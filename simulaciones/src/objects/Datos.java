@@ -7,7 +7,7 @@ package objects;
 
 /**
  *
- * @author nicoalshefty
+ * @author nicolashefty
  */
 public class Datos {
 

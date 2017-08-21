@@ -31,11 +31,14 @@ public class Main extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jLabel1 = new javax.swing.JLabel();
         method1_btn = new javax.swing.JButton();
         method3_btn = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        chiTest_btn = new javax.swing.JButton();
+        multiplicativoTest_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +65,28 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        chiTest_btn.setText("Test Chi Cuadrado");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, chiTest_btn, org.jdesktop.beansbinding.ELProperty.create("true"), chiTest_btn, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        chiTest_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chiTest_btnActionPerformed(evt);
+            }
+        });
+
+        multiplicativoTest_btn.setText("Test Multiplicativo");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, multiplicativoTest_btn, org.jdesktop.beansbinding.ELProperty.create("false"), multiplicativoTest_btn, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        multiplicativoTest_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                multiplicativoTest_btnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,8 +98,10 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(133, 133, 133)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(multiplicativoTest_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(chiTest_btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(method3_btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(method1_btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -88,10 +115,16 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(method1_btn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(method3_btn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chiTest_btn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(multiplicativoTest_btn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(22, 22, 22))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -110,6 +143,17 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         controller.selectedMethod("multiplicativo");
     }//GEN-LAST:event_method3_btnActionPerformed
+
+    private void chiTest_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chiTest_btnActionPerformed
+        // TODO add your handling code here:
+        controller.selectedTest("chi-cuadrado");
+    }//GEN-LAST:event_chiTest_btnActionPerformed
+
+    private void multiplicativoTest_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplicativoTest_btnActionPerformed
+        // TODO add your handling code here:
+        controller.selectedTest("multiplicativo");
+
+    }//GEN-LAST:event_multiplicativoTest_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,10 +194,13 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton chiTest_btn;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton method1_btn;
     private javax.swing.JButton method3_btn;
+    private javax.swing.JButton multiplicativoTest_btn;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
 }

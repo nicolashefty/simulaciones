@@ -18,12 +18,14 @@ public class Controller {
     private static Controller controller;
     static Main main;
     static Metodo metodo;
+    static Test test;
     static Datos datos;
     GeneradorCongruencial generadorCongruencial;
 
     protected Controller(Main menu) {
         main = menu;
         metodo = new Metodo(this);
+        test = new Test(this);
     }
 
     public static Controller getInstance(Main menu) {
@@ -129,6 +131,12 @@ public class Controller {
     
     public void selectedTest(String selectedTest) {
         main.setVisible(false);
+        test.setVisible(true);
+    }
+
+    public void volverDeTestRandomJava()
+    {
+        main.setVisible(true);
     }
 
     public void volverDeGeneradorCongruencial()

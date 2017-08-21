@@ -10,6 +10,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.*;
 import objects.*;
+import jfree.*;
 
 /**
  *
@@ -22,6 +23,7 @@ public class GeneradorCongruencial extends javax.swing.JFrame
     Calculator calculator = new Calculator();
     int contador;
     DefaultTableModel _tmNumerosAleatorios;
+    ChiCuadradoTableModel _tmChiCuadrado;
     String[][] response;
     /**
      * Creates new form GeneradorCongruencial
@@ -38,10 +40,12 @@ public class GeneradorCongruencial extends javax.swing.JFrame
         
         crearTablaNumerosAleatorios();
         
+        crearTablaChiCuadrado();
         
         agregarListeners();
         
         setTexts(valoresDelMetodo);
+        agregarHistograma();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
@@ -57,6 +61,10 @@ public class GeneradorCongruencial extends javax.swing.JFrame
         _scpNumerosAleatorios = new javax.swing.JScrollPane();
         _tblNumerosAleatorios = new javax.swing.JTable();
         _btnSiguiente = new javax.swing.JToggleButton();
+        _btnChiCuadrado = new javax.swing.JButton();
+        _cboIntervalos = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         _btnVolver = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         _txtA = new javax.swing.JTextField();
@@ -86,6 +94,19 @@ public class GeneradorCongruencial extends javax.swing.JFrame
                 _btnSiguienteActionPerformed(evt);
             }
         });
+
+        _btnChiCuadrado.setText("Test Chi Cuadrado");
+        _btnChiCuadrado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _btnChiCuadradoActionPerformed(evt);
+            }
+        });
+
+        _cboIntervalos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "10", "20" }));
+
+        jLabel1.setText("Seleccione cantidad de");
+
+        jLabel2.setText("intervalos");
 
         _btnVolver.setText("Volver");
         _btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -144,8 +165,16 @@ public class GeneradorCongruencial extends javax.swing.JFrame
                             .addComponent(_btnVolver, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(_scpNumerosAleatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(59, 59, 59)
-                        .addComponent(_btnSiguiente)
-                        .addContainerGap(20, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_btnChiCuadrado)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(_btnSiguiente))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(90, 90, 90)
+                                .addComponent(_cboIntervalos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +193,15 @@ public class GeneradorCongruencial extends javax.swing.JFrame
                         .addComponent(_scpNumerosAleatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(94, 94, 94)
-                        .addComponent(_btnSiguiente)))
+                        .addComponent(_btnSiguiente)
+                        .addGap(129, 129, 129)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(_cboIntervalos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addComponent(_btnChiCuadrado)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(_btnVolver)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -192,15 +229,38 @@ public class GeneradorCongruencial extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event__btnSiguienteActionPerformed
 
+    private void _btnChiCuadradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__btnChiCuadradoActionPerformed
+        //        new TestTable(controller,
+            //                        controller.matrizFrecuencia(vecRandom,Integer.parseInt((String)jComboBox1.getSelectedItem())),
+            //                        vecRandom,
+            //                        controller.getRango(Integer.parseInt((String)jComboBox1.getSelectedItem())),
+            //                        Integer.parseInt((String)jComboBox1.getSelectedItem())).setVisible(true);
+        
+        int cantIntervalos = Integer.parseInt((String) _cboIntervalos.getSelectedItem());
+        int cantNumeros = _tmNumerosAleatorios.getRowCount();
+        if (cantNumeros >= cantIntervalos) {
+            new TestCongruencial(controller, cantIntervalos,
+                    controller.getRango(cantIntervalos),
+                    _tblNumerosAleatorios).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Se necesitan más numeros para esa cantidad de intervalos!",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event__btnChiCuadradoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton _btnChiCuadrado;
     private javax.swing.JToggleButton _btnSiguiente;
     private javax.swing.JButton _btnVolver;
+    private javax.swing.JComboBox<String> _cboIntervalos;
     private javax.swing.JScrollPane _scpNumerosAleatorios;
     private javax.swing.JTable _tblNumerosAleatorios;
     private javax.swing.JTextField _txtA;
     private javax.swing.JTextField _txtB;
     private javax.swing.JTextField _txtM;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -215,6 +275,20 @@ public class GeneradorCongruencial extends javax.swing.JFrame
         {
             _tmNumerosAleatorios.addRow(new Object[]{i + 1, response[i][0], response[i][1], response[i][2]});
         }
+    }
+
+    private void crearTablaChiCuadrado()
+    {
+        Object[] colNames =
+        {
+            "Intervalo", "# Intervalo", "Frec. Obs", "Frec. Esp",
+            "Estadistico"
+        };
+        _tmChiCuadrado = new ChiCuadradoTableModel(colNames, 0);
+//        _tblChiCuadrado.setModel(_tmChiCuadrado);
+//        _tblChiCuadrado.setEnabled(false);
+//        _scpChiCuadrado.setEnabled(false);
+        _tmChiCuadrado.setAllDisabled();
     }
 
     private void agregarListeners()
@@ -238,6 +312,19 @@ public class GeneradorCongruencial extends javax.swing.JFrame
         _txtB.setText(datos[1]);
         _txtM.setText(datos[2]);
     }
+    
+    private void agregarHistograma()
+    {
+        // Tenemos que convertir los numeros generados a un vector de double.
+//        double[] valoresGeneradosEnDouble = obtenerValoresEnDouble();
+//        Histograma histograma = new Histograma("Frecuencias del generador con el Metodo Congruencial", valoresGeneradosEnDouble, Integer.parseInt((String)_cboIntervalos.getSelectedItem()));
+//        JPanel histoPanel = histograma.obtenerPanel();
+//        histoPanel.setVisible(true);
+//        _pnlHistograma.add(histoPanel);
+        
+//        _pnlHistograma.validate();
+    }
+
     private double[] obtenerValoresEnDouble()
     {
         double[] ret = new double[_tmNumerosAleatorios.getRowCount()];

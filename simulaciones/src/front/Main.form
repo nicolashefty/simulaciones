@@ -31,8 +31,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="multiplicativoTest_btn" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="chiTest_btn" alignment="0" max="32767" attributes="0"/>
                       <Component id="method3_btn" alignment="0" max="32767" attributes="0"/>
                       <Component id="method1_btn" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                   </Group>
@@ -50,7 +52,11 @@
               <Component id="method1_btn" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="method3_btn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="chiTest_btn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="multiplicativoTest_btn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
               <Component id="jButton4" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
@@ -85,6 +91,31 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="chiTest_btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Test Chi Cuadrado"/>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="enabled" source="chiTest_btn" sourcePath="true" target="chiTest_btn" targetPath="enabled" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chiTest_btnActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="chiTest_btn"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="multiplicativoTest_btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Test Multiplicativo"/>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="enabled" source="multiplicativoTest_btn" sourcePath="false" target="multiplicativoTest_btn" targetPath="enabled" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiplicativoTest_btnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
