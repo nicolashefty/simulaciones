@@ -11,7 +11,7 @@ import java.util.Random;
 
 /**
  *
- * @author gabrielneil
+ * @author nicolashefty
  */
 public class Controller {
 
@@ -129,11 +129,6 @@ public class Controller {
     
     public void selectedTest(String selectedTest) {
         main.setVisible(false);
-    }
-
-    public void volverDeTestRandomJava()
-    {
-        main.setVisible(true);
     }
 
     public void volverDeGeneradorCongruencial()

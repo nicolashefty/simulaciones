@@ -7,7 +7,7 @@ package objects;
 
 /**
  *
- * @author gneil
+ * @author nicolashefty
  */
 public class Calculator {
 

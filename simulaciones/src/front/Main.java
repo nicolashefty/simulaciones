@@ -9,7 +9,7 @@ import objects.*;
  */
 /**
  *
- * @author gneil
+ * @author nicolashefty
  */
 public class Main extends javax.swing.JFrame {
 

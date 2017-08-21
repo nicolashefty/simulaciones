@@ -7,7 +7,7 @@ package front;
  */
 /**
  *
- * @author gneil
+ * @author nicolashefty
  */
 import javax.swing.JOptionPane;
 import objects.*;
