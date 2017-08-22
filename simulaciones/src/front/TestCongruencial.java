@@ -40,20 +40,26 @@ public class TestCongruencial extends javax.swing.JFrame {
         int [][] response = matrizFrecuencia(vec,cantIntervalos); 
         double rangoM;
         DefaultTableModel tm = (DefaultTableModel) tableC.getModel();
-        
+        double estadistico = 0, estadisticoTotal = 0;
         for (int i = 0; i < response.length; i++) {
             if (i == 0) {
                 rangoM = rango;
-                tm.addRow(new Object[]{"0.00 - "+in.format(rangoM),i, response[i][1], frecEsp, c.format(estadisticoPrueba(response,frecEsp,i))});
+                estadistico = estadisticoPrueba(response,frecEsp,i);
+                tm.addRow(new Object[]{"0.00 - "+in.format(rangoM),i, response[i][1], frecEsp, c.format(estadistico)});
+                estadisticoTotal += estadistico;
                 contador++;
             }
             else{
                 if (contador == 1) {
-                    tm.addRow(new Object[]{in.format(rango)+" - "+in.format(rango+rango),i, response[i][1], frecEsp, c.format(estadisticoPrueba(response,frecEsp,i))});
+                    estadistico = estadisticoPrueba(response,frecEsp,i);
+                    tm.addRow(new Object[]{in.format(rango)+" - "+in.format(rango+rango),i, response[i][1], frecEsp, c.format(estadistico)});
+                    estadisticoTotal += estadistico;
                     contador ++;
                 }
                 else{
-                   tm.addRow(new Object[]{in.format(rango*contador)+" - "+in.format((rango*contador)+rango),i, response[i][1], frecEsp, c.format(estadisticoPrueba(response,frecEsp,i))});
+                   estadistico = estadisticoPrueba(response,frecEsp,i);
+                   tm.addRow(new Object[]{in.format(rango*contador)+" - "+in.format((rango*contador)+rango),i, response[i][1], frecEsp, c.format(estadistico)});
+                   estadisticoTotal += estadistico;
                    contador++; 
                 }
                 
@@ -68,14 +74,12 @@ public class TestCongruencial extends javax.swing.JFrame {
         txt_valoresGenerados.setText(acum);
         
         //para el calculo de mi estadistico de prueba total
-        txt_estadistico.setText(""+c.format(estadisticoPruebaTotal(response,frecEsp)));
+        txt_estadistico.setText(""+estadisticoTotal);
         txt_grados.setText(""+gradosLibertad(cantIntervalos));
         
         valoresGenerados = vec;
         this.cantIntervalos = cantIntervalos;
         agregarHistograma();
-        
-        validarAdaptacion();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
@@ -116,20 +120,7 @@ public class TestCongruencial extends javax.swing.JFrame {
         return intervalo - 0 -1;
     }
     
-    public double estadisticoPruebaTotal(int[][] response, int frecEsp){
-        double res = 0.0, a = 0;//(Math.pow((response[i][1]-frecEsp),2))/frecEsp;
-        TableModel tableModel = tableC.getModel();
-        for (int i = 0 ; i < tableModel.getRowCount() ; i++)
-        {
-            res += Double.parseDouble((String) tableModel.getValueAt(i, 4));
-        }
-//        for (int i = 0; i < response.length; i++) {
-//            a += (double)(Math.pow(response[i][1] - frecEsp,2))/frecEsp;
-//        }
-//        res = a;
-        return res;
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -137,8 +128,7 @@ public class TestCongruencial extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tableC = new javax.swing.JTable();
@@ -150,11 +140,6 @@ public class TestCongruencial extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txt_estadistico = new javax.swing.JTextField();
         txt_grados = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        _scpTablaAdaptacion = new javax.swing.JScrollPane();
-        _tblAdaptacion = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        _txtEstadisticoTotalAdaptado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Test de chi cuadrado para el metodo congruencial");
@@ -162,23 +147,18 @@ public class TestCongruencial extends javax.swing.JFrame {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 402));
 
         tableC.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Numeros del intervalo", "Intervalo", "Frecuencia", "Frecuencia esperada", "Estadistico de prueba"
             }
-        )
-        {
-            boolean[] canEdit = new boolean []
-            {
+        ) {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -201,58 +181,20 @@ public class TestCongruencial extends javax.swing.JFrame {
 
         txt_grados.setEditable(false);
 
-        _tblAdaptacion.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String []
-            {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        _scpTablaAdaptacion.setViewportView(_tblAdaptacion);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(_scpTablaAdaptacion, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(_scpTablaAdaptacion, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-        );
-
-        jLabel4.setText("Estadistico Total Adpt");
-
-        _txtEstadisticoTotalAdaptado.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        _txtEstadisticoTotalAdaptado.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                _txtEstadisticoTotalAdaptadoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_estadistico, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,18 +202,11 @@ public class TestCongruencial extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_grados, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(119, 119, 119)
                 .addComponent(_pnlHistograma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(_txtEstadisticoTotalAdaptado)))
-                .addGap(26, 26, 26))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,24 +227,12 @@ public class TestCongruencial extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addComponent(txt_grados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_pnlHistograma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_txtEstadisticoTotalAdaptado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
+                .addComponent(_pnlHistograma, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void _txtEstadisticoTotalAdaptadoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event__txtEstadisticoTotalAdaptadoActionPerformed
-    {//GEN-HEADEREND:event__txtEstadisticoTotalAdaptadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event__txtEstadisticoTotalAdaptadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,14 +241,9 @@ public class TestCongruencial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel _pnlHistograma;
-    private javax.swing.JScrollPane _scpTablaAdaptacion;
-    private javax.swing.JTable _tblAdaptacion;
-    private javax.swing.JTextField _txtEstadisticoTotalAdaptado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tableC;
@@ -355,23 +273,4 @@ private void agregarHistograma()
         }
         return ret;
     }
-
-    private void validarAdaptacion()
-    {
-        if (frecEsp < 5)
-        {
-            popularTablaAdaptacion();
-            _tblAdaptacion.setVisible(true);
-        }
-        else
-        {
-            _tblAdaptacion.setVisible(false);
-        }
-    }
-
-    private void popularTablaAdaptacion()
-    {
-        
-    }
-
 }
