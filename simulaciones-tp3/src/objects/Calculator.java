@@ -9,6 +9,8 @@ import static java.lang.Math.*;
 import java.util.Random;
 
 public class Calculator {
+    
+    // Generador de variables aleatorias para expNegativo 
     public static float[] calculatorExp(int size, Exponencial distribucion){
         Random random = new Random();
         float[] vec = new float[size];
@@ -25,6 +27,7 @@ public class Calculator {
         return vec;
     }
     
+    //Generador de variables aleatoios para dist Normal por metodo de convolcion
     public static float[] calculatorNormal(int size, Normal distribucion){
         Random random = new Random();
         float[] vec = new float[size];
@@ -43,6 +46,7 @@ public class Calculator {
         return vec;
     }
     
+    //Generador de variables aleatorias de dist normal por metodo Box-Muller
     public static float[] calculatorNormalBoxMuller(int size, Normal distribucion)
     {
         Random random = new Random();
@@ -70,7 +74,7 @@ public class Calculator {
         
         return vec;
     }
-
+    // Cslculo de las variables aleatorias que se agregaran al vector de Box Muller
     private static float n1(float rnd1, float rnd2, Normal distribucion)
     {
         float n1 = 0;
@@ -89,6 +93,7 @@ public class Calculator {
         return n2;
     }
     
+    // Acumulador de frecuencias observadas para cada intervalo en dist Uniforme
      public float[][][] matrizFrecuenciaUniforme(Uniforme uniforme, float rango, int intervalos){
         float [][][] m = armadoRangos(uniforme.getDesde(), rango, intervalos);
         float [] randomVec = uniforme.getVecValores();
@@ -106,6 +111,7 @@ public class Calculator {
         return m;
     }
      
+     //Se obtiene el desde y hasta de cada intervalo para la dist uniforme
      public float[][][] armadoRangos(int desde,float rango,int intervalos){
      float [][][] m = new float [intervalos][intervalos][3];
      float inicio = desde;
@@ -120,6 +126,7 @@ public class Calculator {
              return m;
      }
      
+    
     public static void quicksort(float valores[], int izq, int der)
     {
 
@@ -157,7 +164,7 @@ public class Calculator {
         }
         
     }
-        
+     //Calcula la frecuencia observada para cada intervalo   
      public static float[][] matrizFrecuenciaExponencial(float valores[], float rango, int intervalos, float minimo)
     {
         //Se arranca con el extremo minimo y vamos agregando el rango definido a cada intervalo
@@ -181,7 +188,7 @@ public class Calculator {
         }
         return vectorFrecuencias;
     }
-
+    //Desde y hasta de los intervalos para la dist exponencial
     private static float[][] armadoRangosExponencial(float minimo, float rango, int intervalos)
     {
         float[][] vectorFrecuencias = new float[intervalos][3];
@@ -202,7 +209,7 @@ public class Calculator {
         return vectorFrecuencias;
     }
     
-    
+    //Generador de variables para la dist de poisson
     public static float[] calcularPoisson(Poisson distribucion, int size)
     {
         Random random = new Random();
@@ -229,6 +236,7 @@ public class Calculator {
         return vec;
     }
     
+    //Calculo de frecuencias observadas para la dist de poisson
     public static float[][] matrizFrecuenciaPoisson(float valores[])
     {
         float[] vec = valores;

@@ -86,6 +86,7 @@ public class Controller {
         return tipoG;
     }
     
+     //Generador de variables aleatorias para la dist uniforme
      public void randomFloatUniforme(int desde, int hasta, int size){
         Random random = new Random();
         float[] vecValores = new float[size];
