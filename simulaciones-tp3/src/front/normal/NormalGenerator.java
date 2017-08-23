@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package front.exponencial;
+package front.normal;
 import objects.*;
 import front.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -156,8 +157,11 @@ public class NormalGenerator extends javax.swing.JFrame implements IGenerador{//
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_comenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_comenzarActionPerformed
-        this.setVisible(false);
-        controller.randomFloatNormal(Integer.parseInt(txt_cant_num.getText()), Float.parseFloat(_txtMedia.getText()), Float.parseFloat(_txtDesviacion.getText()));
+        if (validInput())
+        {
+            this.setVisible(false);
+            controller.randomFloatNormal(Integer.parseInt(txt_cant_num.getText()), Float.parseFloat(_txtMedia.getText()), Float.parseFloat(_txtDesviacion.getText()));
+        }
     }//GEN-LAST:event_btn_comenzarActionPerformed
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
@@ -198,5 +202,97 @@ public class NormalGenerator extends javax.swing.JFrame implements IGenerador{//
     public String getGeneratorType()
     {
         return Controller.NORMAL;
+    }
+
+    private boolean validInput() 
+    {
+        if(_txtMedia != null &&
+                _txtMedia.getText() != null)
+        {
+            String media = _txtMedia.getText();
+            try
+            {
+                if(media.isEmpty())
+                {
+                    JOptionPane.showMessageDialog(this, "La media debe tener valor", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                else
+                {
+                    Float.parseFloat(media);
+                }
+            }
+            catch (NumberFormatException nfe)
+            {
+                JOptionPane.showMessageDialog(this, "La media debe tener valor", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "La media debe tener valor", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        //Sigma tiene q ser positivo
+        if(_txtDesviacion != null &&
+                _txtDesviacion.getText() != null)
+        {
+            String sigma = _txtDesviacion.getText();
+            if (sigma.isEmpty())
+            {
+                JOptionPane.showMessageDialog(this, "La desviacion debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            try
+            {
+                float sigmaFloat = Float.parseFloat(sigma);
+                if(sigmaFloat < 0f)
+                {
+                    JOptionPane.showMessageDialog(this, "La desviacion debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+            catch (NumberFormatException nfe)
+            {
+                JOptionPane.showMessageDialog(this, "La desviacion debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "La desviacion debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if(txt_cant_num != null &&
+                txt_cant_num.getText() != null)
+        {
+            String cantNum = txt_cant_num.getText();
+            try
+            {
+                if(cantNum.isEmpty())
+                {
+                    JOptionPane.showMessageDialog(this, "Ingrese cantidad de nros validos", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                else
+                {
+                    Float.parseFloat(cantNum);
+                }
+            }
+            catch (NumberFormatException nfe)
+            {
+                JOptionPane.showMessageDialog(this, "Ingrese cantidad de nros validos", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Ingrese cantidad de nros validos", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        return true;
     }
 }

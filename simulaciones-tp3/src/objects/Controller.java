@@ -9,6 +9,7 @@ import java.util.Random;
 import front.*;
 import front.exponencial.*;
 import front.poisson.*;
+import front.normal.*;
 /**
  *
  * @author federico

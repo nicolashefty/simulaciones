@@ -6,6 +6,7 @@
 package front.exponencial;
 import objects.*;
 import front.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -141,8 +142,11 @@ public class ExponencialGenerator extends javax.swing.JFrame implements IGenerad
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_comenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_comenzarActionPerformed
-        this.setVisible(false);
-        controller.randomFloatExponencial(Integer.parseInt(txt_cant_num.getText()), Integer.parseInt(_txtMedia.getText()));
+        if(validInput())
+        {
+            this.setVisible(false);
+            controller.randomFloatExponencial(Integer.parseInt(txt_cant_num.getText()), Integer.parseInt(_txtMedia.getText()));
+        }
     }//GEN-LAST:event_btn_comenzarActionPerformed
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
@@ -176,5 +180,66 @@ public class ExponencialGenerator extends javax.swing.JFrame implements IGenerad
     public String getGeneratorType()
     {
         return Controller.EXPONENCIAL;
+    }
+
+    private boolean validInput() 
+    {
+        //La media tiene q ser positiva
+        if(_txtMedia != null &&
+                _txtMedia.getText() != null)
+        {
+            String media = _txtMedia.getText();
+            if (media.isEmpty())
+            {
+                JOptionPane.showMessageDialog(this, "La media debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            try
+            {
+                float mediaFloat = Float.parseFloat(media);
+                if(mediaFloat < 0f)
+                {
+                    JOptionPane.showMessageDialog(this, "La media debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+            catch (NumberFormatException nfe)
+            {
+                JOptionPane.showMessageDialog(this, "La media debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "La media debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    
+        if(txt_cant_num != null &&
+                txt_cant_num.getText() != null)
+        {
+            String cantNum = txt_cant_num.getText();
+            if (cantNum.isEmpty())
+            {
+                JOptionPane.showMessageDialog(this, "Ingrese cantidad de numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            try
+            {
+                float mediaFloat = Float.parseFloat(cantNum);
+            }
+            catch (NumberFormatException nfe)
+            {
+                JOptionPane.showMessageDialog(this, "La cantidad de numeros debe ser un numero", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Ingrese cantidad de numeros", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        return true;
     }
 }

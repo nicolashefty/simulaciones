@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package front;
+import javax.swing.JOptionPane;
 import objects.*;
 
 /**
@@ -72,19 +73,14 @@ public class UniformeGenerator extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btn_comenzar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_comenzar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 59, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -94,16 +90,23 @@ public class UniformeGenerator extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_hasta, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 9, Short.MAX_VALUE)
                                 .addComponent(jLabel4)
                                 .addGap(28, 28, 28)
-                                .addComponent(txt_cant_num, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txt_cant_num, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(18, 18, 18)
+                .addComponent(btn_back)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -116,9 +119,7 @@ public class UniformeGenerator extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txt_cant_num, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_back)
-                    .addComponent(btn_comenzar))
+                .addComponent(btn_comenzar)
                 .addContainerGap())
         );
 
@@ -126,12 +127,14 @@ public class UniformeGenerator extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_comenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_comenzarActionPerformed
+        if(validInput())
+        {
         this.setVisible(false);
         controller.randomFloatUniforme(
                 Integer.parseInt(txt_desde.getText()), 
                 Integer.parseInt(txt_hasta.getText()),                
-                Integer.parseInt(txt_cant_num.getText()) 
-);
+                Integer.parseInt(txt_cant_num.getText()) );
+        }
     }//GEN-LAST:event_btn_comenzarActionPerformed
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
@@ -153,4 +156,95 @@ public class UniformeGenerator extends javax.swing.JFrame {
     private javax.swing.JTextField txt_desde;
     private javax.swing.JTextField txt_hasta;
     // End of variables declaration//GEN-END:variables
+
+    private boolean validInput() 
+    {
+        //Sigma tiene q ser positivo
+        if(txt_desde != null &&
+                txt_desde.getText() != null)
+        {
+            String desde = txt_desde.getText();
+            if (desde.isEmpty())
+            {
+                JOptionPane.showMessageDialog(this, "Ingrese extremo inferior (Desde)", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            try
+            {
+                float desdeFloat = Float.parseFloat(desde);
+            }
+            catch (NumberFormatException nfe)
+            {
+                JOptionPane.showMessageDialog(this, "Extremo inferior debe ser un numero", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Ingrese extremo inferior", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        //Sigma tiene q ser positivo
+        if(txt_hasta != null &&
+                txt_hasta.getText() != null)
+        {
+            String hasta = txt_hasta.getText();
+            if (hasta.isEmpty())
+            {
+                JOptionPane.showMessageDialog(this, "Ingrese extremo superior (Hasta)", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            try
+            {
+                float hastaFloat = Float.parseFloat(hasta);
+            }
+            catch (NumberFormatException nfe)
+            {
+                JOptionPane.showMessageDialog(this, "Extremo superior debe ser un numero", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Ingrese extremo superior", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        float desdeFloat = Float.parseFloat(txt_desde.getText());
+        float hastaFloat = Float.parseFloat(txt_hasta.getText());
+        if (desdeFloat >= hastaFloat)
+        {
+            JOptionPane.showMessageDialog(this, "Desde debe ser menor a Hasta", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        //Sigma tiene q ser positivo
+        if(txt_cant_num != null &&
+                txt_cant_num.getText() != null)
+        {
+            String cantNum = txt_cant_num.getText();
+            if (cantNum.isEmpty())
+            {
+                JOptionPane.showMessageDialog(this, "Ingrese cantidad de numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            try
+            {
+                float cantFloat = Float.parseFloat(cantNum);
+                
+            }
+            catch (NumberFormatException nfe)
+            {
+                JOptionPane.showMessageDialog(this, "Ingrese cantidad de numeros valida", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Ingrese cantidad de numeros", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
 }
