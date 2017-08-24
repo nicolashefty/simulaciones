@@ -56,7 +56,7 @@ public class ExponencialTestTable extends javax.swing.JFrame {
         System.arraycopy(this.numsAleatorios, 0, ordenadosValues, 0, this.numsAleatorios.length);
         rango = calcularRango(ordenadosValues, cantIntervalos);
         controller = cont;
-        float[][] matrizFrecuencia = Calculator.matrizFrecuenciaExponencial(ordenadosValues, rango, cantIntervalos, minimo);
+        float[][] matrizFrecuencia = Calculator.matrizFrecuencia(ordenadosValues, rango, cantIntervalos, minimo);
         N = Integer.parseInt(datosDistribucion[0]);
         media = Float.parseFloat(datosDistribucion[1]);
         lambda = (float) 1/media;

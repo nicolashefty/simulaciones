@@ -165,10 +165,10 @@ public class Calculator {
         
     }
      //Calcula la frecuencia observada para cada intervalo   
-     public static float[][] matrizFrecuenciaExponencial(float valores[], float rango, int intervalos, float minimo)
+     public static float[][] matrizFrecuencia(float valores[], float rango, int intervalos, float minimo)
     {
         //Se arranca con el extremo minimo y vamos agregando el rango definido a cada intervalo
-        float[][] vectorFrecuencias = armadoRangosExponencial(minimo, rango, intervalos);
+        float[][] vectorFrecuencias = armadoRangos(minimo, rango, intervalos);
 
         for (int i = 0; i < valores.length; i++)
         {
@@ -189,7 +189,7 @@ public class Calculator {
         return vectorFrecuencias;
     }
     //Desde y hasta de los intervalos para la dist exponencial
-    private static float[][] armadoRangosExponencial(float minimo, float rango, int intervalos)
+    private static float[][] armadoRangos(float minimo, float rango, int intervalos)
     {
         float[][] vectorFrecuencias = new float[intervalos][3];
         //  [0] es el limite inferior del intervalo

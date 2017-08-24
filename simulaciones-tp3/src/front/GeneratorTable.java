@@ -1,6 +1,7 @@
 package front;
 
 import front.exponencial.*;
+import front.normal.NormalTestTable;
 import front.poisson.*;
 import java.text.DecimalFormat;
 import javax.swing.table.DefaultTableModel;

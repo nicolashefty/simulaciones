@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package front.exponencial;
+package front.normal;
 
 import java.text.DecimalFormat;
 import javax.swing.*;
@@ -44,7 +44,7 @@ public class NormalTestTable extends javax.swing.JFrame {
         System.arraycopy(values, 0, ordenadosValues, 0, values.length);
         rango = calcularRango(ordenadosValues, cantIntervalos);
         controller = cont;
-        float[][] matriz = Calculator.matrizFrecuenciaExponencial(ordenadosValues, rango, cantIntervalos, minimo);
+        float[][] matriz = Calculator.matrizFrecuencia(ordenadosValues, rango, cantIntervalos, minimo);
         N = Integer.parseInt(datos[0]);
         media = Float.parseFloat(datos[1]);
         desviacion = Float.parseFloat(datos[2]);
