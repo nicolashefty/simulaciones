@@ -271,6 +271,10 @@ public class Calculator {
         //creacion de la matriz
         for (int i = 0; i < r+1; i++)
         {
+            //Con esto solo nos encargamos de poner los valores de x
+            // el primero siempre es el minimo
+            // y luego va subiendo de uno en uno
+            
             if (i == 0)
             {
                 m[0][0] = min;
@@ -289,6 +293,8 @@ public class Calculator {
             {
                 if (vec[i] == m[j][0])
                 {
+                    //En la posicion uno del vector j estamos
+                    // guardando la frecuencia de dicho nro
                     m[j][1]++;
                     break;
                 }
@@ -298,36 +304,6 @@ public class Calculator {
         return m;
     }
 
-    public static int rangoPoisson(float[] vec, int intervalo)
-    {
-        float max = 0, min = 0;
-        for (int i = 0; i < vec.length; i++)
-        {
-            if (vec[i] > max)
-            {
-                max = vec[i];
-            }
-        }
-        for (int i = 0; i < vec.length; i++)
-        {
-            if (i == 0)
-            {
-                min = vec[i];
-            }
-            else
-            {
-                if (vec[i] < min)
-                {
-                    min = vec[i];
-                }
-            }
-        }
-
-        int rango = (int) (max - min) / intervalo;
-        rango++;
-        return rango;
-    }
-    
     public static float obtenerValorEnFloat(Object valueAt)
     {
         float toReturn = 0;
