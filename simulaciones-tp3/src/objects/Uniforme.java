@@ -12,9 +12,9 @@ package objects;
 public class Uniforme {
 
     float[] vecValores;
-    int desde, hasta;
+    float desde, hasta;
 
-    public Uniforme(float[] vecValores, int desde, int hasta) {
+    public Uniforme(float[] vecValores, float desde, float hasta) {
         this.vecValores = vecValores;
         this.desde = desde;
         this.hasta = hasta;
@@ -28,19 +28,19 @@ public class Uniforme {
         this.vecValores = vecValores;
     }
 
-    public int getDesde() {
+    public float getDesde() {
         return desde;
     }
 
-    public void setDesde(int desde) {
+    public void setDesde(float desde) {
         this.desde = desde;
     }
 
-    public int getHasta() {
+    public float getHasta() {
         return hasta;
     }
 
-    public void setHasta(int hasta) {
+    public void setHasta(float hasta) {
         this.hasta = hasta;
     }
 

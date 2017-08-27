@@ -87,7 +87,7 @@ public class Controller {
     }
     
      //Generador de variables aleatorias para la dist uniforme
-     public void randomFloatUniforme(int desde, int hasta, int size){
+     public void randomFloatUniforme(float desde, float hasta, int size){
         Random random = new Random();
         float[] vecValores = new float[size];
         float randomValue=0, operacion = 0;

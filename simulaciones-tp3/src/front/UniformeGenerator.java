@@ -131,8 +131,8 @@ public class UniformeGenerator extends javax.swing.JFrame {
         {
         this.setVisible(false);
         controller.randomFloatUniforme(
-                Integer.parseInt(txt_desde.getText()), 
-                Integer.parseInt(txt_hasta.getText()),                
+                Float.parseFloat(txt_desde.getText()), 
+                Float.parseFloat(txt_hasta.getText()),                
                 Integer.parseInt(txt_cant_num.getText()) );
         }
     }//GEN-LAST:event_btn_comenzarActionPerformed

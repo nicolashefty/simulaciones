@@ -404,7 +404,7 @@ public class UniformeTestTable extends javax.swing.JFrame {
         return ret;
     }
 
-    private float calcularRango(int desde, int hasta, int cantIntervalos) {
+    private float calcularRango(float desde, float hasta, int cantIntervalos) {
         return (float)(hasta - desde) / cantIntervalos;
     }
 
