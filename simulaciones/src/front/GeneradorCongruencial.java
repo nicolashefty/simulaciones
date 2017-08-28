@@ -47,6 +47,7 @@ public class GeneradorCongruencial extends javax.swing.JFrame
         setTexts(valoresDelMetodo);
         agregarHistograma();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     /**

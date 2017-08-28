@@ -198,7 +198,11 @@ public class Metodo extends javax.swing.JFrame {
             {
                 intervalo = Integer.parseInt(txt_int_inicial.getText());
             }
-            controller.calculate(Integer.parseInt(a_txt.getText()), Integer.parseInt(b_txt.getText()), Integer.parseInt(m_txt.getText()), Integer.parseInt(seed_txt.getText()), intervalo);
+            controller.calculate(Integer.parseInt(a_txt.getText()), 
+                    Integer.parseInt(b_txt.getText()), 
+                    Integer.parseInt(m_txt.getText()), 
+                    Integer.parseInt(seed_txt.getText()), 
+                    intervalo);
         } else {
             JOptionPane.showMessageDialog(null, "Error en los valores", "Error", JOptionPane.ERROR_MESSAGE);
         }

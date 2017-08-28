@@ -4,19 +4,25 @@
  * and open the template in the editor.
  */
 package front;
+
+import javax.swing.JOptionPane;
 import objects.*;
+
 /**
  *
  * @author nicolashefty
  */
 public class Test extends javax.swing.JFrame {
+
     Controller controller;
+
     /**
      * Creates new form Test
      */
     public Test(Controller cont) {
         controller = cont;
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -114,19 +120,22 @@ public class Test extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        controller.showMenu();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void calcular_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcular_btnActionPerformed
-        this.setVisible(false);
-        float [] vecRandom = controller.randomFloat(Integer.parseInt(txt_cantGen.getText()));
-        
-        new TestTable(controller,
-                        controller.matrizFrecuencia(vecRandom,Integer.parseInt((String)jComboBox1.getSelectedItem())),
-                        vecRandom,
-                        controller.getRango(Integer.parseInt((String)jComboBox1.getSelectedItem())),
-                        Integer.parseInt((String)jComboBox1.getSelectedItem())).setVisible(true);
-        
+        if (txt_cantGen.getText().equals("") || Integer.parseInt(txt_cantGen.getText()) < 0 || txt_cantGen.getText().contains(",") || txt_cantGen.getText().contains(".")) {
+            JOptionPane.showMessageDialog(null, "Error en los valores", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            this.dispose();
+            float[] vecRandom = controller.randomFloat(Integer.parseInt(txt_cantGen.getText()));
+            new TestTable(controller,
+                    controller.matrizFrecuencia(vecRandom, Integer.parseInt((String) jComboBox1.getSelectedItem())),
+                    vecRandom,
+                    controller.getRango(Integer.parseInt((String) jComboBox1.getSelectedItem())),
+                    Integer.parseInt((String) jComboBox1.getSelectedItem())).setVisible(true);
+        }
     }//GEN-LAST:event_calcular_btnActionPerformed
 
 
@@ -140,6 +149,6 @@ public class Test extends javax.swing.JFrame {
     private javax.swing.JTextField txt_cantGen;
     // End of variables declaration//GEN-END:variables
 public void setTitle(String title) {
-        jLabel1.setText("Test de "+title);
+        jLabel1.setText("Test de " + title);
     }
 }
