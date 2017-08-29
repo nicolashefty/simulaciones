@@ -28,8 +28,7 @@ public class Main extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
         btn_uniforme = new javax.swing.JButton();
@@ -42,37 +41,30 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setText("Seleccione distribucion a generar");
 
         btn_uniforme.setText("Uniforme");
-        btn_uniforme.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btn_uniforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_uniformeActionPerformed(evt);
             }
         });
 
         btn_normal.setText("Normal");
-        btn_normal.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btn_normal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_normalActionPerformed(evt);
             }
         });
 
         btn_exponencial.setText("Exponencial");
-        btn_exponencial.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btn_exponencial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_exponencialActionPerformed(evt);
             }
         });
 
         btn_poisson.setText("Poisson");
-        btn_poisson.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btn_poisson.setEnabled(false);
+        btn_poisson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_poissonActionPerformed(evt);
             }
         });
