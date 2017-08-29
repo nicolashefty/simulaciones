@@ -92,7 +92,8 @@ public class NormalTestTable extends javax.swing.JFrame {
 
     public int gradosLibertad(int intervalos) {
         //Restamos uno por definicion
-        return intervalos - 1;
+        // y dos mas por la media y la desviacion
+        return intervalos - 1 - 2;
     }
 
     public double estadisticoPruebaTotal() {

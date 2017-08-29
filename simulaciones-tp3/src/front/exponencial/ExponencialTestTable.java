@@ -106,8 +106,8 @@ public class ExponencialTestTable extends javax.swing.JFrame {
     public int gradosLibertad(int intervalos) 
     {
         //Restamos uno por definicion
-        // y uno mas por el parametro de la media
-        return intervalos - 1;
+        // y uno mas por el parametro lambda
+        return intervalos - 1 - 1;
     }
 
     public double estadisticoPruebaTotal() 

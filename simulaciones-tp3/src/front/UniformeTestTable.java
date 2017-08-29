@@ -53,7 +53,8 @@ public class UniformeTestTable extends javax.swing.JFrame {
         txt_grados.setText("" + gradosLibertad(tm.getRowCount()));
         //txt_estadistico.setText("" + c.format(estadisticoPruebaTotal(tm)));
         txt_estadistico.setText("" + c.format(estadisticoAcumulado));
-        if (frecEsp < 5) {
+        if (frecEsp < 5) 
+        {
             DefaultTableModel tm2 = (DefaultTableModel) tablaFE.getModel();
             double estadisticoTotal = 0;
             int frecEspAcumulada = 0;
@@ -102,7 +103,7 @@ public class UniformeTestTable extends javax.swing.JFrame {
     }
 
     public int gradosLibertad(int intervalo) {
-        return intervalo - 0 - 1;
+        return intervalo - 0 - 1; //No tiene parametros calculados
     }
 
     public double estadisticoPruebaTotal(DefaultTableModel tm) {
