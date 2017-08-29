@@ -78,7 +78,8 @@ public class TestTable extends javax.swing.JFrame {
             }
         }
 
-        if (frecEsp < 5) {
+        if (frecEsp < 5) 
+        {
             DefaultTableModel tm2 = (DefaultTableModel) tablaFe.getModel();
             double estadisticoTotal = 0;
             int frecEspAcumulada = 0;
@@ -86,11 +87,13 @@ public class TestTable extends javax.swing.JFrame {
             int inicio = 0;
             float a = 0;
 
-            for (int i = 0; i < tm.getRowCount(); i++) {
+            for (int i = 0; i < tm.getRowCount(); i++) 
+            {
                 frecEspAcumulada += (int) tm.getValueAt(i, 2);
                 frecObsAcumulada += (int) tm.getValueAt(i, 1);
                 
-                if (frecEspAcumulada >= 5) {
+                if (frecEspAcumulada >= 5) 
+                {
                     estadisticoParcial[i] += estadisticoPrueba2(frecObsAcumulada, (int) frecEspAcumulada);
                     tm2.addRow(new Object[]{in.format(matrizIntervalos[inicio][0]) + " - " + in.format(matrizIntervalos[i][1]), (int) frecObsAcumulada, frecEspAcumulada, c.format(estadisticoParcial[i])});
                     a = matrizIntervalos[inicio][0];
@@ -98,8 +101,11 @@ public class TestTable extends javax.swing.JFrame {
 
                     frecEspAcumulada = 0;
                     frecObsAcumulada = 0;
-                } else {
-                    if (i == tm.getRowCount() - 1) {
+                } 
+                else 
+                {
+                    if (i == tm.getRowCount() - 1) 
+                    {
                         int filaAUnir = tm2.getRowCount() - 1;
                         //actualizo intervalo
                         tm2.setValueAt(in.format(a) + " - " + in.format(matrizIntervalos[i][1]), filaAUnir, 0);
@@ -123,22 +129,22 @@ public class TestTable extends javax.swing.JFrame {
             }
             txt_gradosNuevo.setText("" + gradosLibertad(tm2.getRowCount()));
             txt_estadisticoNuevo.setText("" + c.format(estadisticoTotal));
-
-            //para mostrar los valores generados
-            String acum = "";
-            for (int i = 0; i < vec.length; i++) {
-                acum += "Valor " + (i + 1) + ": " + aleat.format(vec[i]) + ".\n";
-            }
-            txt_valoresGenerados.setText(acum);
-
-            //para el calculo de mi estadistico de prueba total
-            txt_estadistico.setText("" + c.format(estadisticoPruebaTotal(response, frecEsp)));
-            txt_grados.setText("" + gradosLibertad(cantIntervalos));
-
-            valoresGenerados = vec;
-            this.cantIntervalos = cantIntervalos;
-            agregarHistograma();
         }
+            //para mostrar los valores generados
+        String acum = "";
+        for (int i = 0; i < vec.length; i++) {
+            acum += "Valor " + (i + 1) + ": " + aleat.format(vec[i]) + ".\n";
+        }
+        txt_valoresGenerados.setText(acum);
+
+        //para el calculo de mi estadistico de prueba total
+        txt_estadistico.setText("" + c.format(estadisticoPruebaTotal(response, frecEsp)));
+        txt_grados.setText("" + gradosLibertad(cantIntervalos));
+
+        valoresGenerados = vec;
+        this.cantIntervalos = cantIntervalos;
+        agregarHistograma();
+        
     }
 
     public double estadisticoPrueba(int[][] response, int frecEsp, int loop) {
@@ -343,16 +349,17 @@ public class TestTable extends javax.swing.JFrame {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_estadistico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(txt_grados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txt_estadisticoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5)
                         .addComponent(jLabel6)
-                        .addComponent(txt_gradosNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_gradosNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txt_estadistico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(txt_grados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(panelHistograma, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
