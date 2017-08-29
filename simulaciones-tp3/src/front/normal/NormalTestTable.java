@@ -122,8 +122,7 @@ public class NormalTestTable extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         txt_valoresGenerados = new javax.swing.JTextArea();
@@ -144,12 +143,10 @@ public class NormalTestTable extends javax.swing.JFrame {
         _tablaAcumulada = new javax.swing.JTable();
         _btnGrafico = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Prueba de chi cuadrado");
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowActivated(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
@@ -162,10 +159,8 @@ public class NormalTestTable extends javax.swing.JFrame {
         jLabel1.setText("Valores Generados");
 
         txt_estadistico.setEditable(false);
-        txt_estadistico.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txt_estadistico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_estadisticoActionPerformed(evt);
             }
         });
@@ -178,10 +173,8 @@ public class NormalTestTable extends javax.swing.JFrame {
 
         jButton1.setText("Volver");
         jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
@@ -190,45 +183,40 @@ public class NormalTestTable extends javax.swing.JFrame {
 
         jLabel5.setText("Estadistico de prueba total:");
 
-        txt_nuevo_estadistico.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txt_nuevo_estadistico.setEditable(false);
+        txt_nuevo_estadistico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nuevo_estadisticoActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Grados de Libertad:");
 
+        _gradosLib_agrupado.setEditable(false);
+
         _tabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Desde", "Hasta", "Frec Observada", "Probabilidad", "Frec Esperada", "Estadistico"
             }
         ));
         _scpTabla.setViewportView(_tabla);
 
         _tablaAcumulada.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Desde", "Hasta", "Frec Obs", "Prob", "Frec Esp", "Estadistico"
             }
         ));
         jScrollPane1.setViewportView(_tablaAcumulada);
 
         _btnGrafico.setText("Ver Grafico");
-        _btnGrafico.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        _btnGrafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 _btnGraficoActionPerformed(evt);
             }
         });
@@ -367,9 +355,18 @@ public class NormalTestTable extends javax.swing.JFrame {
     private void agregarHistograma() {
         // Tenemos que convertir los numeros generados a un vector de double.
         double[] valoresGeneradosEnDouble = obtenerValoresEnDouble(values);
-        Histograma histograma = new Histograma("Histograma Distribucion Normal",
+        if (minimo == maximo)
+        {
+            Histograma histograma = new Histograma("Histograma Distribucion Normal",
+                "Frecuencia de numeros aleatorios", valoresGeneradosEnDouble,
+                1, (double) minimo -1, (double) maximo + 1);
+        }
+        else
+        {
+            Histograma histograma = new Histograma("Histograma Distribucion Normal",
                 "Frecuencia de numeros aleatorios", valoresGeneradosEnDouble,
                 cantIntervalos, (double) minimo, (double) maximo);
+        }
 //        JPanel histoPanel = histograma.obtenerPanel();
 //        histoPanel.setVisible(true);
 //        panelHistograma.add(histoPanel);
@@ -405,6 +402,10 @@ public class NormalTestTable extends javax.swing.JFrame {
     {
         //G4 = desde + hasta / 2
         //=EXP((-1/2)*(((G4-MediaN)/Desv)^2))/(Desv*SQRTPI(2))
+        if (desviacion == 0)
+        {
+            return 1;
+        }
         float marcaDeClase = (limiteInferior + limiteSuperior) / 2;
         double exponente = (-0.5) * (Math.pow(((marcaDeClase - media)/ desviacion), 2));
         double denominador = desviacion * Math.sqrt(2*Math.PI);

@@ -36,6 +36,10 @@ public class GeneratorTable extends javax.swing.JFrame {
         for (int i = 0; i < vec.length; i++) {
             tm.addRow(new Object[]{i+1 , aleat.format(vec[i])});
         }
+        if (controller.getTipo() == Controller.EXPONENCIAL)
+        {
+            _lblMediaLambda.setText("Lambda:");
+        }
         txt_media.setText(""+datos[1]);
         txt_cantNum.setText(""+datos[0]);
         if(controller.getTipo() == Controller.NORMAL){
@@ -53,12 +57,11 @@ public class GeneratorTable extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_valoresA = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        _lblMediaLambda = new javax.swing.JLabel();
         txt_media = new javax.swing.JTextField();
         _lblDesviacion = new javax.swing.JLabel();
         txt_desviacion = new javax.swing.JTextField();
@@ -74,29 +77,24 @@ public class GeneratorTable extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tabla_valoresA.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Generacion", "Número aleatorio"
             }
-        )
-        {
-            boolean[] canEdit = new boolean []
-            {
+        ) {
+            boolean[] canEdit = new boolean [] {
                 false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tabla_valoresA);
 
-        jLabel1.setText("Media");
+        _lblMediaLambda.setText("Media");
 
         txt_media.setEditable(false);
 
@@ -113,10 +111,8 @@ public class GeneratorTable extends javax.swing.JFrame {
         btn_ejecutar.setText("Ejecutar prueba");
 
         btn_volver.setText("Volver");
-        btn_volver.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btn_volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
             }
         });
@@ -149,7 +145,7 @@ public class GeneratorTable extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(_lblMediaLambda)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_media, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -173,7 +169,7 @@ public class GeneratorTable extends javax.swing.JFrame {
                 .addComponent(lbl_distribucion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(_lblMediaLambda)
                     .addComponent(txt_media, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_lblDesviacion)
                     .addComponent(txt_desviacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,10 +201,10 @@ public class GeneratorTable extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel _lblDesviacion;
+    private javax.swing.JLabel _lblMediaLambda;
     private javax.swing.JButton btn_ejecutar;
     private javax.swing.JButton btn_volver;
     private javax.swing.JComboBox<String> cmb_intervalo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;

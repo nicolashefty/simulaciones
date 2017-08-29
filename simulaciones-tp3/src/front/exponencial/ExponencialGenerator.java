@@ -30,8 +30,7 @@ public class ExponencialGenerator extends javax.swing.JFrame implements IGenerad
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -39,7 +38,7 @@ public class ExponencialGenerator extends javax.swing.JFrame implements IGenerad
         btn_comenzar = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        _txtMedia = new javax.swing.JTextField();
+        _txtLambda = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
@@ -50,24 +49,20 @@ public class ExponencialGenerator extends javax.swing.JFrame implements IGenerad
         jLabel4.setText("Cantidad de números a generar");
 
         btn_comenzar.setText("Comenzar");
-        btn_comenzar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btn_comenzar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_comenzarActionPerformed(evt);
             }
         });
 
         btn_back.setText("Volver");
-        btn_back.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_backActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("Ingrese Media:");
+        jLabel5.setText("Ingrese Lambda:");
 
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -99,7 +94,7 @@ public class ExponencialGenerator extends javax.swing.JFrame implements IGenerad
                                         .addGap(28, 28, 28)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txt_cant_num, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                                    .addComponent(_txtMedia)))
+                                    .addComponent(_txtLambda)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -126,7 +121,7 @@ public class ExponencialGenerator extends javax.swing.JFrame implements IGenerad
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(_txtMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_txtLambda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -145,7 +140,7 @@ public class ExponencialGenerator extends javax.swing.JFrame implements IGenerad
         if(validInput())
         {
             this.setVisible(false);
-            controller.randomFloatExponencial(Integer.parseInt(txt_cant_num.getText()), Integer.parseInt(_txtMedia.getText()));
+            controller.randomFloatExponencial(Integer.parseInt(txt_cant_num.getText()), Float.parseFloat(_txtLambda.getText()));
         }
     }//GEN-LAST:event_btn_comenzarActionPerformed
 
@@ -158,7 +153,7 @@ public class ExponencialGenerator extends javax.swing.JFrame implements IGenerad
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField _txtMedia;
+    private javax.swing.JTextField _txtLambda;
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_comenzar;
     private javax.swing.JLabel jLabel1;
@@ -185,33 +180,33 @@ public class ExponencialGenerator extends javax.swing.JFrame implements IGenerad
     private boolean validInput() 
     {
         //La media tiene q ser positiva
-        if(_txtMedia != null &&
-                _txtMedia.getText() != null)
+        if(_txtLambda != null &&
+                _txtLambda.getText() != null)
         {
-            String media = _txtMedia.getText();
-            if (media.isEmpty())
+            String lambda = _txtLambda.getText();
+            if (lambda.isEmpty())
             {
-                JOptionPane.showMessageDialog(this, "La media debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Lambda debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
             try
             {
-                float mediaFloat = Float.parseFloat(media);
-                if(mediaFloat < 0f)
+                float lambdaFloat = Float.parseFloat(lambda);
+                if(lambdaFloat < 0f)
                 {
-                    JOptionPane.showMessageDialog(this, "La media debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Lambda debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
             }
             catch (NumberFormatException nfe)
             {
-                JOptionPane.showMessageDialog(this, "La media debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Lambda debe ser positiva - Use punto no coma.", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }
         else
         {
-            JOptionPane.showMessageDialog(this, "La media debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Lambda debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     

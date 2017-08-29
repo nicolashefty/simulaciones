@@ -128,8 +128,7 @@ public class UniformeTestTable extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -150,34 +149,27 @@ public class UniformeTestTable extends javax.swing.JFrame {
         _gradosLib_agrupado = new javax.swing.JTextField();
         _btnGrafico = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Prueba de chi cuadrado");
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowActivated(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
 
         table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Numeros del intervalo", "Intervalo", "Frecuencia", "Frecuencia esperada", "Estadistico de prueba"
             }
-        )
-        {
-            boolean[] canEdit = new boolean []
-            {
+        ) {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -191,10 +183,8 @@ public class UniformeTestTable extends javax.swing.JFrame {
         jLabel1.setText("Valores Generados");
 
         txt_estadistico.setEditable(false);
-        txt_estadistico.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txt_estadistico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_estadisticoActionPerformed(evt);
             }
         });
@@ -207,32 +197,25 @@ public class UniformeTestTable extends javax.swing.JFrame {
 
         jButton1.setText("Volver");
         jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
         tablaFE.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Intervalo", "Frecuencia observada", "Frecuencia esperada", "Estadistico de prueba"
             }
-        )
-        {
-            boolean[] canEdit = new boolean []
-            {
+        ) {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -242,21 +225,20 @@ public class UniformeTestTable extends javax.swing.JFrame {
 
         jLabel5.setText("Estadistico de prueba total:");
 
-        txt_nuevo_estadistico.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txt_nuevo_estadistico.setEditable(false);
+        txt_nuevo_estadistico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nuevo_estadisticoActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Grados de Libertad:");
 
+        _gradosLib_agrupado.setEditable(false);
+
         _btnGrafico.setText("Ver Grafico");
-        _btnGrafico.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        _btnGrafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 _btnGraficoActionPerformed(evt);
             }
         });

@@ -138,8 +138,7 @@ public class ExponencialTestTable extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         txt_valoresGenerados = new javax.swing.JTextArea();
@@ -160,12 +159,10 @@ public class ExponencialTestTable extends javax.swing.JFrame {
         _tablaAcumulada = new javax.swing.JTable();
         _btnGrafico = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Prueba de chi cuadrado");
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowActivated(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
@@ -178,10 +175,8 @@ public class ExponencialTestTable extends javax.swing.JFrame {
         jLabel1.setText("Valores Generados");
 
         txt_estadistico.setEditable(false);
-        txt_estadistico.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txt_estadistico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_estadisticoActionPerformed(evt);
             }
         });
@@ -194,10 +189,8 @@ public class ExponencialTestTable extends javax.swing.JFrame {
 
         jButton1.setText("Volver");
         jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
@@ -206,45 +199,40 @@ public class ExponencialTestTable extends javax.swing.JFrame {
 
         jLabel5.setText("Estadistico de prueba total:");
 
-        txt_nuevo_estadistico.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txt_nuevo_estadistico.setEditable(false);
+        txt_nuevo_estadistico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nuevo_estadisticoActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Grados de Libertad:");
 
+        _gradosLib_agrupado.setEditable(false);
+
         _tabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Desde", "Hasta", "Frec Observada", "Probabilidad", "Frec Esperada", "Estadistico"
             }
         ));
         _scpTabla.setViewportView(_tabla);
 
         _tablaAcumulada.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Desde", "Hasta", "Frec Obs", "Prob", "Frec Esp", "Estadistico"
             }
         ));
         jScrollPane1.setViewportView(_tablaAcumulada);
 
         _btnGrafico.setText("Ver Grafico");
-        _btnGrafico.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        _btnGrafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 _btnGraficoActionPerformed(evt);
             }
         });
@@ -490,6 +478,45 @@ public class ExponencialTestTable extends javax.swing.JFrame {
                     frecEspAcumulada = 0;
                     frecObsAcumulada = 0;
                 } 
+                else if (i == 0 && tmAgrupado.getRowCount() > 0)
+                        // siguiente vuelta y no suma 5, le appendeo lo acumulado a la ultima fila que armé
+                {
+                    
+                    int filaAUnir = tmAgrupado.getRowCount() - 1;
+                    //actualizo intervalo (HASTA)
+                    tmAgrupado.setValueAt(tmOriginal.getValueAt(i, COL_HASTA), filaAUnir, COL_HASTA);
+                    //frec observada
+
+                    tmAgrupado.setValueAt(frecObsAcumulada + obtenerValorEnFloat(tmAgrupado.getValueAt(filaAUnir, COL_FREC_OBS)), filaAUnir, COL_FREC_OBS);
+                    //frec esperada
+                    tmAgrupado.setValueAt(frecEspAcumulada + obtenerValorEnFloat(tmAgrupado.getValueAt(filaAUnir, COL_FREC_ESP)), filaAUnir, COL_FREC_ESP);
+
+                    frecObsActual = (float) tmAgrupado.getValueAt(filaAUnir, COL_FREC_OBS);
+                    frecEsperadaActual = (float) tmAgrupado.getValueAt(filaAUnir, COL_FREC_ESP);
+
+                    
+                    estadisticoTotal -= obtenerValorEnFloat(tmAgrupado.getValueAt((tmAgrupado.getRowCount() - 1), COL_ESTAD));
+                    
+                    double estadistico = estadisticoPrueba(frecObsActual, frecEsperadaActual);
+                    tmAgrupado.setValueAt(formatterEstadistico.format(estadistico), filaAUnir, COL_ESTAD);
+                    estadisticoTotal += estadistico;
+
+                    break;
+                }
+                else if (i == 0 && tmAgrupado.getRowCount() <= 0)
+                {
+                    //Esto significa q no hay como actualizar xq la tabla nunca tuvo ninguna fila, asiq agregarla es la opcion.
+                    
+                    double estadisticoPruebaAcumActual = estadisticoPrueba(frecObsAcumulada, frecEspAcumulada);
+                    estadisticoTotal += estadisticoPruebaAcumActual;
+                    //poner Probabilidad a N/A xq no se usa aca
+                    tmAgrupado.addRow(new Object[]{tmOriginal.getValueAt(tmOriginal.getRowCount() - 1, COL_DESDE), 
+                        tmOriginal.getValueAt(i, COL_HASTA), 
+                        frecObsAcumulada,
+                        "N/A",
+                        frecEspAcumulada,
+                        formatterEstadistico.format(estadisticoPruebaAcumActual)});
+                }
             }
             int aMover = tmAgrupado.getRowCount() - 1;
             for (int j = 0; j < tmAgrupado.getRowCount(); j++)
@@ -527,5 +554,28 @@ public class ExponencialTestTable extends javax.swing.JFrame {
             }
         }
         return rv;
+    }
+    
+    
+    private float obtenerValorEnFloat(Object valueAt)
+    {
+        float toReturn = 0;
+        if (valueAt instanceof String)
+        {
+            String val = (String) valueAt;
+            if (val.indexOf(',') > 0)
+            {
+                toReturn = Float.parseFloat(val.replace(',', '.'));
+            }
+            else
+            {
+                toReturn = Float.parseFloat(val);
+            }
+        }
+        else if (valueAt instanceof Float)
+        {
+            toReturn = (Float) valueAt;
+        }
+        return toReturn;
     }
 }

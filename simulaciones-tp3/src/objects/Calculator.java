@@ -16,7 +16,7 @@ public class Calculator {
         float[] vec = new float[size];
         float op = 0;
         float randomValue=0; 
-        float mediaNegativa = (float) distribucion.getMedia()*-1;
+        float mediaNegativa = (float) (1/distribucion.getLambda())*-1;
         
         for (int i = 0; i < vec.length; i++) {
             randomValue = random.nextFloat();
@@ -170,19 +170,23 @@ public class Calculator {
         //Se arranca con el extremo minimo y vamos agregando el rango definido a cada intervalo
         float[][] vectorFrecuencias = armadoRangos(minimo, rango, intervalos);
 
-        for (int i = 0; i < valores.length; i++)
+        if (vectorFrecuencias.length == 1)
         {
-            for (int j = 0; j < intervalos; j++)
-            {
+            vectorFrecuencias[0][2] = valores.length;
+        }
+        else
+        {
+            for (int i = 0; i < valores.length; i++) {
+                for (int j = 0; j < vectorFrecuencias.length; j++) {
 
-                //vectorFrecuencias[j][0] tiene el desde y el vectorFrecuencias[j][1] el hasta,
-                //y vectorFrecuencias[j][2] la frecuencia obtenida
-                // Si el valor actual es menor al extremo superior del intervalo
-                if (valores[i] < vectorFrecuencias[j][1])
-                {
-                    // Incremento Frecuencia
-                    vectorFrecuencias[j][2]++;
-                    break;
+                    //vectorFrecuencias[j][0] tiene el desde y el vectorFrecuencias[j][1] el hasta,
+                    //y vectorFrecuencias[j][2] la frecuencia obtenida
+                    // Si el valor actual es menor al extremo superior del intervalo
+                    if (valores[i] < vectorFrecuencias[j][1]) {
+                        // Incremento Frecuencia
+                        vectorFrecuencias[j][2]++;
+                        break;
+                    }
                 }
             }
         }
@@ -191,6 +195,16 @@ public class Calculator {
     //Desde y hasta de los intervalos para la dist exponencial
     private static float[][] armadoRangos(float minimo, float rango, int intervalos)
     {
+        if (rango == 0)
+        {
+            //Si no hay rango es porque no vamos a poder armar mas de un
+            // solo intervalo por lo tanto creamos ese solo
+            // CASO: Normal sin desviacion o desviacion = 0
+            float[][] frecuenciasEspeciales = new float[1][3];
+            frecuenciasEspeciales[0][0] = minimo;
+            frecuenciasEspeciales[0][1] = minimo;
+            return frecuenciasEspeciales;
+        }
         float[][] vectorFrecuencias = new float[intervalos][3];
         //  [0] es el limite inferior del intervalo
         //  [1] es el limite superior del intervalo

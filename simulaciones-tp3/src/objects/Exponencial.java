@@ -10,28 +10,18 @@ package objects;
  * @author federico
  */
 public class Exponencial {
-    private double media;
     private double lambda;
 
-    public Exponencial(double media) {
-        this.media = media;
-        this.lambda = 1/media;
-    }
-
-    public double getMedia() {
-        return media;
-    }
-
-    public void setMedia(double media) {
-        this.media = media;
+    public Exponencial(double lambda) {
+        this.lambda = lambda;
     }
 
     public double getLambda() {
         return lambda;
     }
 
-    public void setLambda(double media) {
-        this.lambda = 1/media;
+    public void setLambda(double lambda) {
+        this.lambda = lambda;
     }
     
 }

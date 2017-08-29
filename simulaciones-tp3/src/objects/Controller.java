@@ -103,12 +103,12 @@ public class Controller {
         table.setVisible(true);
     }
     
-    public void randomFloatExponencial(int size, float media){
-        Exponencial e = new Exponencial(media);
+    public void randomFloatExponencial(int size, float lambda){
+        Exponencial e = new Exponencial(lambda);
         float[] vec = Calculator.calculatorExp(size, e);
         String[] datosUsados = new String[3];
         datosUsados[0] = ""+size;
-        datosUsados[1] = ""+media;
+        datosUsados[1] = ""+lambda;
         //datosUsados[2] = ""+desviacion
         GeneratorTable exp = new GeneratorTable(this,vec,"Exponencial",datosUsados);
         exp.setVisible(true);

@@ -47,7 +47,7 @@
                               </Group>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="txt_cant_num" pref="75" max="32767" attributes="0"/>
-                                  <Component id="_txtMedia" max="32767" attributes="0"/>
+                                  <Component id="_txtLambda" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -86,7 +86,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="_txtMedia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="_txtLambda" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -134,10 +134,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ingrese Media:"/>
+        <Property name="text" type="java.lang.String" value="Ingrese Lambda:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="_txtMedia">
+    <Component class="javax.swing.JTextField" name="_txtLambda">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>

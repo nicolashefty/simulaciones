@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Prueba de chi cuadrado"/>
   </Properties>
   <SyntheticProperties>
@@ -190,6 +190,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_nuevo_estadistico">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_nuevo_estadisticoActionPerformed"/>
       </Events>
@@ -200,6 +203,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="_gradosLib_agrupado">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="_scpTabla">
 
