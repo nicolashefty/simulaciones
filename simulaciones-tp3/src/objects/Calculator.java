@@ -94,16 +94,16 @@ public class Calculator {
     }
     
     // Acumulador de frecuencias observadas para cada intervalo en dist Uniforme
-     public float[][][] matrizFrecuenciaUniforme(Uniforme uniforme, float rango, int intervalos){
-        float [][][] m = armadoRangos(uniforme.getDesde(), rango, intervalos);
+     public float[][] matrizFrecuenciaUniforme(Uniforme uniforme, float rango, int intervalos){
+        float [][] m = armadoRangos(uniforme.getDesde(), rango, intervalos);
         float [] randomVec = uniforme.getVecValores();
         
         for (int i = 0; i < randomVec.length; i++) {
             for (int j = 0; j < intervalos; j++) {
                 
-                //m[j][j][0] tiene el desde y el m[j][j][1] el hasta, y m[j][j][2] la frecuencia obtenida
-                if (randomVec[i]<m[j][j][1]) {
-                    m[j][j][2]++;
+                //m[j][0] tiene el desde y el m[j][1] el hasta, y m[j][2] la frecuencia obtenida
+                if (randomVec[i]<m[j][1]) {
+                    m[j][2]++;
                     break;
                 }
             }
