@@ -192,9 +192,9 @@ public class ExponencialGenerator extends javax.swing.JFrame implements IGenerad
             try
             {
                 float lambdaFloat = Float.parseFloat(lambda);
-                if(lambdaFloat < 0f)
+                if(lambdaFloat <= 0f)
                 {
-                    JOptionPane.showMessageDialog(this, "Lambda debe ser positiva", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Lambda debe ser positiva y mayor que cero", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
             }
