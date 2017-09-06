@@ -5,6 +5,9 @@
  */
 package vista.montecarlo;
 
+import javax.swing.table.DefaultTableModel;
+import logica.montecarlo.politicas.IPolitica;
+
 /**
  *
  * @author heftyn
@@ -18,6 +21,35 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void addRowToTable(Object[] row, IPolitica politica)
+    {
+        DefaultTableModel tm = null;
+        switch (politica.getIDPolitica())
+        {
+            case IPolitica.A:
+            {
+                //agregar a la tabla de A;
+                tm = (DefaultTableModel) tblPoliticaA.getModel();
+                break;
+            }
+            case IPolitica.B:
+            {
+                //Agregar a la de B
+                tm = (DefaultTableModel) tblPoliticaB.getModel();
+                break;
+            }
+            case IPolitica.ALTR:
+            {
+                //Agregar a la nuestra
+                tm = (DefaultTableModel) tblPoliticaAlternativa.getModel();
+                break;
+            }
+        }
+        if (tm != null)
+        {
+            tm.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,8 +81,11 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
         txtStockInicial = new javax.swing.JTextField();
         tbpMontecarlo = new javax.swing.JTabbedPane();
         tabPoliticaA = new javax.swing.JScrollPane();
+        tblPoliticaA = new javax.swing.JTable();
         tabPoliticaB = new javax.swing.JScrollPane();
+        tblPoliticaB = new javax.swing.JTable();
         tabPoliticaAlternativa = new javax.swing.JScrollPane();
+        tblPoliticaAlternativa = new javax.swing.JTable();
         btnGrafico = new javax.swing.JButton();
         lblTtlDemanda = new javax.swing.JLabel();
         lblTtlDemora = new javax.swing.JLabel();
@@ -204,8 +239,40 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tblPoliticaA.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14", "Title 15", "Title 16", "Title 17", "Title 18", "Title 19"
+            }
+        ));
+        tabPoliticaA.setViewportView(tblPoliticaA);
+
         tbpMontecarlo.addTab("Política A", tabPoliticaA);
+
+        tblPoliticaB.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14", "Title 15", "Title 16", "Title 17", "Title 18", "Title 19"
+            }
+        ));
+        tabPoliticaB.setViewportView(tblPoliticaB);
+
         tbpMontecarlo.addTab("Política B", tabPoliticaB);
+
+        tblPoliticaAlternativa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14", "Title 15", "Title 16", "Title 17", "Title 18", "Title 19"
+            }
+        ));
+        tabPoliticaAlternativa.setViewportView(tblPoliticaAlternativa);
+
         tbpMontecarlo.addTab("Política Alternativa", tabPoliticaAlternativa);
 
         btnGrafico.setText("Gráfico Evolutivo del Costo Promedio Diario");
@@ -287,40 +354,6 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCostoAlmacenamientoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaMontecarloSimulacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaMontecarloSimulacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaMontecarloSimulacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaMontecarloSimulacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaMontecarloSimulacion().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGrafico;
@@ -348,6 +381,9 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
     private javax.swing.JTable tblCostoPedido;
     private javax.swing.JTable tblDemanda;
     private javax.swing.JTable tblDemora;
+    private javax.swing.JTable tblPoliticaA;
+    private javax.swing.JTable tblPoliticaAlternativa;
+    private javax.swing.JTable tblPoliticaB;
     private javax.swing.JTabbedPane tbpMontecarlo;
     private javax.swing.JTextField txtCostoAlmacenamiento;
     private javax.swing.JTextField txtCostoFaltante;

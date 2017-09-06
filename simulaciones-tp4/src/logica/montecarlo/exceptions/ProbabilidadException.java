@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logica.montecarlo;
+package logica.montecarlo.exceptions;
 
 /**
  *
  * @author heftyn
  */
-public class FilaMontecarlo {
+public class ProbabilidadException extends Exception{
     
+    public ProbabilidadException(String msg)
+    {
+        super(msg);
+    }
 }
