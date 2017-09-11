@@ -20,8 +20,9 @@ import logica.montecarlo.exceptions.ProbabilidadException;
  */
 public class Utilidades 
 {
-    public static ValoresInicialesSimulacion transformarAValoresInicialesSimulacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static ValoresInicialesSimulacion transformarAValoresInicialesSimulacion(int desde, int hasta) {
+        
+        return new ValoresInicialesSimulacion(desde, hasta, getDatosMontecarlo());
     }
     
     public static String formatRND(double rndDouble)

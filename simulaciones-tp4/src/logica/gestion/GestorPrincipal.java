@@ -15,7 +15,6 @@ public class GestorPrincipal {
     public static void main(String args[])
     {
         GestorVistaMontecarloSimulacion gestorMontec = new GestorVistaMontecarloSimulacion();
-        VistaPrincipal ventana = new VistaPrincipal();
-        gestorMontec.setValoresInicialesSimulacion(ventana.getValoresInicialesSimulacion());
+        VistaPrincipal ventana = new VistaPrincipal(gestorMontec);
     }
 }

@@ -22,7 +22,7 @@ import vista.montecarlo.VistaMontecarloSimulacion;
  */
 public class GestorVistaMontecarloSimulacion {
 
-    void setValoresInicialesSimulacion(ValoresInicialesSimulacion valoresInicialesSimulacion) 
+    public void setValoresInicialesSimulacion(ValoresInicialesSimulacion valoresInicialesSimulacion) 
     {
         VistaMontecarloSimulacion vistaMontecarlo = new VistaMontecarloSimulacion();
         try

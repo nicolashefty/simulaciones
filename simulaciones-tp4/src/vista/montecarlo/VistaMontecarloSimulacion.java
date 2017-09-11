@@ -19,6 +19,8 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
      */
     public VistaMontecarloSimulacion() {
         initComponents();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
 
     public void addRowToTable(Object[] row, IPolitica politica)
@@ -93,6 +95,7 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
         lblCostosTtl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Simulaciones - TP N° 4");
 
         tblDemanda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

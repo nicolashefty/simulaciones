@@ -11,8 +11,8 @@ package logica.montecarlo;
  */
 public class ValoresInicialesSimulacion 
 {
-    private double diaDesde;
-    private double diaHasta;
+    private int diaDesde;
+    private int diaHasta;
     private DatosMontecarlo datosMontecarlo;
     
     public ValoresInicialesSimulacion()
@@ -20,26 +20,26 @@ public class ValoresInicialesSimulacion
         
     }
     
-    public ValoresInicialesSimulacion(double diaDesde, double diaHasta, DatosMontecarlo datosMon)
+    public ValoresInicialesSimulacion(int diaDesde, int diaHasta, DatosMontecarlo datosMon)
     {
         this.diaDesde = diaDesde;
         this.diaHasta = diaHasta;
         this.datosMontecarlo = datosMon;
     }
 
-    public double getDiaDesde() {
+    public int getDiaDesde() {
         return diaDesde;
     }
 
-    public void setDiaDesde(double diaDesde) {
+    public void setDiaDesde(int diaDesde) {
         this.diaDesde = diaDesde;
     }
 
-    public double getDiaHasta() {
+    public int getDiaHasta() {
         return diaHasta;
     }
 
-    public void setDiaHasta(double diaHasta) {
+    public void setDiaHasta(int diaHasta) {
         this.diaHasta = diaHasta;
     }
 
