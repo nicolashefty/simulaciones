@@ -16,7 +16,11 @@ public class PoliticaB implements IPolitica{
     @Override
     public void hacerPedido(EstadoMontecarlo[] vectorEstado) {
         //Esta politica en cambio, hace pedidos cada 10 dias.
-        // se pide en relacion a la
+        // se pide en relacion a la (? nose porque no termine esta idea lpm
+        
+        //Manejar costo de pedido!
+        
+        // Manejar Demora!
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -31,5 +35,15 @@ public class PoliticaB implements IPolitica{
     @Override
     public String getIDPolitica() {
         return IPolitica.B;
+    }
+
+    @Override
+    public boolean calculaDemandaAcumulada() {
+        return true;
+    }
+
+    @Override
+    public double getDiasFaltantesParaPedirIniciales() {
+        return 10;
     }
 }

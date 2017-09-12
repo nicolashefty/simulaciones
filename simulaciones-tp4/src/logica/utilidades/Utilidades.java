@@ -47,7 +47,7 @@ public class Utilidades
     public static DatosMontecarlo getDatosMontecarlo() {
         DatosMontecarlo datos = new DatosMontecarlo();
         datos.setCostoFaltante(10);
-        datos.setCostoMantenimiento(3);
+        datos.setCostoAlmacenamiento(3);
         datos.setStockInicial(20);
         datos.setCostoPedido(getCostoPedido());
         datos.setDemanda(getDemanda());

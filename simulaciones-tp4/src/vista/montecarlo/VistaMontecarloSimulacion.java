@@ -14,6 +14,8 @@ import logica.montecarlo.politicas.IPolitica;
  */
 public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
+    private double[][] costosPromedio;
+
     /**
      * Creates new form VistaMontecarloSimulacion
      */
@@ -392,4 +394,9 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
     private javax.swing.JTextField txtCostoFaltante;
     private javax.swing.JTextField txtStockInicial;
     // End of variables declaration//GEN-END:variables
+
+    public void setCostosPromedios(double[][] costosPromedio) {
+        this.costosPromedio = costosPromedio;
+    }
+
 }

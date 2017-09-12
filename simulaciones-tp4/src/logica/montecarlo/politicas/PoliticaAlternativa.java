@@ -17,6 +17,10 @@ public class PoliticaAlternativa implements IPolitica{
     @Override
     public void hacerPedido(EstadoMontecarlo[] vectorEstado) {
         //TODO: To think about :P
+        
+        //Manejar costo de pedido!
+        
+        // Manejar Demora!
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -32,5 +36,15 @@ public class PoliticaAlternativa implements IPolitica{
     @Override
     public String getIDPolitica() {
         return IPolitica.ALTR;
+    }
+
+    @Override
+    public boolean calculaDemandaAcumulada() {
+        return false;
+    }
+
+    @Override
+    public double getDiasFaltantesParaPedirIniciales() {
+        return 1;
     }
 }

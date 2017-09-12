@@ -85,4 +85,9 @@ public class Demanda {
         
         return cpr.getProbabilidad() + probabilidad;
     }
+    
+    public double getDemandaParaRandom(double rnd)
+    {
+        return 0;
+    }
 }

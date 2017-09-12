@@ -18,4 +18,7 @@ public interface IPolitica {
     
     String getIDPolitica();
     void hacerPedido(EstadoMontecarlo[] vectorEstado);
+    boolean calculaDemandaAcumulada();
+
+    double getDiasFaltantesParaPedirIniciales();
 }

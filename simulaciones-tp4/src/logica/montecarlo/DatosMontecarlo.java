@@ -14,19 +14,19 @@ import logica.montecarlo.costoPedido.CostoPedido;
  * @author heftyn
  */
 public class DatosMontecarlo {
-    private double costoMantenimiento = 0;
+    private double costoAlmacenamiento = 0;
     private double costoFaltante = 0;
     private double stockInicial = 0;
     private CostoPedido costoPedido;
     private Demora demora;
     private Demanda demanda;
 
-    public double getCostoMantenimiento() {
-        return costoMantenimiento;
+    public double getCostoAlmacenamiento() {
+        return costoAlmacenamiento;
     }
 
-    public void setCostoMantenimiento(double costoMantenimiento) {
-        this.costoMantenimiento = costoMantenimiento;
+    public void setCostoAlmacenamiento(double costoAlmacenamiento) {
+        this.costoAlmacenamiento = costoAlmacenamiento;
     }
 
     public double getCostoFaltante() {
@@ -69,5 +69,8 @@ public class DatosMontecarlo {
         this.demanda = demanda;
     }
     
-    
+    public double getDemandaParaRandom(double random)
+    {
+        return demanda.getDemandaParaRandom(random);
+    }
 }

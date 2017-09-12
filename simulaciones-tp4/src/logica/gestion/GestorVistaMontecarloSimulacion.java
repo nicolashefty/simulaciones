@@ -27,28 +27,31 @@ public class GestorVistaMontecarloSimulacion {
         VistaMontecarloSimulacion vistaMontecarlo = new VistaMontecarloSimulacion();
         try
         {
-            for (int i = 0 ; i < 3 ; i++)
+            double[][] costosPromedio = new double[3][121];
+            for (int politica = 0 ; politica < 3 ; politica++)
             {
                 CoordinadorMontecarlo coord = new CoordinadorMontecarlo();
                 //vamos tmb a tener q mandarle los datos montecarlo
-                coord.setPolitica(getPoliticaParaIteracion(i));
-                coord.setDatosMontecarlo(Utilidades.getDatosMontecarlo());
-                for(int dia = 0; dia < CoordinadorMontecarlo.DIA_MAXIMO; i++)
+                coord.setPolitica(getPoliticaParaIteracion(politica));
+                coord.setDatosMontecarlo(valoresInicialesSimulacion.getDatosMontecarlo());
+                coord.inicializar();
+                for(int dia = 0; dia < CoordinadorMontecarlo.DIA_MAXIMO; dia++)
                 {
                     coord.simularDia();
                     //Solo lo agregamos a la tabla si esta dentro del rango
                     // osi es la ultima fila.
-                    if((i > valoresInicialesSimulacion.getDiaDesde()
-                       && i < valoresInicialesSimulacion.getDiaHasta()) 
-                      || i == CoordinadorMontecarlo.DIA_MAXIMO -1 )
+                    if((dia+1 > valoresInicialesSimulacion.getDiaDesde()
+                       && dia+1 < valoresInicialesSimulacion.getDiaHasta()) 
+                      || dia+1 == CoordinadorMontecarlo.DIA_MAXIMO)
                     {
                         vistaMontecarlo.addRowToTable(coord.getRowActual(), coord.getPolitica());
                     }
-                    
+                    costosPromedio[politica][dia] = coord.getCostoPromedioActual();
                     //Probablemente sin condicion le tengamos que mandar el costo promedio
                     // diario en cada iteracion para que tenga como graficarlo despues.
                 }
             }
+            vistaMontecarlo.setCostosPromedios(costosPromedio);
         }
         catch(NoPolicyYetException npye)
         {

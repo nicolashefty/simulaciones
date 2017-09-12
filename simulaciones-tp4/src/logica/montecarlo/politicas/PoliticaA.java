@@ -18,6 +18,10 @@ public class PoliticaA implements IPolitica
     public void hacerPedido(EstadoMontecarlo[] vectorEstado) {
         // Esta politica si no hay otro pedido en curso (columna dias restantes para que llegue el pedido to check)
         // te crea un pedido... y si es el dia de la llegada del pedido le va aponer la cantidad: 7
+        
+        //Manejar costo de pedido!
+        
+        // Manejar Demora!
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -31,5 +35,15 @@ public class PoliticaA implements IPolitica
     @Override
     public String getIDPolitica() {
         return IPolitica.A;
+    }
+
+    @Override
+    public boolean calculaDemandaAcumulada() {
+        return false;
+    }
+
+    @Override
+    public double getDiasFaltantesParaPedirIniciales() {
+        return 7;
     }
 }
