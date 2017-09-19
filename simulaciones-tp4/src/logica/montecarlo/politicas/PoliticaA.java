@@ -21,6 +21,9 @@ public class PoliticaA implements IPolitica
     @Override
     public void hacerPedido(EstadoMontecarlo[] vectorEstado, DatosMontecarlo datosMontecarlo) throws ProbabilidadException 
     {
+        
+        // Esta politica si no hay otro pedido en curso (columna dias restantes para que llegue el pedido to check)
+        // te crea un pedido... y si es el dia de la llegada del pedido le va aponer la cantidad: 7 al stock
         this.datosMontecarlo = datosMontecarlo;
         if(vectorEstado[0].isHayPedidoEnCurso())
         {
@@ -29,14 +32,7 @@ public class PoliticaA implements IPolitica
         else
         {
             noHayPedidoEnCurso(vectorEstado);
-        }
-        // Esta politica si no hay otro pedido en curso (columna dias restantes para que llegue el pedido to check)
-        // te crea un pedido... y si es el dia de la llegada del pedido le va aponer la cantidad: 7
-        
-        //Manejar costo de pedido!
-        
-        // Manejar Demora!
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }        
     }
     
     @Override

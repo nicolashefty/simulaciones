@@ -17,7 +17,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  *
  * @author heftyn
  */
-public class GraficoEvolutivo extends ApplicationFrame {
+public class GraficoEvolutivo extends javax.swing.JFrame {
 
     private static final String TITULO_FRAME = "Grafico Evolutivo";
     private static final String TITULO_GRAFICO = "Evolución del Costo Promedio";
@@ -38,6 +38,7 @@ public class GraficoEvolutivo extends ApplicationFrame {
       ChartPanel chartPanel = new ChartPanel( lineChart );
       chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
       setContentPane( chartPanel );
+      setDefaultCloseOperation(DISPOSE_ON_CLOSE);
    }
 
    private DefaultCategoryDataset createDataset( ) {

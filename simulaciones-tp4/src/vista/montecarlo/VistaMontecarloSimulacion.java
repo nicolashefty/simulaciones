@@ -117,7 +117,7 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
         lblTitCostoPedido = new javax.swing.JLabel();
         lblCostosTtl = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Simulaciones - TP N° 4");
 
         tblDemanda.setModel(new javax.swing.table.DefaultTableModel(
