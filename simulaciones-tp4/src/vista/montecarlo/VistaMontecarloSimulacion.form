@@ -391,25 +391,25 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="19" rowCount="0">
-                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 5" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 6" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 7" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 8" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 9" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 10" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 11" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 12" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 13" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 14" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 15" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 16" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 17" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 18" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 19" type="java.lang.Object"/>
+                    <Column editable="false" title="Dia" type="java.lang.String"/>
+                    <Column editable="false" title="RND" type="java.lang.String"/>
+                    <Column editable="false" title="Demanda" type="java.lang.String"/>
+                    <Column editable="false" title="Stock" type="java.lang.String"/>
+                    <Column editable="false" title="RND" type="java.lang.String"/>
+                    <Column editable="false" title="Demora" type="java.lang.String"/>
+                    <Column editable="false" title="Demanda Acum" type="java.lang.String"/>
+                    <Column editable="false" title="Dias faltantes para pedir" type="java.lang.String"/>
+                    <Column editable="false" title="Hay pedido en curso" type="java.lang.String"/>
+                    <Column editable="false" title="Cant Pedida 1" type="java.lang.String"/>
+                    <Column editable="false" title="Cant Pedida 2" type="java.lang.String"/>
+                    <Column editable="false" title="Dia Llegada pedido 1" type="java.lang.String"/>
+                    <Column editable="false" title="Dia Llegada pedido 2" type="java.lang.String"/>
+                    <Column editable="false" title="Costo faltante" type="java.lang.String"/>
+                    <Column editable="false" title="Costo pedido" type="java.lang.String"/>
+                    <Column editable="false" title="Costo mantenimiento" type="java.lang.String"/>
+                    <Column editable="false" title="Costo total hoy" type="java.lang.String"/>
+                    <Column editable="false" title="Costo diario Acum" type="java.lang.String"/>
+                    <Column editable="false" title="Costo diario Prom" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -533,25 +533,25 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="19" rowCount="0">
-                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 5" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 6" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 7" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 8" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 9" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 10" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 11" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 12" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 13" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 14" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 15" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 16" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 17" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 18" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 19" type="java.lang.Object"/>
+                    <Column editable="false" title="Dia" type="java.lang.String"/>
+                    <Column editable="false" title="RND" type="java.lang.String"/>
+                    <Column editable="false" title="Demanda" type="java.lang.String"/>
+                    <Column editable="false" title="Stock" type="java.lang.String"/>
+                    <Column editable="false" title="RND" type="java.lang.String"/>
+                    <Column editable="false" title="Demora" type="java.lang.String"/>
+                    <Column editable="false" title="Demanda Acum" type="java.lang.String"/>
+                    <Column editable="false" title="Dias faltantes para pedir" type="java.lang.String"/>
+                    <Column editable="false" title="Hay pedido en curso" type="java.lang.String"/>
+                    <Column editable="false" title="Cant Pedida 1" type="java.lang.String"/>
+                    <Column editable="false" title="Cant Pedida 2" type="java.lang.String"/>
+                    <Column editable="false" title="Dia Llegada Pedido 1" type="java.lang.String"/>
+                    <Column editable="false" title="Dia Llegada Pedido 2" type="java.lang.String"/>
+                    <Column editable="false" title="Costo faltante" type="java.lang.String"/>
+                    <Column editable="false" title="Costo pedido" type="java.lang.String"/>
+                    <Column editable="false" title="Costo mantenimiento" type="java.lang.String"/>
+                    <Column editable="false" title="Costo total hoy" type="java.lang.String"/>
+                    <Column editable="false" title="Costo diario Acum" type="java.lang.String"/>
+                    <Column editable="false" title="Costo diario Prom" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -675,25 +675,25 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="19" rowCount="0">
-                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 5" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 6" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 7" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 8" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 9" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 10" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 11" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 12" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 13" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 14" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 15" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 16" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 17" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 18" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 19" type="java.lang.Object"/>
+                    <Column editable="false" title="Dia" type="java.lang.String"/>
+                    <Column editable="false" title="RND" type="java.lang.String"/>
+                    <Column editable="false" title="Demanda" type="java.lang.String"/>
+                    <Column editable="false" title="Stock" type="java.lang.String"/>
+                    <Column editable="false" title="RND" type="java.lang.String"/>
+                    <Column editable="false" title="Demora" type="java.lang.String"/>
+                    <Column editable="false" title="Demora Acum" type="java.lang.String"/>
+                    <Column editable="false" title="Dias faltantes para pedir" type="java.lang.String"/>
+                    <Column editable="false" title="Hay pedido en curso" type="java.lang.String"/>
+                    <Column editable="false" title="Cant Pedida 1" type="java.lang.String"/>
+                    <Column editable="false" title="Cant Pedida 2" type="java.lang.String"/>
+                    <Column editable="false" title="Dia Llegada pedido 1" type="java.lang.String"/>
+                    <Column editable="false" title="Dia Llegada pedido 2" type="java.lang.String"/>
+                    <Column editable="false" title="Costo faltante" type="java.lang.String"/>
+                    <Column editable="false" title="Costo pedido" type="java.lang.String"/>
+                    <Column editable="false" title="Costo mantenimiento" type="java.lang.String"/>
+                    <Column editable="false" title="Costo total hoy" type="java.lang.String"/>
+                    <Column editable="true" title="Costo diario Acum" type="java.lang.String"/>
+                    <Column editable="false" title="Costo diario Prom" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

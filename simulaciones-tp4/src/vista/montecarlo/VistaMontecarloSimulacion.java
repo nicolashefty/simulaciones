@@ -249,9 +249,24 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14", "Title 15", "Title 16", "Title 17", "Title 18", "Title 19"
+                "Dia", "RND", "Demanda", "Stock", "RND", "Demora", "Demanda Acum", "Dias faltantes para pedir", "Hay pedido en curso", "Cant Pedida 1", "Cant Pedida 2", "Dia Llegada pedido 1", "Dia Llegada pedido 2", "Costo faltante", "Costo pedido", "Costo mantenimiento", "Costo total hoy", "Costo diario Acum", "Costo diario Prom"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabPoliticaA.setViewportView(tblPoliticaA);
 
         tbpMontecarlo.addTab("Política A", tabPoliticaA);
@@ -261,9 +276,24 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14", "Title 15", "Title 16", "Title 17", "Title 18", "Title 19"
+                "Dia", "RND", "Demanda", "Stock", "RND", "Demora", "Demanda Acum", "Dias faltantes para pedir", "Hay pedido en curso", "Cant Pedida 1", "Cant Pedida 2", "Dia Llegada Pedido 1", "Dia Llegada Pedido 2", "Costo faltante", "Costo pedido", "Costo mantenimiento", "Costo total hoy", "Costo diario Acum", "Costo diario Prom"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabPoliticaB.setViewportView(tblPoliticaB);
 
         tbpMontecarlo.addTab("Política B", tabPoliticaB);
@@ -273,9 +303,24 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14", "Title 15", "Title 16", "Title 17", "Title 18", "Title 19"
+                "Dia", "RND", "Demanda", "Stock", "RND", "Demora", "Demora Acum", "Dias faltantes para pedir", "Hay pedido en curso", "Cant Pedida 1", "Cant Pedida 2", "Dia Llegada pedido 1", "Dia Llegada pedido 2", "Costo faltante", "Costo pedido", "Costo mantenimiento", "Costo total hoy", "Costo diario Acum", "Costo diario Prom"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabPoliticaAlternativa.setViewportView(tblPoliticaAlternativa);
 
         tbpMontecarlo.addTab("Política Alternativa", tabPoliticaAlternativa);
