@@ -23,7 +23,8 @@ public class Demora {
         }
         if(sePuedeAgregar(probabilidad))
         {
-            agregarOrdenado(probabilidad, demora);
+//            agregarOrdenado(probabilidad, demora);
+            agregar(probabilidad, demora);
         }
         else
         {
@@ -33,13 +34,21 @@ public class Demora {
 
     private boolean sePuedeAgregar(Double probabilidad) 
     {
-        if (probabilidad > 1 || probabilidad < 0)
-        {
-            return false;
-        }
-        return true;
+        return !(probabilidad > 1 || probabilidad < 0);
     }
 
+    private void agregar(Double probabilidad, Double demora)
+    {
+        double probabilidadAcumulada = probabilidad;
+        if (mapaProbabilidades.size() > 0)
+        {
+            probabilidadAcumulada = 
+                    calcularProbabilidadAcumulada(mapaProbabilidades.get(mapaProbabilidades.size()-1), probabilidad);
+        }
+        mapaProbabilidades.add(new DemoraRow(probabilidadAcumulada, demora));
+    }
+    
+    /**NO ES NECESARIO*/
     private void agregarOrdenado(Double probabilidad, Double demora) 
     {
         //Ordenar
@@ -50,7 +59,7 @@ public class Demora {
         double probabilidadAcumulada = probabilidad;
         for (DemoraRow cpr : mapaProbabilidades)
         {
-            if (cpr.getDemora() >= demora)
+            if (cpr.getProbabilidad() >= probabilidad)
             {
                 indiceDondePoner = i;
                 probabilidadAcumulada = calcularProbabilidadAcumulada(cpr,probabilidad);
@@ -82,5 +91,35 @@ public class Demora {
         }
         
         return cpr.getProbabilidad() + probabilidad;
+    }
+    
+    public double getDemoraParaRandom(double rnd)
+        throws ProbabilidadException
+    {
+        DemoraRow retDemora = null;
+        //Arrancamos a iterar la lista de abajo para arriba
+        for (int i = mapaProbabilidades.size() - 1; i >= 0; i--)
+        {
+            DemoraRow demora = mapaProbabilidades.get(i);
+            if (rnd <= demora.getProbabilidad())
+            {
+                retDemora = demora;
+            }
+        }
+        
+        if (retDemora == null)
+        {
+            //Si por alguna razon no se encuentra tiramos el error
+            throw new DemoraNotFoundException("No se encuentra demora para "+ rnd);
+        }
+        return retDemora.getDemora();
+    }
+    
+    private class DemoraNotFoundException extends ProbabilidadException
+    {
+        DemoraNotFoundException(String msg)
+        {
+            super(msg);
+        }
     }
 }

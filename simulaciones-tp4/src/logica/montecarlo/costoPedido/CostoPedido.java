@@ -22,50 +22,41 @@ public class CostoPedido
         {
             mapaProbabilidades = new ArrayList<>();
         }
-        agregarOrdenado(cantidadPedidaLimite, costo);
+        agregar(cantidadPedidaLimite, costo);
     }
 
-    private void agregarOrdenado(Double cantidadPedidaLimite, Double costo) 
+    private void agregar(Double cantidadPedidaLimite, Double costo) 
     {
-        //Ordenar
-        Collections.sort(mapaProbabilidades);
-        //Agregar
-        int i = 0;
-        int indiceDondePoner = mapaProbabilidades.size();
-        double probabilidadAcumulada = cantidadPedidaLimite;
-        for (CostoPedidoRow cpr : mapaProbabilidades)
+        mapaProbabilidades.add(new CostoPedidoRow(cantidadPedidaLimite, costo));
+    }
+    
+    public double getCostoParaCantidad(double cant)
+        throws ProbabilidadException
+    {
+        CostoPedidoRow retCosto = null;
+        //Arrancamos a iterar la lista de abajo para arriba
+        for (int i = mapaProbabilidades.size() - 1; i >= 0; i--)
         {
-            if (cpr.getCantidadPedidaLimite() >= costo)
+            CostoPedidoRow costo = mapaProbabilidades.get(i);
+            if (cant <= costo.getCantidadPedidaLimite())
             {
-                indiceDondePoner = i;
-                probabilidadAcumulada = calcularProbabilidadAcumulada(cpr,cantidadPedidaLimite);
+                retCosto = costo;
             }
-            
-            i++;
-        }
-        if(indiceDondePoner == mapaProbabilidades.size())
-        {
-            mapaProbabilidades.add(new CostoPedidoRow(probabilidadAcumulada, costo));
-        }
-        else
-        {
-            mapaProbabilidades.set(indiceDondePoner, new CostoPedidoRow(probabilidadAcumulada, costo));
-        }
-    }
-
-    /**
-     * Te devuelve la probabilidad acumulada
-     * @param cpr
-     * @param probabilidad
-     * @return 
-     */
-    private double calcularProbabilidadAcumulada(CostoPedidoRow cpr, Double probabilidad) 
-    {
-        if (cpr == null)
-        {
-            return probabilidad;
         }
         
-        return cpr.getProbabilidad() + probabilidad;
+        if (retCosto == null)
+        {
+            //Si por alguna razon no se encuentra tiramos el error
+            throw new CostoNotFoundException("No se encuentra demora para "+ cant);
+        }
+        return retCosto.getCosto();
+    }
+    
+    private class CostoNotFoundException extends ProbabilidadException
+    {
+        CostoNotFoundException(String msg)
+        {
+            super(msg);
+        }
     }
 }

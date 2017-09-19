@@ -25,7 +25,7 @@ public class Demanda {
         }
         if(sePuedeAgregar(probabilidad))
         {
-            agregarOrdenado(probabilidad, demanda);
+            agregar(probabilidad, demanda);
         }
         else
         {
@@ -35,11 +35,18 @@ public class Demanda {
 
     private boolean sePuedeAgregar(Double probabilidad) 
     {
-        if (probabilidad > 1 || probabilidad < 0)
+        return !(probabilidad > 1 || probabilidad < 0);
+    }
+
+    private void agregar(Double probabilidad, Double demanda)
+    {
+        double probabilidadAcumulada = probabilidad;
+        if (mapaProbabilidades.size() > 0)
         {
-            return false;
+            probabilidadAcumulada = 
+                    calcularProbabilidadAcumulada(mapaProbabilidades.get(mapaProbabilidades.size()-1), probabilidad);
         }
-        return true;
+        mapaProbabilidades.add(new DemandaRow(probabilidadAcumulada, demanda));
     }
 
     private void agregarOrdenado(Double probabilidad, Double demanda) 
@@ -52,7 +59,7 @@ public class Demanda {
         double probabilidadAcumulada = probabilidad;
         for (DemandaRow cpr : mapaProbabilidades)
         {
-            if (cpr.getDemanda() >= demanda)
+            if (cpr.getProbabilidad() >= probabilidad)
             {
                 indiceDondePoner = i;
                 probabilidadAcumulada = calcularProbabilidadAcumulada(cpr,probabilidad);
@@ -87,7 +94,32 @@ public class Demanda {
     }
     
     public double getDemandaParaRandom(double rnd)
+            throws ProbabilidadException
     {
-        return 0;
+        DemandaRow retDemanda = null;
+        //Arrancamos a iterar la lista de abajo para arriba
+        for (int i = mapaProbabilidades.size() - 1; i >= 0; i--)
+        {
+            DemandaRow demanda = mapaProbabilidades.get(i);
+            if (rnd <= demanda.getProbabilidad())
+            {
+                retDemanda = demanda;
+            }
+        }
+        
+        if (retDemanda == null)
+        {
+            //Si por alguna razon no se encuentra tiramos el error
+            throw new DemandaNotFoundException("No se encuentra demanda para "+ rnd);
+        }
+        return retDemanda.getDemanda();
+    }
+    
+    private class DemandaNotFoundException extends ProbabilidadException
+    {
+        DemandaNotFoundException(String msg)
+        {
+            super(msg);
+        }
     }
 }

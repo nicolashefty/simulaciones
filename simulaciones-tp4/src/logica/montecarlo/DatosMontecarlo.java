@@ -8,6 +8,7 @@ package logica.montecarlo;
 import logica.montecarlo.demora.Demora;
 import logica.montecarlo.demanda.Demanda;
 import logica.montecarlo.costoPedido.CostoPedido;
+import logica.montecarlo.exceptions.ProbabilidadException;
 
 /**
  *
@@ -70,6 +71,7 @@ public class DatosMontecarlo {
     }
     
     public double getDemandaParaRandom(double random)
+            throws ProbabilidadException
     {
         return demanda.getDemandaParaRandom(random);
     }

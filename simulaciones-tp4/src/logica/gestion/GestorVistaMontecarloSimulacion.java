@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import logica.montecarlo.CoordinadorMontecarlo;
 import logica.montecarlo.ValoresInicialesSimulacion;
 import logica.montecarlo.exceptions.NoPolicyYetException;
+import logica.montecarlo.exceptions.ProbabilidadException;
 import logica.montecarlo.politicas.IPolitica;
 import logica.montecarlo.politicas.PoliticaA;
 import logica.montecarlo.politicas.PoliticaAlternativa;
@@ -53,7 +54,7 @@ public class GestorVistaMontecarloSimulacion {
             }
             vistaMontecarlo.setCostosPromedios(costosPromedio);
         }
-        catch(NoPolicyYetException npye)
+        catch(NoPolicyYetException|ProbabilidadException npye)
         {
             JOptionPane.showMessageDialog(null, npye.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }

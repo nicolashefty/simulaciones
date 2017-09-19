@@ -7,6 +7,7 @@ package logica.montecarlo;
 
 import logica.montecarlo.politicas.IPolitica;
 import static java.lang.Math.random;
+import logica.montecarlo.exceptions.ProbabilidadException;
 
 /**
  *
@@ -46,6 +47,7 @@ public class CoordinadorMontecarlo
     }
 
     public void simularDia() 
+            throws ProbabilidadException
     {
         //Mover la que era row actual a la anterior y limpiar la actual
         vectorEstado[0] = vectorEstado[1];
@@ -71,7 +73,9 @@ public class CoordinadorMontecarlo
         //Fin
     }
 
-    private void setDemanda() {
+    private void setDemanda() 
+            throws ProbabilidadException
+    {
         //Generar y guardar RND Demanda
         vectorEstado[1].setRndDemanda(random());
         // Obtener demanda a partir del random

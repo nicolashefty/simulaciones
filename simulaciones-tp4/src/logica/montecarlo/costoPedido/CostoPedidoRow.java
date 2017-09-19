@@ -21,12 +21,12 @@ public class CostoPedidoRow implements Comparable<CostoPedidoRow>
         this.costo = costo;
     }
     
-    public double getProbabilidad()
+    public double getCantidadPedidaLimite()
     {
         return cantidadPedidaLimite;
     }
     
-    public double getCantidadPedidaLimite()
+    public double getCosto()
     {
         return costo;
     }
