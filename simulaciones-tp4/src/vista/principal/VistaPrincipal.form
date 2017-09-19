@@ -138,7 +138,7 @@
                   <Font name="Tahoma" size="12" style="0"/>
                 </Property>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="Godoy, Federico ()&#xa;Hefty, Nicolas (62718)&#xa;Juarez, Diego ()&#xa;Toloza, Macarena (62326)"/>
+                <Property name="text" type="java.lang.String" value="Godoy, Federico (62174)&#xa;Hefty, Nicolas (62718)&#xa;Juarez, Diego ()&#xa;Toloza, Macarena (62326)"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                     <EtchetBorder/>

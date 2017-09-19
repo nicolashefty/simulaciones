@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import logica.gestion.GestorVistaMontecarloSimulacion;
 import logica.montecarlo.CoordinadorMontecarlo;
 import logica.montecarlo.ValoresInicialesSimulacion;
+import logica.montecarlo.demanda.Demanda;
+import logica.montecarlo.demora.Demora;
 import logica.utilidades.Utilidades;
 
 /**
@@ -69,7 +71,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("Godoy, Federico ()\nHefty, Nicolas (62718)\nJuarez, Diego ()\nToloza, Macarena (62326)");
+        jTextArea1.setText("Godoy, Federico (62174)\nHefty, Nicolas (62718)\nJuarez, Diego ()\nToloza, Macarena (62326)");
         jTextArea1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jScrollPane1.setViewportView(jTextArea1);
 

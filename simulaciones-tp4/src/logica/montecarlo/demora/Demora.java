@@ -14,6 +14,10 @@ import logica.montecarlo.exceptions.ProbabilidadException;
  */
 public class Demora {
     private List<DemoraRow> mapaProbabilidades;
+
+    public List<DemoraRow> getMapaProbabilidades() {
+        return mapaProbabilidades;
+    }
     
     public void agregarDemora(Double probabilidad, Double demora) throws ProbabilidadException
     {

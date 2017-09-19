@@ -26,6 +26,7 @@ public class GestorVistaMontecarloSimulacion {
     public void setValoresInicialesSimulacion(ValoresInicialesSimulacion valoresInicialesSimulacion) 
     {
         VistaMontecarloSimulacion vistaMontecarlo = new VistaMontecarloSimulacion();
+        //populateDemandaDemora(vistaMontecarlo);
         try
         {
             double[][] costosPromedio = new double[3][121];
@@ -52,6 +53,8 @@ public class GestorVistaMontecarloSimulacion {
                     // diario en cada iteracion para que tenga como graficarlo despues.
                 }
             }
+            vistaMontecarlo.addRowToDemanda(valoresInicialesSimulacion.getDatosMontecarlo().getDemanda());
+            vistaMontecarlo.addRowToDemora(valoresInicialesSimulacion.getDatosMontecarlo().getDemora());
             vistaMontecarlo.setCostosPromedios(costosPromedio);
         }
         catch(NoPolicyYetException|ProbabilidadException npye)
@@ -82,4 +85,4 @@ public class GestorVistaMontecarloSimulacion {
         throw new NoPolicyYetException("Aun no tenemos esta politica!");
     }
     
-}
+    }

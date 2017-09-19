@@ -5,7 +5,12 @@
  */
 package vista.montecarlo;
 
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import logica.montecarlo.demanda.Demanda;
+import logica.montecarlo.demanda.DemandaRow;
+import logica.montecarlo.demora.Demora;
+import logica.montecarlo.demora.DemoraRow;
 import logica.montecarlo.politicas.IPolitica;
 
 /**
@@ -52,6 +57,24 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
         if (tm != null)
         {
             tm.addRow(row);
+        }
+    }
+    
+    public void addRowToDemanda(Demanda demanda){
+        List<DemandaRow> listaDemanda = demanda.getMapaProbabilidades();
+        
+        DefaultTableModel tDemanda = (DefaultTableModel) tblDemanda.getModel();
+        for (int i = 0; i < listaDemanda.size(); i++) {
+            tDemanda.addRow(new Object[]{listaDemanda.get(i).getDemanda(),listaDemanda.get(i).getProbabilidad()});
+        }
+    }
+    
+    public void addRowToDemora(Demora demora){
+        List<DemoraRow> listaDemora = demora.getMapaProbabilidades();
+        
+        DefaultTableModel tDemora = (DefaultTableModel) tblDemora.getModel();
+        for (int i = 0; i < listaDemora.size(); i++) {
+            tDemora.addRow(new Object[]{listaDemora.get(i).getDemora(),listaDemora.get(i).getProbabilidad()});
         }
     }
     /**
