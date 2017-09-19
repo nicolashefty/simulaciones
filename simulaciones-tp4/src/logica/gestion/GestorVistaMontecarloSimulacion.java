@@ -41,14 +41,16 @@ public class GestorVistaMontecarloSimulacion {
                 coord.setPolitica(getPoliticaParaIteracion(politica));
                 coord.setDatosMontecarlo(valoresInicialesSimulacion.getDatosMontecarlo());
                 coord.inicializar();
-                for(int dia = 0; dia < CoordinadorMontecarlo.DIA_MAXIMO; dia++)
+                //Agregamos row 0
+                vistaMontecarlo.addRowToTable(coord.getRowActual(), coord.getPolitica());
+                for(int dia = 1; dia < CoordinadorMontecarlo.DIA_MAXIMO; dia++)
                 {
                     coord.simularDia();
                     //Solo lo agregamos a la tabla si esta dentro del rango
                     // osi es la ultima fila.
-                    if((dia+1 > valoresInicialesSimulacion.getDiaDesde()
-                       && dia+1 < valoresInicialesSimulacion.getDiaHasta()) 
-                      || dia+1 == CoordinadorMontecarlo.DIA_MAXIMO)
+                    if((dia > valoresInicialesSimulacion.getDiaDesde()
+                       && dia < valoresInicialesSimulacion.getDiaHasta()) 
+                      || dia == CoordinadorMontecarlo.DIA_MAXIMO)
                     {
                         vistaMontecarlo.addRowToTable(coord.getRowActual(), coord.getPolitica());
                     }

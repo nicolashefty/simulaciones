@@ -271,12 +271,14 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tabPoliticaA.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
         tblPoliticaA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Dia", "RND", "Demanda", "Stock", "RND", "Demora", "Demanda Acum", "Dias faltantes para pedir", "Hay pedido en curso", "Cant Pedida 1", "Cant Pedida 2", "Dia Llegada pedido 1", "Dia Llegada pedido 2", "Costo faltante", "Costo pedido", "Costo mantenimiento", "Costo total hoy", "Costo diario Acum", "Costo diario Prom"
+                "Dia", "RND", "Demanda", "Stock", "RND", "Demora", "Demanda Acum", "Dias faltantes para pedir", "Hay pedido en curso", "Cant Pedida 1", "Dia Llegada pedido 1", "Cant Pedida 2", "Dia Llegada pedido 2", "Costo faltante", "Costo pedido", "Costo mantenimiento", "Costo total hoy", "Costo diario Acum", "Costo diario Prom"
             }
         ) {
             Class[] types = new Class [] {
@@ -294,7 +296,48 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblPoliticaA.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tabPoliticaA.setViewportView(tblPoliticaA);
+        if (tblPoliticaA.getColumnModel().getColumnCount() > 0) {
+            tblPoliticaA.getColumnModel().getColumn(0).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(0).setPreferredWidth(35);
+            tblPoliticaA.getColumnModel().getColumn(1).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(1).setPreferredWidth(75);
+            tblPoliticaA.getColumnModel().getColumn(2).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(2).setPreferredWidth(75);
+            tblPoliticaA.getColumnModel().getColumn(3).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(3).setPreferredWidth(75);
+            tblPoliticaA.getColumnModel().getColumn(4).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(4).setPreferredWidth(75);
+            tblPoliticaA.getColumnModel().getColumn(5).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(5).setPreferredWidth(75);
+            tblPoliticaA.getColumnModel().getColumn(6).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(6).setPreferredWidth(175);
+            tblPoliticaA.getColumnModel().getColumn(7).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(7).setPreferredWidth(175);
+            tblPoliticaA.getColumnModel().getColumn(8).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(8).setPreferredWidth(175);
+            tblPoliticaA.getColumnModel().getColumn(9).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(9).setPreferredWidth(175);
+            tblPoliticaA.getColumnModel().getColumn(10).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(10).setPreferredWidth(175);
+            tblPoliticaA.getColumnModel().getColumn(11).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(11).setPreferredWidth(175);
+            tblPoliticaA.getColumnModel().getColumn(12).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(12).setPreferredWidth(175);
+            tblPoliticaA.getColumnModel().getColumn(13).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(13).setPreferredWidth(175);
+            tblPoliticaA.getColumnModel().getColumn(14).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(14).setPreferredWidth(175);
+            tblPoliticaA.getColumnModel().getColumn(15).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(15).setPreferredWidth(175);
+            tblPoliticaA.getColumnModel().getColumn(16).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(16).setPreferredWidth(175);
+            tblPoliticaA.getColumnModel().getColumn(17).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(17).setPreferredWidth(175);
+            tblPoliticaA.getColumnModel().getColumn(18).setResizable(false);
+            tblPoliticaA.getColumnModel().getColumn(18).setPreferredWidth(175);
+        }
 
         tbpMontecarlo.addTab("Política A", tabPoliticaA);
 
@@ -321,7 +364,48 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblPoliticaB.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tabPoliticaB.setViewportView(tblPoliticaB);
+        if (tblPoliticaB.getColumnModel().getColumnCount() > 0) {
+            tblPoliticaB.getColumnModel().getColumn(0).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(0).setPreferredWidth(35);
+            tblPoliticaB.getColumnModel().getColumn(1).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(1).setPreferredWidth(75);
+            tblPoliticaB.getColumnModel().getColumn(2).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(2).setPreferredWidth(75);
+            tblPoliticaB.getColumnModel().getColumn(3).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(3).setPreferredWidth(75);
+            tblPoliticaB.getColumnModel().getColumn(4).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(4).setPreferredWidth(75);
+            tblPoliticaB.getColumnModel().getColumn(5).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(5).setPreferredWidth(75);
+            tblPoliticaB.getColumnModel().getColumn(6).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(6).setPreferredWidth(175);
+            tblPoliticaB.getColumnModel().getColumn(7).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(7).setPreferredWidth(175);
+            tblPoliticaB.getColumnModel().getColumn(8).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(8).setPreferredWidth(175);
+            tblPoliticaB.getColumnModel().getColumn(9).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(9).setPreferredWidth(175);
+            tblPoliticaB.getColumnModel().getColumn(10).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(10).setPreferredWidth(175);
+            tblPoliticaB.getColumnModel().getColumn(11).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(11).setPreferredWidth(175);
+            tblPoliticaB.getColumnModel().getColumn(12).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(12).setPreferredWidth(175);
+            tblPoliticaB.getColumnModel().getColumn(13).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(13).setPreferredWidth(175);
+            tblPoliticaB.getColumnModel().getColumn(14).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(14).setPreferredWidth(175);
+            tblPoliticaB.getColumnModel().getColumn(15).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(15).setPreferredWidth(175);
+            tblPoliticaB.getColumnModel().getColumn(16).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(16).setPreferredWidth(175);
+            tblPoliticaB.getColumnModel().getColumn(17).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(17).setPreferredWidth(175);
+            tblPoliticaB.getColumnModel().getColumn(18).setResizable(false);
+            tblPoliticaB.getColumnModel().getColumn(18).setPreferredWidth(175);
+        }
 
         tbpMontecarlo.addTab("Política B", tabPoliticaB);
 
@@ -330,14 +414,14 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Dia", "RND", "Demanda", "Stock", "RND", "Demora", "Demora Acum", "Dias faltantes para pedir", "Hay pedido en curso", "Cant Pedida 1", "Cant Pedida 2", "Dia Llegada pedido 1", "Dia Llegada pedido 2", "Costo faltante", "Costo pedido", "Costo mantenimiento", "Costo total hoy", "Costo diario Acum", "Costo diario Prom"
+                "Dia", "RND", "Demanda", "Stock", "RND", "Demora", "Demanda Acum", "Dias faltantes para pedir", "Hay pedido en curso", "Cant Pedida 1", "Cant Pedida 2", "Dia Llegada pedido 1", "Dia Llegada pedido 2", "Costo faltante", "Costo pedido", "Costo mantenimiento", "Costo total hoy", "Costo diario Acum", "Costo diario Prom"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -348,7 +432,48 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblPoliticaAlternativa.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tabPoliticaAlternativa.setViewportView(tblPoliticaAlternativa);
+        if (tblPoliticaAlternativa.getColumnModel().getColumnCount() > 0) {
+            tblPoliticaAlternativa.getColumnModel().getColumn(0).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(0).setPreferredWidth(35);
+            tblPoliticaAlternativa.getColumnModel().getColumn(1).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(1).setPreferredWidth(75);
+            tblPoliticaAlternativa.getColumnModel().getColumn(2).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(2).setPreferredWidth(75);
+            tblPoliticaAlternativa.getColumnModel().getColumn(3).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(3).setPreferredWidth(75);
+            tblPoliticaAlternativa.getColumnModel().getColumn(4).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(4).setPreferredWidth(75);
+            tblPoliticaAlternativa.getColumnModel().getColumn(5).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(5).setPreferredWidth(75);
+            tblPoliticaAlternativa.getColumnModel().getColumn(6).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(6).setPreferredWidth(175);
+            tblPoliticaAlternativa.getColumnModel().getColumn(7).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(7).setPreferredWidth(175);
+            tblPoliticaAlternativa.getColumnModel().getColumn(8).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(8).setPreferredWidth(175);
+            tblPoliticaAlternativa.getColumnModel().getColumn(9).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(9).setPreferredWidth(175);
+            tblPoliticaAlternativa.getColumnModel().getColumn(10).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(10).setPreferredWidth(175);
+            tblPoliticaAlternativa.getColumnModel().getColumn(11).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(11).setPreferredWidth(175);
+            tblPoliticaAlternativa.getColumnModel().getColumn(12).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(12).setPreferredWidth(175);
+            tblPoliticaAlternativa.getColumnModel().getColumn(13).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(13).setPreferredWidth(175);
+            tblPoliticaAlternativa.getColumnModel().getColumn(14).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(14).setPreferredWidth(175);
+            tblPoliticaAlternativa.getColumnModel().getColumn(15).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(15).setPreferredWidth(175);
+            tblPoliticaAlternativa.getColumnModel().getColumn(16).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(16).setPreferredWidth(175);
+            tblPoliticaAlternativa.getColumnModel().getColumn(17).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(17).setPreferredWidth(175);
+            tblPoliticaAlternativa.getColumnModel().getColumn(18).setResizable(false);
+            tblPoliticaAlternativa.getColumnModel().getColumn(18).setPreferredWidth(175);
+        }
 
         tbpMontecarlo.addTab("Política Alternativa", tabPoliticaAlternativa);
 
