@@ -6,6 +6,7 @@
 package logica.montecarlo.costoPedido;
 
 import java.util.*;
+import logica.montecarlo.demora.DemoraRow;
 import logica.montecarlo.exceptions.ProbabilidadException;
 
 /**
@@ -50,6 +51,10 @@ public class CostoPedido
             throw new CostoNotFoundException("No se encuentra demora para "+ cant);
         }
         return retCosto.getCosto();
+    }
+
+    public List<CostoPedidoRow> getMapaProbabilidades() {
+        return mapaProbabilidades;
     }
     
     private class CostoNotFoundException extends ProbabilidadException

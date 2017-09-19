@@ -59,8 +59,9 @@ public class GestorVistaMontecarloSimulacion {
                     // diario en cada iteracion para que tenga como graficarlo despues.
                 }
             }
-            vistaMontecarlo.addRowToDemanda(valoresInicialesSimulacion.getDatosMontecarlo().getDemanda());
-            vistaMontecarlo.addRowToDemora(valoresInicialesSimulacion.getDatosMontecarlo().getDemora());
+            vistaMontecarlo.addRowsToDemanda(valoresInicialesSimulacion.getDatosMontecarlo().getDemanda());
+            vistaMontecarlo.addRowsToDemora(valoresInicialesSimulacion.getDatosMontecarlo().getDemora());
+            vistaMontecarlo.addRowsToCosto(valoresInicialesSimulacion.getDatosMontecarlo().getCostoPedido());
             vistaMontecarlo.setCostosPromedios(costosPromedio);
         }
         catch(NoPolicyYetException|ProbabilidadException npye)

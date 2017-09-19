@@ -8,9 +8,12 @@ package vista.montecarlo;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import logica.gestion.GestorVistaMontecarloSimulacion;
+import logica.montecarlo.costoPedido.CostoPedido;
+import logica.montecarlo.costoPedido.CostoPedidoRow;
 import logica.montecarlo.demanda.*;
 import logica.montecarlo.demora.*;
 import logica.montecarlo.politicas.IPolitica;
+import static logica.utilidades.Utilidades.*;
 
 /**
  *
@@ -59,21 +62,31 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
         }
     }
     
-    public void addRowToDemanda(Demanda demanda){
+    public void addRowsToDemanda(Demanda demanda){
         List<DemandaRow> listaDemanda = demanda.getMapaProbabilidades();
         
         DefaultTableModel tDemanda = (DefaultTableModel) tblDemanda.getModel();
         for (int i = 0; i < listaDemanda.size(); i++) {
-            tDemanda.addRow(new Object[]{listaDemanda.get(i).getDemanda(),listaDemanda.get(i).getProbabilidad()});
+            tDemanda.addRow(new Object[]{aEntero(listaDemanda.get(i).getDemanda()),formatRND(listaDemanda.get(i).getProbabilidad())});
         }
     }
     
-    public void addRowToDemora(Demora demora){
+    public void addRowsToDemora(Demora demora){
         List<DemoraRow> listaDemora = demora.getMapaProbabilidades();
         
         DefaultTableModel tDemora = (DefaultTableModel) tblDemora.getModel();
         for (int i = 0; i < listaDemora.size(); i++) {
-            tDemora.addRow(new Object[]{listaDemora.get(i).getDemora(),listaDemora.get(i).getProbabilidad()});
+            tDemora.addRow(new Object[]{aCosto(listaDemora.get(i).getDemora()),formatRND(listaDemora.get(i).getProbabilidad())});
+        }
+    }
+    
+     
+    public void addRowsToCosto(CostoPedido costo){
+        List<CostoPedidoRow> listaDemora = costo.getMapaProbabilidades();
+        
+        DefaultTableModel tCosto = (DefaultTableModel) tblCostoPedido.getModel();
+        for (int i = 0; i < listaDemora.size(); i++) {
+            tCosto.addRow(new Object[]{aCosto(listaDemora.get(i).getCosto()),aEntero(listaDemora.get(i).getCantidadPedidaLimite())});
         }
     }
     /**
