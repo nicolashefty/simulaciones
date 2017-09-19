@@ -242,6 +242,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
         //validar Desde que sea nro y menor al maximo menos 1
         int max = CoordinadorMontecarlo.DIA_MAXIMO;
         // validar Hsta que sea un numero entre el maximo y el desde
+        int desde = getInt(txtDesde.getText());
+        int hasta = getInt(txtHasta.getText());
+        
+        if (hasta > max)
+        {
+            throw new InvalidInputException("El valor Hasta debe ser menor a "+ max);
+        }
+        if (desde < 0 || desde > hasta)
+        {
+            throw new InvalidInputException("El valor Desde debe ser un valor mayor a 0 y menor a " + hasta);
+        }
     }
 
     private int getInt(String text) throws InvalidInputException {
