@@ -5,6 +5,7 @@
  */
 package logica.montecarlo.politicas;
 
+import logica.montecarlo.DatosMontecarlo;
 import logica.montecarlo.EstadoMontecarlo;
 
 /**
@@ -14,7 +15,7 @@ import logica.montecarlo.EstadoMontecarlo;
 public class PoliticaB implements IPolitica{
 
     @Override
-    public void hacerPedido(EstadoMontecarlo[] vectorEstado) {
+    public void hacerPedido(EstadoMontecarlo[] vectorEstado, DatosMontecarlo datosMontecarlo) {
         //Esta politica en cambio, hace pedidos cada 10 dias.
         // se pide en relacion a la (? nose porque no termine esta idea lpm
         

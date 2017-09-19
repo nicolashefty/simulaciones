@@ -5,7 +5,9 @@
  */
 package logica.montecarlo.politicas;
 
+import logica.montecarlo.DatosMontecarlo;
 import logica.montecarlo.EstadoMontecarlo;
+import logica.montecarlo.exceptions.ProbabilidadException;
 
 /**
  *
@@ -17,7 +19,8 @@ public interface IPolitica {
     String ALTR = "Alternativa";
     
     String getIDPolitica();
-    void hacerPedido(EstadoMontecarlo[] vectorEstado);
+    void hacerPedido(EstadoMontecarlo[] vectorEstado, DatosMontecarlo datosMontecarlo)
+            throws ProbabilidadException;
     boolean calculaDemandaAcumulada();
 
     double getDiasFaltantesParaPedirIniciales();

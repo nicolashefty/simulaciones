@@ -75,4 +75,16 @@ public class DatosMontecarlo {
     {
         return demanda.getDemandaParaRandom(random);
     }
+
+    public double getDemoraParaRandom(double rndDemora) 
+            throws ProbabilidadException
+    {
+        return demora.getDemoraParaRandom(rndDemora);
+    }
+
+    public double getCostoParaCantidad(int cantidadPedida) 
+            throws ProbabilidadException 
+    {
+        return costoPedido.getCostoParaCantidad(cantidadPedida);
+    }
 }

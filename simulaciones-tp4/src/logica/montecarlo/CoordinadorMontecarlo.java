@@ -61,7 +61,7 @@ public class CoordinadorMontecarlo
 
         //La politica se va a encargar de la demora y todo lo relacionado con el pedido
         try{
-        politica.hacerPedido(vectorEstado);
+        politica.hacerPedido(vectorEstado, datosMontecarlo);
         }catch(UnsupportedOperationException uoe)
         {
             
@@ -174,7 +174,8 @@ public class CoordinadorMontecarlo
         vectorEstado[1].setDia(0);
         vectorEstado[1].setStock(20);
         vectorEstado[1].setDemandaAcumulada(0);
-        vectorEstado[1].setDiasFaltantesParaPedir(politica.getDiasFaltantesParaPedirIniciales());
+        vectorEstado[1].setDiasFaltantesParaPedir(politica.getDiasFaltantesParaPedirIniciales() + 1);
+        vectorEstado[1].setHayPedidoEnCurso(false);
         vectorEstado[1].setCostoDiarioAcum(0);
         vectorEstado[1].setCostoDiarioPromedio(0);
     }

@@ -5,6 +5,7 @@
  */
 package logica.montecarlo.politicas;
 
+import logica.montecarlo.DatosMontecarlo;
 import logica.montecarlo.EstadoMontecarlo;
 
 /**
@@ -15,7 +16,7 @@ public class PoliticaAlternativa implements IPolitica{
 
     
     @Override
-    public void hacerPedido(EstadoMontecarlo[] vectorEstado) {
+    public void hacerPedido(EstadoMontecarlo[] vectorEstado, DatosMontecarlo datosMontecarlo) {
         //TODO: To think about :P
         
         //Manejar costo de pedido!
