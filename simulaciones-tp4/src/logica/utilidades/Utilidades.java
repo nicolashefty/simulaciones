@@ -5,6 +5,7 @@
  */
 package logica.utilidades;
 
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logica.montecarlo.DatosMontecarlo;
@@ -20,6 +21,11 @@ import logica.montecarlo.exceptions.ProbabilidadException;
  */
 public class Utilidades 
 {
+    
+    final static DecimalFormat ENTERO = new DecimalFormat("0");
+    final static DecimalFormat COSTO = new DecimalFormat("0.00");
+    final static DecimalFormat RANDOM = new DecimalFormat("0.0000");
+    
     public static ValoresInicialesSimulacion transformarAValoresInicialesSimulacion(int desde, int hasta) {
         
         return new ValoresInicialesSimulacion(desde, hasta, getDatosMontecarlo());
@@ -27,7 +33,7 @@ public class Utilidades
     
     public static String formatRND(double rndDouble)
     {
-        return "el RND en String - con 4? decimales esta bien";
+        return RANDOM.format(rndDouble);
     }
     
     public static String aEntero(double unDouble)
@@ -36,12 +42,12 @@ public class Utilidades
         {
             return "Infinito";
         }
-        return "En realidad no eran con coma asiq chunk";
+        return ENTERO.format(unDouble);
     }
     
     public static String aCosto(double unCosto)
     {
-        return "Ponerle $ y negativo si es necesario. Solo dos decimales";
+        return "$"+COSTO.format(unCosto); //Ponerle $ y negativo si es necesario. Solo dos decimales;
     }
 
     public static DatosMontecarlo getDatosMontecarlo() {
