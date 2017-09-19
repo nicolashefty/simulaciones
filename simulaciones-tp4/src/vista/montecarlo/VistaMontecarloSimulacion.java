@@ -7,10 +7,8 @@ package vista.montecarlo;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import logica.montecarlo.demanda.Demanda;
-import logica.montecarlo.demanda.DemandaRow;
-import logica.montecarlo.demora.Demora;
-import logica.montecarlo.demora.DemoraRow;
+import logica.montecarlo.demanda.*;
+import logica.montecarlo.demora.*;
 import logica.montecarlo.politicas.IPolitica;
 
 /**
@@ -349,6 +347,11 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
         tbpMontecarlo.addTab("Política Alternativa", tabPoliticaAlternativa);
 
         btnGrafico.setText("Gráfico Evolutivo del Costo Promedio Diario");
+        btnGrafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraficoActionPerformed(evt);
+            }
+        });
 
         lblTtlDemanda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTtlDemanda.setText("Tabla de Demanda");
@@ -427,6 +430,10 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCostoAlmacenamientoActionPerformed
 
+    private void btnGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficoActionPerformed
+        mostrarGraficoEvolutivo();
+    }//GEN-LAST:event_btnGraficoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGrafico;
@@ -465,6 +472,10 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
     public void setCostosPromedios(double[][] costosPromedio) {
         this.costosPromedio = costosPromedio;
+    }
+
+    private void mostrarGraficoEvolutivo() {
+        GraficoEvolutivo.mostrar(costosPromedio);
     }
 
 }
