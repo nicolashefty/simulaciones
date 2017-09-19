@@ -7,6 +7,7 @@ package vista.montecarlo;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import logica.gestion.GestorVistaMontecarloSimulacion;
 import logica.montecarlo.demanda.*;
 import logica.montecarlo.demora.*;
 import logica.montecarlo.politicas.IPolitica;
@@ -119,6 +120,11 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Simulaciones - TP N° 4");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         tblDemanda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -434,6 +440,10 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
         mostrarGraficoEvolutivo();
     }//GEN-LAST:event_btnGraficoActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+       mostrarVentanaPrincipal();
+    }//GEN-LAST:event_formWindowClosed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGrafico;
@@ -476,6 +486,10 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
     private void mostrarGraficoEvolutivo() {
         GraficoEvolutivo.mostrar(costosPromedio);
+    }
+
+    private void mostrarVentanaPrincipal() {
+        GestorVistaMontecarloSimulacion.mostrarVentanaPrincipal();
     }
 
 }

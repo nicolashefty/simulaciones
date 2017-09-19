@@ -36,7 +36,7 @@ public class GraficoEvolutivo extends javax.swing.JFrame {
          true,true,false);
          
       ChartPanel chartPanel = new ChartPanel( lineChart );
-      chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
+      chartPanel.setPreferredSize( new java.awt.Dimension(1300, 733) );
       setContentPane( chartPanel );
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
    }

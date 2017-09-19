@@ -14,6 +14,10 @@ public class GestorPrincipal {
     
     public static void main(String args[])
     {
+        mostrarVentanaPrincipal();
+    }
+
+    static void mostrarVentanaPrincipal() {
         GestorVistaMontecarloSimulacion gestorMontec = new GestorVistaMontecarloSimulacion();
         VistaPrincipal ventana = new VistaPrincipal(gestorMontec);
     }

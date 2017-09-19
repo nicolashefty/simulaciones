@@ -23,6 +23,10 @@ import vista.montecarlo.VistaMontecarloSimulacion;
  */
 public class GestorVistaMontecarloSimulacion {
 
+    public static void mostrarVentanaPrincipal() {
+        GestorPrincipal.mostrarVentanaPrincipal();
+    }
+
     public void setValoresInicialesSimulacion(ValoresInicialesSimulacion valoresInicialesSimulacion) 
     {
         VistaMontecarloSimulacion vistaMontecarlo = new VistaMontecarloSimulacion();
