@@ -95,9 +95,24 @@ public class CoordinadorMontecarlo
         
         vectorEstado[1].setDemandaAcumulada(vectorEstado[0].getDemandaAcumulada() + vectorEstado[1].getCantDemandada());
     }
-
+    
+    //falta sumar lo que se compra cuando llega el pedido
     private void setStock() {
-        vectorEstado[1].setStock(vectorEstado[0].getStock() - vectorEstado[1].getCantDemandada());
+       if (vectorEstado[0].getStock() != 0)
+       {
+           if (vectorEstado[1].getCantDemandada() <= vectorEstado[0].getStock()) 
+            {
+                vectorEstado[1].setStock(vectorEstado[0].getStock() - vectorEstado[1].getCantDemandada());
+            }
+            else
+            {
+                vectorEstado[1].setStock(vectorEstado[0].getStock() - vectorEstado[0].getStock());
+            }
+       }
+       else
+       {
+           vectorEstado[1].setStock(0); 
+       }
     }
 
     private void setCostos() 
