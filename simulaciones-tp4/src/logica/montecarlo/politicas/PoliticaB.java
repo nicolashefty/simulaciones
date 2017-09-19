@@ -159,28 +159,47 @@ public class PoliticaB implements IPolitica
         
         if(vectorEstado[0].getDiaLlegadaPedido1()>1)
         {
-            //Hay pedido en curso (Pedido1) 
-            //Si es 1 significa que llega hoy puedo usar el espacio
-            vectorEstado[1].setDiaLlegadaPedido2(vectorEstado[1].getDia() + (int)vectorEstado[1].getDiasDemora());
-            vectorEstado[1].setCantPedida2(vectorEstado[1].getDemandaAcumulada() * multiplicadorDemanda);
+            if (vectorEstado[1].getDiasDemora() > 0)
+            {
+                //Hay pedido en curso (Pedido1) 
+                //Si es 1 significa que llega hoy puedo usar el espacio
+                vectorEstado[1].setDiaLlegadaPedido2(vectorEstado[1].getDia() + (int)vectorEstado[1].getDiasDemora());
+                vectorEstado[1].setCantPedida2(vectorEstado[1].getDemandaAcumulada() * multiplicadorDemanda);
+            }     
+            else
+            {
+                //Llega hoy mismo
+                vectorEstado[1].setStock(vectorEstado[1].getStock() + (vectorEstado[1].getDemandaAcumulada() * multiplicadorDemanda));
+            }
             
             //Arrastro lo del pedido 1
             vectorEstado[1].setDiaLlegadaPedido1(vectorEstado[0].getDiaLlegadaPedido1() -1);
             vectorEstado[1].setCantPedida1(vectorEstado[1].getCantPedida1());
+            vectorEstado[1].setHayPedidoEnCurso(true);
         }
         else
         {
-            vectorEstado[1].setDiaLlegadaPedido1(vectorEstado[1].getDia() + (int)vectorEstado[1].getDiasDemora());
-            vectorEstado[1].setCantPedida1(vectorEstado[1].getDemandaAcumulada() * multiplicadorDemanda);
+            if (vectorEstado[1].getDiasDemora() > 0)
+            {
+                vectorEstado[1].setDiaLlegadaPedido1(vectorEstado[1].getDia() + (int)vectorEstado[1].getDiasDemora());
+                vectorEstado[1].setCantPedida1(vectorEstado[1].getDemandaAcumulada() * multiplicadorDemanda);
+                vectorEstado[1].setHayPedidoEnCurso(true);
+            }
+            else
+            {
+                //Llega hoy mismo
+                vectorEstado[1].setStock(vectorEstado[1].getStock() + (vectorEstado[1].getDemandaAcumulada() * multiplicadorDemanda));
+            }
+
             
             if(vectorEstado[0].getDiaLlegadaPedido2()>1)
             {
                 //Arrastro lo del pedido 2
                 vectorEstado[1].setDiaLlegadaPedido2(vectorEstado[0].getDiaLlegadaPedido2() -1);
                 vectorEstado[1].setCantPedida2(vectorEstado[1].getCantPedida2());
+                vectorEstado[1].setHayPedidoEnCurso(true);
             }
         }
-        vectorEstado[1].setHayPedidoEnCurso(true);
         agregarCostoPedido(vectorEstado);
     }
 
