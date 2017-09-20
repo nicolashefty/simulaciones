@@ -630,4 +630,23 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
         GestorVistaMontecarloSimulacion.mostrarVentanaPrincipal();
     }
 
+    public void showPoliticaElegida() 
+    {
+        int politicaElegida = 0;
+        double costoMin = Double.MAX_VALUE;
+        if (costosPromedio != null)
+        {
+            for (int politica = 0 ; politica < 3 ; politica++)
+            {
+                if (costosPromedio[politica][costosPromedio[politica].length-1] < costoMin)
+                {
+                    costoMin = costosPromedio[politica][costosPromedio[politica].length-1];
+                    politicaElegida = politica;
+                }
+            }
+            
+            tbpMontecarlo.setSelectedIndex(politicaElegida);
+        }
+    }
+
 }

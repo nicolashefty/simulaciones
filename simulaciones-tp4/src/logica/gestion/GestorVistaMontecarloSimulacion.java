@@ -33,7 +33,7 @@ public class GestorVistaMontecarloSimulacion {
         //populateDemandaDemora(vistaMontecarlo);
         try
         {
-            double[][] costosPromedio = new double[3][121];
+            double[][] costosPromedio = new double[3][120];
             for (int politica = 0 ; politica < 3 ; politica++)
             {
                 CoordinadorMontecarlo coord = new CoordinadorMontecarlo();
@@ -43,6 +43,7 @@ public class GestorVistaMontecarloSimulacion {
                 coord.inicializar();
                 //Agregamos row 0
                 vistaMontecarlo.addRowToTable(coord.getRowActual(), coord.getPolitica());
+                costosPromedio[politica][0] = coord.getCostoPromedioActual();
                 for(int dia = 1; dia < CoordinadorMontecarlo.DIA_MAXIMO; dia++)
                 {
                     coord.simularDia();
@@ -68,7 +69,7 @@ public class GestorVistaMontecarloSimulacion {
         {
             JOptionPane.showMessageDialog(null, npye.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        
+        vistaMontecarlo.showPoliticaElegida();
         vistaMontecarlo.setVisible(true);
         //Y angora?
     }
