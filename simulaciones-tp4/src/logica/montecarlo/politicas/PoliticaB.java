@@ -39,7 +39,7 @@ public class PoliticaB implements IPolitica
     @Override
     public String toString()
     {
-        return "<b>Politica de Stock B:</b>\n Efectuar un pedido cada 10 días con una cantidad\n "
+        return "--Politica de Stock B:--\n Efectuar un pedido cada 10 días con una cantidad\n "
                 + "igual a la demanda en los 10 días anteriores\n"
                 + "(incluido el día que se hace el pedido)\n";
     }

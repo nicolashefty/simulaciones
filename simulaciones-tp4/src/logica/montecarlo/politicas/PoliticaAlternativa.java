@@ -38,7 +38,7 @@ public class PoliticaAlternativa implements IPolitica{
     public String toString()
     {
         //TODO:
-        return "<b>Politica de Stock B:</b>\n Efectuar un pedido cada 5 días con una cantidad\n "
+        return "--Politica Alternativa:--</b>\n Efectuar un pedido cada 5 días con una cantidad\n "
                 + "igual a la demanda promedio hasta el momento del pedido\n";
     }
 

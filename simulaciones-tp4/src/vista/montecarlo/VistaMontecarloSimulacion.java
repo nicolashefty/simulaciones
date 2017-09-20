@@ -6,6 +6,7 @@
 package vista.montecarlo;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.gestion.GestorVistaMontecarloSimulacion;
 import logica.montecarlo.costoPedido.CostoPedido;
@@ -13,6 +14,7 @@ import logica.montecarlo.costoPedido.CostoPedidoRow;
 import logica.montecarlo.demanda.*;
 import logica.montecarlo.demora.*;
 import logica.montecarlo.politicas.IPolitica;
+import logica.montecarlo.politicas.*;
 import static logica.utilidades.Utilidades.*;
 
 /**
@@ -646,6 +648,21 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
             }
             
             tbpMontecarlo.setSelectedIndex(politicaElegida);
+            switch(politicaElegida)
+            {
+                case 0:
+                {
+                    JOptionPane.showMessageDialog(this, "La mejor politica es la: \n"+ (new PoliticaA()).toString());
+                }
+                case 1:
+                {
+                    JOptionPane.showMessageDialog(this, "La mejor politica es la: \n"+ (new PoliticaB()).toString());
+                }
+                case 2:
+                {
+                    JOptionPane.showMessageDialog(this, "La mejor politica es la: \n"+ (new PoliticaAlternativa()).toString());
+                }
+            }
         }
     }
 

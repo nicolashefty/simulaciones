@@ -16,7 +16,7 @@ import logica.montecarlo.exceptions.ProbabilidadException;
 public class PoliticaA implements IPolitica
 {
     DatosMontecarlo datosMontecarlo;
-    final int cantidadPedida = 10;
+    final int cantidadPedida = 100;
     
     @Override
     public void hacerPedido(EstadoMontecarlo[] vectorEstado, DatosMontecarlo datosMontecarlo) throws ProbabilidadException 
@@ -38,8 +38,8 @@ public class PoliticaA implements IPolitica
     @Override
     public String toString()
     {
-        return "<b>Politica de Stock A:</b>\n Efectuar un pedido cada 7 días \n"
-                + "con una cantidad de 10 decenas\n ";
+        return "--Politica de Stock A:--\n Efectuar un pedido cada 7 días \n"
+                + "con una cantidad de 10 decenas (100 unidades) \n ";
     }
 
     @Override
