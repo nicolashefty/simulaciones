@@ -16,7 +16,7 @@ import logica.montecarlo.exceptions.ProbabilidadException;
 public class PoliticaA implements IPolitica
 {
     DatosMontecarlo datosMontecarlo;
-    final int cantidadPedida = 7;
+    final int cantidadPedida = 10;
     
     @Override
     public void hacerPedido(EstadoMontecarlo[] vectorEstado, DatosMontecarlo datosMontecarlo) throws ProbabilidadException 
