@@ -120,18 +120,18 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="2" rowCount="0">
-                    <Column editable="true" title="Demanda" type="java.lang.Object"/>
-                    <Column editable="true" title="Probabilidad" type="java.lang.Object"/>
+                    <Column editable="false" title="Demanda" type="java.lang.Object"/>
+                    <Column editable="false" title="Probabilidad" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -176,12 +176,12 @@
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -220,18 +220,18 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="2" rowCount="0">
-                    <Column editable="true" title="Costo Pedido" type="java.lang.Object"/>
-                    <Column editable="true" title="Cantidad Pedida" type="java.lang.Object"/>
+                    <Column editable="false" title="Costo Pedido" type="java.lang.Object"/>
+                    <Column editable="false" title="Cantidad Pedida" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -307,6 +307,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtCostoAlmacenamiento">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="3.00"/>
           </Properties>
           <Events>
@@ -325,6 +326,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtCostoFaltante">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="10.00"/>
           </Properties>
         </Component>
@@ -370,6 +372,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtStockInicial">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="20"/>
           </Properties>
         </Component>
@@ -550,8 +553,8 @@
                     <Column editable="false" title="Dias faltantes para pedir" type="java.lang.String"/>
                     <Column editable="false" title="Hay pedido en curso" type="java.lang.String"/>
                     <Column editable="false" title="Cant Pedida 1" type="java.lang.String"/>
-                    <Column editable="false" title="Cant Pedida 2" type="java.lang.String"/>
                     <Column editable="false" title="Dia Llegada Pedido 1" type="java.lang.String"/>
+                    <Column editable="false" title="Cant Pedida 2" type="java.lang.String"/>
                     <Column editable="false" title="Dia Llegada Pedido 2" type="java.lang.String"/>
                     <Column editable="false" title="Costo faltante" type="java.lang.String"/>
                     <Column editable="false" title="Costo pedido" type="java.lang.String"/>
@@ -693,8 +696,8 @@
                     <Column editable="false" title="Dias faltantes para pedir" type="java.lang.String"/>
                     <Column editable="false" title="Hay pedido en curso" type="java.lang.String"/>
                     <Column editable="false" title="Cant Pedida 1" type="java.lang.String"/>
-                    <Column editable="false" title="Cant Pedida 2" type="java.lang.String"/>
                     <Column editable="false" title="Dia Llegada pedido 1" type="java.lang.String"/>
+                    <Column editable="false" title="Cant Pedida 2" type="java.lang.String"/>
                     <Column editable="false" title="Dia Llegada pedido 2" type="java.lang.String"/>
                     <Column editable="false" title="Costo faltante" type="java.lang.String"/>
                     <Column editable="false" title="Costo pedido" type="java.lang.String"/>

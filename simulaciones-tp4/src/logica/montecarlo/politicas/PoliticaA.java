@@ -113,20 +113,31 @@ public class PoliticaA implements IPolitica
             limpiar cantidad pedida
             pedido "from" llega el dia-> N/A? o a 0
             */
-        vectorEstado[1].setStock(vectorEstado[1].getStock() + vectorEstado[0].getCantPedida1());
         
+        if (vectorEstado[1].getStock() > 0)
+        {
+            //Como el stock se calculo antes (restandole la demandada) solo le agregamos lo pedido
+            vectorEstado[1].setStock(vectorEstado[1].getStock() + cantidadPedida);
+        }
+        else
+        {
+            //Si es negativo el stock ahora se vuelve a cero y se suma lo que llego y se resta lo que se demando
+            vectorEstado[1].setStock(cantidadPedida - vectorEstado[1].getCantDemandada());
+        }
+        
+        //Limpiar pedido de ahora en mas
         switch(from)
         {
             case 1:
             {
-                vectorEstado[0].setCantPedida1(0);
-                vectorEstado[0].setDiaLlegadaPedido1(0);
+                vectorEstado[1].setCantPedida1(0);
+                vectorEstado[1].setDiaLlegadaPedido1(0);
                 break;
             }
             case 2:
             {
-                vectorEstado[0].setCantPedida2(0);
-                vectorEstado[0].setDiaLlegadaPedido2(0);
+                vectorEstado[1].setCantPedida2(0);
+                vectorEstado[1].setDiaLlegadaPedido2(0);
                 break;
             }
         }
@@ -166,7 +177,16 @@ public class PoliticaA implements IPolitica
             else
             {
                 //Llega hoy mismo
-                vectorEstado[1].setStock(vectorEstado[1].getStock() + cantidadPedida);
+                if (vectorEstado[1].getStock() > 0)
+                {
+                    //Como el stock se calculo antes (restandole la demandada) solo le agregamos lo pedido
+                    vectorEstado[1].setStock(vectorEstado[1].getStock() + cantidadPedida);
+                }
+                else
+                {
+                    //Si es negativo el stock ahora se vuelve a cero y se suma lo que llego y se resta lo que se demando
+                    vectorEstado[1].setStock(cantidadPedida - vectorEstado[1].getCantDemandada());
+                }
             }
             
             //Arrastro lo del pedido 1
@@ -185,7 +205,16 @@ public class PoliticaA implements IPolitica
             else
             {
                 //Llega hoy mismo
-                vectorEstado[1].setStock(vectorEstado[1].getStock() + cantidadPedida);
+                if (vectorEstado[1].getStock() > 0)
+                {
+                    //Como el stock se calculo antes (restandole la demandada) solo le agregamos lo pedido
+                    vectorEstado[1].setStock(vectorEstado[1].getStock() + cantidadPedida);
+                }
+                else
+                {
+                    //Si es negativo el stock ahora se vuelve a cero y se suma lo que llego y se resta lo que se demando
+                    vectorEstado[1].setStock(cantidadPedida - vectorEstado[1].getCantDemandada());
+                }
             }
             
             if(vectorEstado[0].getDiaLlegadaPedido2()>1)

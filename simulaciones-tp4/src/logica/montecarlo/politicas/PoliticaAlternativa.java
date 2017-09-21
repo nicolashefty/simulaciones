@@ -113,20 +113,36 @@ public class PoliticaAlternativa implements IPolitica{
             limpiar cantidad pedida
             pedido "from" llega el dia-> N/A? o a 0
             */
-        vectorEstado[1].setStock(vectorEstado[1].getStock() + vectorEstado[0].getCantPedida1());
-        
+        //Tengo q poner a cero el pedido de ahora en mas (dia y cantidad) y acumular el stock
         switch(from)
         {
             case 1:
             {
-                vectorEstado[0].setCantPedida1(0);
-                vectorEstado[0].setDiaLlegadaPedido1(0);
+                vectorEstado[1].setCantPedida1(0);
+                vectorEstado[1].setDiaLlegadaPedido1(0);
+                //Si es negativo se lleva a cero y en base a lo que llego restamos la demanda
+                if (vectorEstado[1].getStock() > 0)
+                {
+                    vectorEstado[1].setStock(vectorEstado[1].getStock() + (int)(vectorEstado[0].getCantPedida1()));
+                }
+                else
+                {
+                    vectorEstado[1].setStock((int)(vectorEstado[0].getCantPedida1()) - vectorEstado[1].getCantDemandada());
+                }
                 break;
             }
             case 2:
             {
-                vectorEstado[0].setCantPedida2(0);
-                vectorEstado[0].setDiaLlegadaPedido2(0);
+                vectorEstado[1].setCantPedida2(0);
+                vectorEstado[1].setDiaLlegadaPedido2(0);
+                if (vectorEstado[1].getStock() > 0)
+                {
+                    vectorEstado[1].setStock(vectorEstado[1].getStock() + (int)(vectorEstado[0].getCantPedida2()));
+                }
+                else
+                {
+                    vectorEstado[1].setStock((int)(vectorEstado[0].getCantPedida2()) - vectorEstado[1].getCantDemandada());
+                }
                 break;
             }
         }
@@ -166,7 +182,14 @@ public class PoliticaAlternativa implements IPolitica{
             else
             {
                 //Llega hoy mismo
-                vectorEstado[1].setStock(vectorEstado[1].getStock() + (int)(vectorEstado[1].getDemandaAcumulada()/vectorEstado[1].getDia()));
+                if (vectorEstado[1].getStock() > 0)
+                {
+                    vectorEstado[1].setStock(vectorEstado[1].getStock() + (int)(vectorEstado[1].getDemandaAcumulada()/vectorEstado[1].getDia()));
+                }
+                else
+                {
+                    vectorEstado[1].setStock((int)(vectorEstado[1].getDemandaAcumulada()/vectorEstado[1].getDia()) - vectorEstado[1].getCantDemandada());
+                }
             }
             
             //Arrastro lo del pedido 1
@@ -185,7 +208,15 @@ public class PoliticaAlternativa implements IPolitica{
             else
             {
                 //Llega hoy mismo
-                vectorEstado[1].setStock(vectorEstado[1].getStock() + (int)(vectorEstado[1].getDemandaAcumulada()/vectorEstado[1].getDia()));
+                
+                if (vectorEstado[1].getStock() > 0)
+                {
+                    vectorEstado[1].setStock(vectorEstado[1].getStock() + (int)(vectorEstado[1].getDemandaAcumulada()/vectorEstado[1].getDia()));
+                }
+                else
+                {
+                    vectorEstado[1].setStock((int)(vectorEstado[1].getDemandaAcumulada()/vectorEstado[1].getDia()) - vectorEstado[1].getCantDemandada());
+                }
             }
             
             if(vectorEstado[0].getDiaLlegadaPedido2()>1)

@@ -43,19 +43,18 @@ public class GestorVistaMontecarloSimulacion {
                 coord.inicializar();
                 //Agregamos row 0
                 vistaMontecarlo.addRowToTable(coord.getRowActual(), coord.getPolitica());
-                costosPromedio[politica][0] = coord.getCostoPromedioActual();
-                for(int dia = 1; dia < CoordinadorMontecarlo.DIA_MAXIMO; dia++)
+                for(int dia = 1; dia <= CoordinadorMontecarlo.DIA_MAXIMO; dia++)
                 {
                     coord.simularDia();
                     //Solo lo agregamos a la tabla si esta dentro del rango
                     // osi es la ultima fila.
-                    if((dia > valoresInicialesSimulacion.getDiaDesde()
-                       && dia < valoresInicialesSimulacion.getDiaHasta()) 
+                    if((dia >= valoresInicialesSimulacion.getDiaDesde()
+                       && dia <= valoresInicialesSimulacion.getDiaHasta()) 
                       || dia == CoordinadorMontecarlo.DIA_MAXIMO)
                     {
                         vistaMontecarlo.addRowToTable(coord.getRowActual(), coord.getPolitica());
                     }
-                    costosPromedio[politica][dia] = coord.getCostoPromedioActual();
+                    costosPromedio[politica][dia-1] = coord.getCostoPromedioActual();
                     //Probablemente sin condicion le tengamos que mandar el costo promedio
                     // diario en cada iteracion para que tenga como graficarlo despues.
                 }

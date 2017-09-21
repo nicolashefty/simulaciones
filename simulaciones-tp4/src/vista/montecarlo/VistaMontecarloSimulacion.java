@@ -148,8 +148,20 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
             new String [] {
                 "Demanda", "Probabilidad"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         scpTablaDemanda.setViewportView(tblDemanda);
+        if (tblDemanda.getColumnModel().getColumnCount() > 0) {
+            tblDemanda.getColumnModel().getColumn(0).setResizable(false);
+            tblDemanda.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout pnlTblDemandaLayout = new javax.swing.GroupLayout(pnlTblDemanda);
         pnlTblDemanda.setLayout(pnlTblDemandaLayout);
@@ -171,6 +183,10 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
             }
         ));
         scpTblDemora.setViewportView(tblDemora);
+        if (tblDemora.getColumnModel().getColumnCount() > 0) {
+            tblDemora.getColumnModel().getColumn(0).setResizable(false);
+            tblDemora.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout pnlTblDemoraLayout = new javax.swing.GroupLayout(pnlTblDemora);
         pnlTblDemora.setLayout(pnlTblDemoraLayout);
@@ -190,8 +206,20 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
             new String [] {
                 "Costo Pedido", "Cantidad Pedida"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         scpCostoPedido.setViewportView(tblCostoPedido);
+        if (tblCostoPedido.getColumnModel().getColumnCount() > 0) {
+            tblCostoPedido.getColumnModel().getColumn(0).setResizable(false);
+            tblCostoPedido.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout pnlCostoPedidoLayout = new javax.swing.GroupLayout(pnlCostoPedido);
         pnlCostoPedido.setLayout(pnlCostoPedidoLayout);
@@ -206,6 +234,7 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
         lblCostoPorAlmacenamiento.setText("Costo por Almacenamiento");
 
+        txtCostoAlmacenamiento.setEditable(false);
         txtCostoAlmacenamiento.setText("3.00");
         txtCostoAlmacenamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,6 +246,7 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
         lblCostoPorFaltante.setText("Costo por Faltante");
 
+        txtCostoFaltante.setEditable(false);
         txtCostoFaltante.setText("10.00");
 
         lblUnidCostoFaltante.setText("$ por unidad por día");
@@ -263,6 +293,7 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
         lblStockInicial.setText("Stock inicial");
 
+        txtStockInicial.setEditable(false);
         txtStockInicial.setText("20");
 
         javax.swing.GroupLayout pnlStockInicialLayout = new javax.swing.GroupLayout(pnlStockInicial);
@@ -361,7 +392,7 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Dia", "RND", "Demanda", "Stock", "RND", "Demora", "Demanda Acum", "Dias faltantes para pedir", "Hay pedido en curso", "Cant Pedida 1", "Cant Pedida 2", "Dia Llegada Pedido 1", "Dia Llegada Pedido 2", "Costo faltante", "Costo pedido", "Costo mantenimiento", "Costo total hoy", "Costo diario Acum", "Costo diario Prom"
+                "Dia", "RND", "Demanda", "Stock", "RND", "Demora", "Demanda Acum", "Dias faltantes para pedir", "Hay pedido en curso", "Cant Pedida 1", "Dia Llegada Pedido 1", "Cant Pedida 2", "Dia Llegada Pedido 2", "Costo faltante", "Costo pedido", "Costo mantenimiento", "Costo total hoy", "Costo diario Acum", "Costo diario Prom"
             }
         ) {
             Class[] types = new Class [] {
@@ -429,7 +460,7 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Dia", "RND", "Demanda", "Stock", "RND", "Demora", "Demanda Acum", "Dias faltantes para pedir", "Hay pedido en curso", "Cant Pedida 1", "Cant Pedida 2", "Dia Llegada pedido 1", "Dia Llegada pedido 2", "Costo faltante", "Costo pedido", "Costo mantenimiento", "Costo total hoy", "Costo diario Acum", "Costo diario Prom"
+                "Dia", "RND", "Demanda", "Stock", "RND", "Demora", "Demanda Acum", "Dias faltantes para pedir", "Hay pedido en curso", "Cant Pedida 1", "Dia Llegada pedido 1", "Cant Pedida 2", "Dia Llegada pedido 2", "Costo faltante", "Costo pedido", "Costo mantenimiento", "Costo total hoy", "Costo diario Acum", "Costo diario Prom"
             }
         ) {
             Class[] types = new Class [] {
@@ -653,14 +684,17 @@ public class VistaMontecarloSimulacion extends javax.swing.JFrame {
                 case 0:
                 {
                     JOptionPane.showMessageDialog(this, "La mejor politica es la: \n"+ (new PoliticaA()).toString());
+                    break;
                 }
                 case 1:
                 {
                     JOptionPane.showMessageDialog(this, "La mejor politica es la: \n"+ (new PoliticaB()).toString());
+                    break;
                 }
                 case 2:
                 {
                     JOptionPane.showMessageDialog(this, "La mejor politica es la: \n"+ (new PoliticaAlternativa()).toString());
+                    break;
                 }
             }
         }
