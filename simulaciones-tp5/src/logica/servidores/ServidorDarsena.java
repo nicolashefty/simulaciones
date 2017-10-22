@@ -15,12 +15,14 @@ import logica.servidores.state.EstadoServidor;
 public class ServidorDarsena implements Servidor
 {
 
-    EstadoServidor estado;
-    Cola cola;
+    private EstadoServidor estado;
+    private int cantAtendidos;
+    private static Cola cola;
     
     public ServidorDarsena()
     {
         estado = new EstadoDarsenaLibre();
+        cantAtendidos = 0;
         cola = new Cola();
     }
     
@@ -42,6 +44,14 @@ public class ServidorDarsena implements Servidor
     @Override
     public void setCola(Cola c) {
         cola = c;
+    }
+
+    public int getCantAtendidos() {
+        return cantAtendidos;
+    }
+
+    public void setCantAtendidos(int cantAtendidos) {
+        this.cantAtendidos = cantAtendidos;
     }
     
     public abstract class EstadoDarsena implements EstadoServidor

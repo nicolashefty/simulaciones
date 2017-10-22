@@ -30,15 +30,36 @@ public class Simulador
     
     public void rutinaDeInicializacion()
     {
+        //Reloj en 0
+        // Crear servidores 
+        //Iniciar contadores
+        //Iniciar archivo de eventos
+    }
+    
+    public void rutinaDeTiempo()
+    {
+        //1 - Determinar proximo evento
+        
+        //2 - Avanzar Reloj
         
     }
     
-    public void rutinaDe()
+    public void rutinaDeEvento()
+    {
+        //Actualizar estado del Sistema
+        //Actualizar contadores estadisticos
+        //Generar eventos futuros y adicionarlos al archivo de eventos
+    }
+    
+    public void rutinaGeneradoraDeReportes()
     {
         
-        
     }
     
+    public void calcularParametrosDeInteres()
+    {
+        
+    }
     public void mostrarResultados()
     {
         
