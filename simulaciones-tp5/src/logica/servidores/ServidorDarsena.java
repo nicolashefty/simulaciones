@@ -6,6 +6,7 @@
 package logica.servidores;
 
 import logica.servidores.colas.Cola;
+import logica.servidores.exceptions.TieneQueCalibrar;
 import logica.servidores.state.EstadoServidor;
 
 /**
@@ -77,6 +78,34 @@ public class ServidorDarsena implements Servidor
         public void finAtencionRecepcion(Servidor s) {
             //No hace nada
         }
+
+        @Override
+        public void inicioAtencionRecepcion(Servidor s) {
+        }
+
+        @Override
+        public void inicioCalibrado(Servidor s) {
+        }
+
+        @Override
+        public void finCalibrado(Servidor s) {
+        }
+
+        @Override
+        public void inicioDescarga(Servidor s) {
+        }
+
+        @Override
+        public void finDescarga(Servidor s) throws TieneQueCalibrar{
+        }
+
+        @Override
+        public void inicioPesaje(Servidor s) {
+        }
+
+        @Override
+        public void finPesaje(Servidor s) {
+        }
         
     }
     public class EstadoDarsenaCalibrando extends EstadoDarsena
@@ -89,22 +118,32 @@ public class ServidorDarsena implements Servidor
         }
 
         @Override
-        public void finCalibrado(Servidor s) 
-        {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public void inicioCalibrado(Servidor s) {
+            //No deberia pasar
         }
 
         @Override
-        public void finDescarga(Servidor s) 
-        {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public void finCalibrado(Servidor s) {
+            if(s.getCola().getCola() > 0)
+            {
+                s.getCola().disminuirCola();
+                s.setEstado(new EstadoDarsenaOcupada());
+            }
+            else
+            {
+                s.setEstado(new EstadoDarsenaLibre());
+            }
+            cantAtendidos = 0;
         }
 
         @Override
-        public void finPesaje(Servidor s) 
-        {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public void inicioDescarga(Servidor s) {
         }
+
+        @Override
+        public void finDescarga(Servidor s) {
+        }
+
 
     }
     
@@ -116,20 +155,39 @@ public class ServidorDarsena implements Servidor
         {
             return "Ocupada";
         }
+        
+        @Override
+        public void inicioCalibrado(Servidor s) {
+            s.setEstado(new EstadoDarsenaCalibrando());
+        }
 
         @Override
         public void finCalibrado(Servidor s) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
-        public void finDescarga(Servidor s) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public void inicioDescarga(Servidor s) {
+            s.getCola().disminuirCola();
+            cantAtendidos ++;
         }
 
         @Override
-        public void finPesaje(Servidor s) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public void finDescarga(Servidor s) 
+        throws TieneQueCalibrar{
+            
+            cantAtendidos++;
+            if (cantAtendidos == 15)
+            {
+                throw new TieneQueCalibrar();
+            }
+            if(s.getCola().getCola() > 0)
+            {
+                s.getCola().disminuirCola();
+            }
+            else
+            {
+                s.setEstado(new EstadoDarsenaLibre());
+            }
         }
 
     }
@@ -142,20 +200,25 @@ public class ServidorDarsena implements Servidor
         {
             return "Libre";
         }
+     
+        @Override
+        public void inicioCalibrado(Servidor s) {
+            
+        }
 
         @Override
         public void finCalibrado(Servidor s) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void inicioDescarga(Servidor s) {
+            s.getCola().disminuirCola();
+            s.setEstado(new EstadoDarsenaOcupada());
         }
 
         @Override
         public void finDescarga(Servidor s) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
-        @Override
-        public void finPesaje(Servidor s) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }        
     }
 }

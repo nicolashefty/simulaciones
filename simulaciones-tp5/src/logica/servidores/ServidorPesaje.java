@@ -62,65 +62,61 @@ public class ServidorPesaje implements Servidor
         public void cierre(Servidor s) {
             //No hace nada
         }
-======== Seguir desde aca para abajo.
+        
+        @Override
+        public void finAtencionRecepcion(Servidor s) {
+            //No hace nada
+        }
         
         @Override
         public void finCalibrado(Servidor s) 
         {
             //No hace nada
         }
-    }
-    public class EstadoDarsenaCalibrando extends EstadoDarsena
-    {
-
+        
         @Override
-        public String getNombre() 
-        {
-            return "Calibrando";
+        public void finDescarga(Servidor s) {
+            //NO hace nada
+        }
+        
+        @Override
+        public void inicioAtencionRecepcion(Servidor s) {
+            //No hace nada;
+        }
+        
+        @Override
+        public void inicioCalibrado(Servidor s) {
         }
 
-
         @Override
-        public void finDescarga(Servidor s) 
-        {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        public void finPesaje(Servidor s) 
-        {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public void inicioDescarga(Servidor s) {
         }
 
     }
     
-    public class EstadoDarsenaOcupada extends EstadoDarsena
+    public class EstadoPesajeOcupado extends EstadoPesaje
     {
 
         @Override
         public String getNombre() 
         {
-            return "Ocupada";
-        }
-
-        @Override
-        public void finCalibrado(Servidor s) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        public void finDescarga(Servidor s) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return "Ocupado";
         }
 
         @Override
         public void finPesaje(Servidor s) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            //Si no hay mas en la cola paso a Libre
+            
+        }
+
+        @Override
+        public void inicioPesaje(Servidor s) {
+            //Sigue ocupado
         }
 
     }
     
-    public class EstadoDarsenaLibre extends EstadoDarsena
+    public class EstadoPesajeLibre extends EstadoPesaje
     {
 
         @Override
@@ -130,18 +126,14 @@ public class ServidorPesaje implements Servidor
         }
 
         @Override
-        public void finCalibrado(Servidor s) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        public void finDescarga(Servidor s) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
         public void finPesaje(Servidor s) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }        
+            //No deberia pasar
+        }
+
+        @Override
+        public void inicioPesaje(Servidor s) {
+            s.setEstado(new EstadoPesajeOcupado());
+            //disminiur la cola?
+        }
     }
 }

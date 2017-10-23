@@ -6,6 +6,7 @@
 package logica.servidores.state;
 
 import logica.servidores.Servidor;
+import logica.servidores.exceptions.*;
 
 /**
  *
@@ -16,9 +17,13 @@ public interface EstadoServidor
     String getNombre();
     
     void apertura(Servidor s);
-    void cierre(Servidor s);
+    void cierre(Servidor s) throws NoAtendidos;
+    void inicioAtencionRecepcion(Servidor s);
     void finAtencionRecepcion(Servidor s);
+    void inicioCalibrado(Servidor s);
     void finCalibrado(Servidor s);
-    void finDescarga(Servidor s);
+    void inicioDescarga(Servidor s);
+    void finDescarga(Servidor s) throws TieneQueCalibrar;
+    void inicioPesaje(Servidor s);
     void finPesaje(Servidor s);  
 }
