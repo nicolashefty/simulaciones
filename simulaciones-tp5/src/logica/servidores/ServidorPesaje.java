@@ -43,6 +43,11 @@ public class ServidorPesaje implements Servidor
     public void setCola(Cola c) {
         cola = c;
     }
+
+    @Override
+    public String getNombre() {
+        return "Pesaje";
+    }
     
     public abstract class EstadoPesaje implements EstadoServidor
     {

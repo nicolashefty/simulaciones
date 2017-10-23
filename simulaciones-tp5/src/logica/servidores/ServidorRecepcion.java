@@ -34,5 +34,9 @@ public class ServidorRecepcion implements Servidor
     public void setCola(Cola c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public String getNombre() {
+        return "Recepcion";
+    }
 }

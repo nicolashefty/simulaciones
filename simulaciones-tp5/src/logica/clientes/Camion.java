@@ -85,6 +85,14 @@ public class Camion {
     public void finAtencionPesaje() {
         estado.finAtencionPesaje();
     }
+
+    public boolean estaFueraDelSistema() {
+        return estado.esFueraDelSistema();
+    }
+
+    public Servidor getServidorAtendido() {
+        return servidor;
+    }
     
     
     
@@ -124,6 +132,11 @@ public class Camion {
         {
             
         }
+
+        private boolean esFueraDelSistema()
+        {
+            return false;
+        }
     }
    
     public class EstadoCamionColaRecepcion extends EstadoCamion
@@ -138,6 +151,7 @@ public class Camion {
         public String toString() {
             return "Esperando para Recepcion";
         }
+
     }
     
     public class EstadoCamionRecepcion extends EstadoCamion

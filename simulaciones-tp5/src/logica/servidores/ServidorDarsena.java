@@ -54,6 +54,11 @@ public class ServidorDarsena implements Servidor
         this.cantAtendidos = cantAtendidos;
     }
     
+    @Override
+    public String getNombre() {
+        return "Darsena";
+    }
+    
     public abstract class EstadoDarsena implements EstadoServidor
     {
         

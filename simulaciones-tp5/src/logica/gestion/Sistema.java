@@ -5,6 +5,7 @@
  */
 package logica.gestion;
 
+import com.sun.xml.internal.ws.client.ContentNegotiation;
 import java.time.*;
 import java.util.*;
 import logica.clientes.*;
@@ -326,5 +327,56 @@ public class Sistema
         this.camiones = camiones;
     }
     
+    public String[] getVectorFila()
+    {
+        //Se deberia usar de utilidades un metodo q nos ponga en N/A los q no se tienen q mostrar por ejemplo los rnd cuando no se calcularon
+        String[] vectorEstado = {
+        ""+dia, ""+reloj, evento, 
+            ""+rndLlegadaCamiones, proximaLlegada.toString(), horaProxLlegada.toString(),
+            ""+rndProxAtencion, proximaAtencion.toString(), horaProxAtencion.toString(), recepcionista.getEstado().getNombre(), ""+recepcionista.getCola().getCola(),
+            ""+rndTiempoPesado, tiempoPesado.toString(), horaFinPesado.toString(), balanza.getEstado().getNombre(), ""+balanza.getCola().getCola(),
+            ""+rndTiempoDescarga1, tiempoDescarga1.toString(), horaFinDescarga1.toString(), ""+darsena1.getCantAtendidos(), 
+            ""+rndTiempoCalibrado1, tiempoRecalibrado1.toString(), horaFinRecalibrado1.toString(), darsena1.getEstado().getNombre(), ""+darsena1.getCola().getCola(),
+            ""+rndTiempoCalibrado2, tiempoRecalibrado2.toString(), horaFinRecalibrado2.toString(), darsena2.getEstado().getNombre(),
+            ""+ acCantAtendidos, ""+acCantNOAtendidos, formatDuration(acTiempoPermanencia)
+        };
+        vectorEstado = agregarCamiones(vectorEstado);
+        return vectorEstado;
+    }
+
+    private String formatDuration(Duration acTiempoPermanencia) {
+        return acTiempoPermanencia.toHours() + ":" + acTiempoPermanencia.minusHours(acTiempoPermanencia.toHours()).toMinutes();
+    }
+
+    private String[] agregarCamiones(String[] vectorEstado) {
+        
+        if(camiones.isEmpty())
+        {
+            return vectorEstado;
+        }
+        ArrayList<String> lista = new ArrayList<>();
+        for(Camion camion: camiones)
+        {
+            if (camion.estaFueraDelSistema())
+            {
+                lista.add("");
+                lista.add("");
+                lista.add("");
+                lista.add("");
+            }
+            else
+            {
+                lista.add(camion.getEstado().toString());
+                lista.add(camion.getServidorAtendido().getNombre());
+                lista.add(camion.getTiempoLlegada().toString());
+                lista.add(camion.getTiempoFin().toString());
+            }
+        }
+        
+        List<String> nuevaLista = Arrays.asList(vectorEstado);
+        nuevaLista.addAll(lista);
+        
+        return nuevaLista.toArray(new String[0]);
+    }
     
 }
