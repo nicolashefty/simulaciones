@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import logica.servidores.ServidorDarsena;
 import logica.servidores.ServidorPesaje;
 import logica.servidores.ServidorRecepcion;
+import logica.servidores.exceptions.NecesitaCalcularRNDDarsena;
 import logica.servidores.exceptions.NecesitaCalcularRNDPesaje;
 import logica.utilidades.Utilidades;
 
@@ -190,16 +191,55 @@ public class Simulador
         }
         if(vectorActual.getDarsena1().estaLibre())
         {
-            vectorActual.getDarsena1().inicioDescarga(); 
+            try
+            {
+                vectorActual.getDarsena1().inicioDescarga(); 
+            }
+            catch (NecesitaCalcularRNDDarsena ncrndd)
+            {
+                double rndD = new Random().nextDouble();
+                vectorActual.setRndTiempoDescarga1(rndD);
+                vectorActual.setTiempoDescarga1(Utilidades.uniforme(20, 25, rndD));
+                vectorActual.setHoraFinDescarga1(vectorActual.getReloj()
+                        .plusSeconds(vectorActual.getTiempoDescarga1().getSecond())
+                        .plusMinutes(vectorActual.getTiempoDescarga1().getMinute())
+                        .plusHours(vectorActual.getTiempoDescarga1().getHour()));
+            }
         }
         else if (vectorActual.getDarsena2().estaLibre())
         {
-            vectorActual.getDarsena2().inicioDescarga();
+            try
+            {
+                vectorActual.getDarsena2().inicioDescarga(); 
+            }
+            catch (NecesitaCalcularRNDDarsena ncrndd)
+            {
+                double rndD = new Random().nextDouble();
+                vectorActual.setRndTiempoDescarga2(rndD);
+                vectorActual.setTiempoDescarga2(Utilidades.uniforme(20, 25, rndD));
+                vectorActual.setHoraFinDescarga2(vectorActual.getReloj()
+                        .plusSeconds(vectorActual.getTiempoDescarga2().getSecond())
+                        .plusMinutes(vectorActual.getTiempoDescarga2().getMinute())
+                        .plusHours(vectorActual.getTiempoDescarga2().getHour()));
+            }
         }
         else
         {
-            //A cualquiera es lo mismo
-            vectorActual.getDarsena1().inicioDescarga();
+            //A cualquiera es lo mismo pero vamos a la 1
+            try
+            {
+                vectorActual.getDarsena1().inicioDescarga(); 
+            }
+            catch (NecesitaCalcularRNDDarsena ncrndd)
+            {
+                double rndD = new Random().nextDouble();
+                vectorActual.setRndTiempoDescarga1(rndD);
+                vectorActual.setTiempoDescarga1(Utilidades.uniforme(20, 25, rndD));
+                vectorActual.setHoraFinDescarga1(vectorActual.getReloj()
+                        .plusSeconds(vectorActual.getTiempoDescarga1().getSecond())
+                        .plusMinutes(vectorActual.getTiempoDescarga1().getMinute())
+                        .plusHours(vectorActual.getTiempoDescarga1().getHour()));
+            }
         }
         
         throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.

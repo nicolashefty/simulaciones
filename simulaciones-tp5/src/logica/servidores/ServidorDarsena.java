@@ -6,6 +6,7 @@
 package logica.servidores;
 
 import logica.servidores.colas.Cola;
+import logica.servidores.exceptions.NecesitaCalcularRNDDarsena;
 import logica.servidores.exceptions.NecesitaCalcularRNDPesaje;
 import logica.servidores.exceptions.NoAtendidos;
 import logica.servidores.exceptions.TieneQueCalibrar;
@@ -62,66 +63,6 @@ public class ServidorDarsena implements Servidor
         return "Darsena";
     }
     
-    //Desgraciadamente este se va a comportar distinto y no va a usar el state.
-    @Override
-    public void apertura()
-    {
-        
-    }
-    
-    @Override
-    public void cierre() throws NoAtendidos
-    {
-        
-    }
-    
-    @Override
-    public void inicioAtencionRecepcion()
-    {
-        
-    }
-    
-    @Override
-    public void finAtencionRecepcion()
-    {
-        
-    }
-    
-    @Override
-    public void inicioCalibrado()
-    {
-        
-    }
-    
-    @Override
-    public void finCalibrado()
-    {
-        
-    }
-    
-    @Override
-    public void inicioDescarga()
-    {
-        
-    }
-    
-    @Override
-    public void finDescarga() throws TieneQueCalibrar
-    {
-        
-    }
-    
-    @Override
-    public void inicioPesaje()
-    {
-        
-    }
-    
-    @Override
-    public void finPesaje() throws NecesitaCalcularRNDPesaje
-    {
-        
-    }
     
     public abstract class EstadoDarsena implements EstadoServidor
     {
@@ -130,6 +71,7 @@ public class ServidorDarsena implements Servidor
         public void apertura(Servidor s) 
         {
             s.getCola().inicializar();
+            cantAtendidos = 0;
         }
 
         @Override
@@ -155,12 +97,9 @@ public class ServidorDarsena implements Servidor
         }
 
         @Override
-        public void inicioDescarga(Servidor s) {
+        public void inicioDescarga(Servidor s) throws NecesitaCalcularRNDDarsena{
         }
 
-        @Override
-        public void finDescarga(Servidor s) throws TieneQueCalibrar{
-        }
 
         @Override
         public void inicioPesaje(Servidor s) {
@@ -200,7 +139,11 @@ public class ServidorDarsena implements Servidor
         }
 
         @Override
-        public void inicioDescarga(Servidor s) {
+        public void inicioDescarga(Servidor s) 
+                throws NecesitaCalcularRNDDarsena
+        {
+            cola.incrementarCola();
+            throw new NecesitaCalcularRNDDarsena();
         }
 
         @Override
@@ -239,14 +182,16 @@ public class ServidorDarsena implements Servidor
         }
 
         @Override
-        public void inicioDescarga(Servidor s) {
-            s.getCola().disminuirCola();
-            cantAtendidos ++;
+        public void inicioDescarga(Servidor s) 
+                throws NecesitaCalcularRNDDarsena
+        {
+            cola.incrementarCola();
+            throw new NecesitaCalcularRNDDarsena();
         }
 
         @Override
         public void finDescarga(Servidor s) 
-        throws TieneQueCalibrar{
+        throws TieneQueCalibrar, NecesitaCalcularRNDDarsena{
             
             cantAtendidos++;
             if (cantAtendidos == 15)
@@ -256,6 +201,7 @@ public class ServidorDarsena implements Servidor
             if(s.getCola().getCola() > 0)
             {
                 s.getCola().disminuirCola();
+                throw new NecesitaCalcularRNDDarsena();
             }
             else
             {
@@ -294,9 +240,12 @@ public class ServidorDarsena implements Servidor
         }
 
         @Override
-        public void inicioDescarga(Servidor s) {
+        public void inicioDescarga(Servidor s) 
+        throws NecesitaCalcularRNDDarsena
+        {
             s.getCola().disminuirCola();
             s.setEstado(new EstadoDarsenaOcupada());
+            throw new NecesitaCalcularRNDDarsena();
         }
 
         @Override

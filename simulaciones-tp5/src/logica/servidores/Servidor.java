@@ -46,11 +46,11 @@ public interface Servidor
     {
         getEstado().finCalibrado(this);
     }
-    default void inicioDescarga()
+    default void inicioDescarga() throws NecesitaCalcularRNDDarsena
     {
         getEstado().inicioDescarga(this);
     }
-    default void finDescarga() throws TieneQueCalibrar
+    default void finDescarga() throws TieneQueCalibrar, NecesitaCalcularRNDDarsena
     {
         getEstado().finDescarga(this);
     }
