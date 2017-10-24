@@ -43,6 +43,19 @@ public class Utilidades
     {
         return "$"+COSTO.format(unCosto); //Ponerle $ y negativo si es necesario. Solo dos decimales;
     }
+    
+    public static double calcularLlegadaCamion(float lambda, float random){
+        return (-1/lambda)*(Math.log(1-random));
+    }
+    
+    /* Sirve tanto para atencion de cambion, balanza de peso y las darsenas */
+    public static double uniforme(int a, int b, float random){
+        return a + random * (b-a);
+    }
+    
+    public static double calcularRecalibramiento(float varianza, float media, float randomUno, float randomDos){
+        return (Math.sqrt(-2*Math.log(randomUno))*Math.cos(2*Math.PI*randomDos))*media + varianza;
+    }
 
 //    public static DatosMontecarlo getDatosMontecarlo() {
 //        DatosMontecarlo datos = new DatosMontecarlo();
