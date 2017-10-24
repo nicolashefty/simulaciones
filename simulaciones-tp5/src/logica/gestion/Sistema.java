@@ -407,7 +407,7 @@ public class Sistema implements Comparable<Sistema>
         return sistCopy;
     }
 
-    String getProximoEvento() 
+    BeanEventoHora getProximoEvento() 
     {
         List<BeanEventoHora> lista = new ArrayList<>();
         lista.add(new BeanEventoHora(Evento.LLEGADA_CAMION, horaProxLlegada));
@@ -419,7 +419,7 @@ public class Sistema implements Comparable<Sistema>
         lista.add(new BeanEventoHora(Evento.FIN_PESAJE, horaFinPesado));
         lista.sort(null);
         
-        return lista.get(0).evento;
+        return lista.get(0);
     }
 
     @Override
@@ -436,7 +436,7 @@ public class Sistema implements Comparable<Sistema>
         return this.camiones.size() - o.camiones.size();
     }
 
-    private class BeanEventoHora implements Comparable<BeanEventoHora>
+    public class BeanEventoHora implements Comparable<BeanEventoHora>
     {
         String evento;
         LocalTime hora;

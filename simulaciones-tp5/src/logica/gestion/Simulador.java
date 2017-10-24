@@ -60,11 +60,8 @@ public class Simulador
         if(Evento.APERTURA.equals(vectorAnterior.getEvento()))
         {
             //Proxima llegada debiera ser la hora inicio llegada de camiones
-            vectorActual = vectorAnterior.copy();
-            vectorActual.setDia(vectorAnterior.getDia());
-            vectorActual.setReloj(LocalTime.of(12,0));
             //Ojo q la llegada camion deberia modificar el reloj en todos los casos menos este
-            //rutinaLlegadaCamion();
+            rutinaLlegadaCamion(LocalTime.of(12,0));
             
             rotacionVector();
             return;
@@ -80,23 +77,23 @@ public class Simulador
             return;
         }
         
-        String eventoSig = vectorAnterior.getProximoEvento();
-        switch (eventoSig)
+        Sistema.BeanEventoHora eventoSig = vectorAnterior.getProximoEvento();
+        switch (eventoSig.evento)
         {
             case Evento.FIN_ATENCION_RECEPCION:
-                rutinaFinAtencionRecepcion();
+                rutinaFinAtencionRecepcion(eventoSig.hora);
                 break;
             case Evento.FIN_CALIBRADO:
-                rutinaFinCalibrado();
+                rutinaFinCalibrado(eventoSig.hora);
                 break;
             case Evento.FIN_DESCARGA:
-                rutinaFinDescarga();
+                rutinaFinDescarga(eventoSig.hora);
                 break;
             case Evento.FIN_PESAJE:
-                rutinaFinPesaje();
+                rutinaFinPesaje(eventoSig.hora);
                 break;
             case Evento.LLEGADA_CAMION:
-                rutinaLlegadaCamion();
+                rutinaLlegadaCamion(eventoSig.hora);
                 break;
         }
        
@@ -142,26 +139,26 @@ public class Simulador
         }
     }
 
-    private void rutinaFinAtencionRecepcion() {
+    private void rutinaFinAtencionRecepcion(LocalTime newTime) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void rutinaFinCalibrado() 
+    private void rutinaFinCalibrado(LocalTime newTime) 
     {
         throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void rutinaFinDescarga() 
+    private void rutinaFinDescarga(LocalTime newTime) 
     {
         throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void rutinaFinPesaje() 
+    private void rutinaFinPesaje(LocalTime newTime) 
     {
         throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void rutinaLlegadaCamion() {
+    private void rutinaLlegadaCamion(LocalTime newTime) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
