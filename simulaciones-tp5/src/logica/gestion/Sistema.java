@@ -5,7 +5,6 @@
  */
 package logica.gestion;
 
-import com.sun.xml.internal.ws.client.ContentNegotiation;
 import java.time.*;
 import java.util.*;
 import logica.clientes.*;
@@ -15,7 +14,7 @@ import logica.servidores.*;
  *
  * @author heftyn
  */
-public class Sistema 
+public class Sistema implements Comparable<Sistema>
 {
     private int dia;
     private LocalTime reloj;
@@ -25,9 +24,9 @@ public class Sistema
     private LocalTime proximaLlegada;
     private LocalTime horaProxLlegada;
     
-    private double rndProxAtencion;
-    private LocalTime proximaAtencion;
-    private LocalTime horaProxAtencion;
+    private double rndTiempoAtencion;
+    private LocalTime tiempoAtencion;
+    private LocalTime horaFinAtencion;
     
     private ServidorRecepcion recepcionista;
     
@@ -41,7 +40,8 @@ public class Sistema
     private LocalTime tiempoDescarga1;
     private LocalTime horaFinDescarga1;
     
-    private double rndTiempoCalibrado1;
+    private double rndTiempoCalibrado11;
+    private double rndTiempoCalibrado12;
     private LocalTime tiempoRecalibrado1;
     private LocalTime horaFinRecalibrado1;
     private ServidorDarsena darsena1;
@@ -50,7 +50,8 @@ public class Sistema
     private LocalTime tiempoDescarga2;
     private LocalTime horaFinDescarga2;
     
-    private double rndTiempoCalibrado2;
+    private double rndTiempoCalibrado21;
+    private double rndTiempoCalibrado22;
     private LocalTime tiempoRecalibrado2;
     private LocalTime horaFinRecalibrado2;
     private ServidorDarsena darsena2;
@@ -114,28 +115,28 @@ public class Sistema
         this.horaProxLlegada = horaProxLlegada;
     }
 
-    public double getRndProxAtencion() {
-        return rndProxAtencion;
+    public double getRndTiempoAtencion() {
+        return rndTiempoAtencion;
     }
 
-    public void setRndProxAtencion(double rndProxAtencion) {
-        this.rndProxAtencion = rndProxAtencion;
+    public void setRndTiempoAtencion(double rndTiempoAtencion) {
+        this.rndTiempoAtencion = rndTiempoAtencion;
     }
 
-    public LocalTime getProximaAtencion() {
-        return proximaAtencion;
+    public LocalTime getTiempoAtencion() {
+        return tiempoAtencion;
     }
 
-    public void setProximaAtencion(LocalTime proximaAtencion) {
-        this.proximaAtencion = proximaAtencion;
+    public void setTiempoAtencion(LocalTime tiempoAtencion) {
+        this.tiempoAtencion = tiempoAtencion;
     }
 
-    public LocalTime getHoraProxAtencion() {
-        return horaProxAtencion;
+    public LocalTime getHoraFinAtencion() {
+        return horaFinAtencion;
     }
 
-    public void setHoraProxAtencion(LocalTime horaProxAtencion) {
-        this.horaProxAtencion = horaProxAtencion;
+    public void setHoraFinAtencion(LocalTime horaFinAtencion) {
+        this.horaFinAtencion = horaFinAtencion;
     }
 
     public ServidorRecepcion getRecepcionista() {
@@ -202,14 +203,20 @@ public class Sistema
         this.horaFinDescarga1 = horaFinDescarga1;
     }
 
-    public double getRndTiempoCalibrado1() {
-        return rndTiempoCalibrado1;
+    public double getRndTiempoCalibrado11() {
+        return rndTiempoCalibrado11;
     }
 
-    public void setRndTiempoCalibrado1(double rndTiempoCalibrado1) {
-        this.rndTiempoCalibrado1 = rndTiempoCalibrado1;
+    public void setRndTiempoCalibrado11(double rndTiempoCalibrado11) {
+        this.rndTiempoCalibrado11 = rndTiempoCalibrado11;
+    }
+    public double getRndTiempoCalibrado12() {
+        return rndTiempoCalibrado12;
     }
 
+    public void setRndTiempoCalibrado12(double rndTiempoCalibrado12) {
+        this.rndTiempoCalibrado12 = rndTiempoCalibrado12;
+    }
     public LocalTime getTiempoRecalibrado1() {
         return tiempoRecalibrado1;
     }
@@ -258,14 +265,20 @@ public class Sistema
         this.horaFinDescarga2 = horaFinDescarga2;
     }
 
-    public double getRndTiempoCalibrado2() {
-        return rndTiempoCalibrado2;
+    public double getRndTiempoCalibrado21() {
+        return rndTiempoCalibrado21;
     }
 
-    public void setRndTiempoCalibrado2(double rndTiempoCalibrado2) {
-        this.rndTiempoCalibrado2 = rndTiempoCalibrado2;
+    public void setRndTiempoCalibrado21(double rndTiempoCalibrado21) {
+        this.rndTiempoCalibrado21 = rndTiempoCalibrado21;
+    }
+    public double getRndTiempoCalibrado22() {
+        return rndTiempoCalibrado22;
     }
 
+    public void setRndTiempoCalibrado22(double rndTiempoCalibrado22) {
+        this.rndTiempoCalibrado22 = rndTiempoCalibrado22;
+    }
     public LocalTime getTiempoRecalibrado2() {
         return tiempoRecalibrado2;
     }
@@ -333,11 +346,12 @@ public class Sistema
         String[] vectorEstado = {
         ""+dia, ""+reloj, evento, 
             ""+rndLlegadaCamiones, proximaLlegada.toString(), horaProxLlegada.toString(),
-            ""+rndProxAtencion, proximaAtencion.toString(), horaProxAtencion.toString(), recepcionista.getEstado().getNombre(), ""+recepcionista.getCola().getCola(),
+            ""+rndTiempoAtencion, tiempoAtencion.toString(), horaFinAtencion.toString(), recepcionista.getEstado().getNombre(), ""+recepcionista.getCola().getCola(),
             ""+rndTiempoPesado, tiempoPesado.toString(), horaFinPesado.toString(), balanza.getEstado().getNombre(), ""+balanza.getCola().getCola(),
             ""+rndTiempoDescarga1, tiempoDescarga1.toString(), horaFinDescarga1.toString(), ""+darsena1.getCantAtendidos(), 
-            ""+rndTiempoCalibrado1, tiempoRecalibrado1.toString(), horaFinRecalibrado1.toString(), darsena1.getEstado().getNombre(), ""+darsena1.getCola().getCola(),
-            ""+rndTiempoCalibrado2, tiempoRecalibrado2.toString(), horaFinRecalibrado2.toString(), darsena2.getEstado().getNombre(),
+            ""+rndTiempoCalibrado11, ""+rndTiempoCalibrado12, tiempoRecalibrado1.toString(), horaFinRecalibrado1.toString(), darsena1.getEstado().getNombre(), ""+darsena1.getCola().getCola(),
+            ""+rndTiempoDescarga2, tiempoDescarga2.toString(), horaFinDescarga2.toString(), ""+darsena2.getCantAtendidos(), 
+            ""+rndTiempoCalibrado21, ""+rndTiempoCalibrado22, tiempoRecalibrado2.toString(), horaFinRecalibrado2.toString(), darsena2.getEstado().getNombre(),
             ""+ acCantAtendidos, ""+acCantNOAtendidos, formatDuration(acTiempoPermanencia)
         };
         vectorEstado = agregarCamiones(vectorEstado);
@@ -378,5 +392,68 @@ public class Sistema
         
         return nuevaLista.toArray(new String[0]);
     }
-    
+
+    public Sistema copy() 
+    {
+        Sistema sistCopy = new Sistema();
+        sistCopy.acCantAtendidos = this.acCantAtendidos;
+        sistCopy.acCantNOAtendidos = this.acCantNOAtendidos;
+        sistCopy.acTiempoPermanencia = this.acTiempoPermanencia;
+        sistCopy.balanza = new ServidorPesaje();
+        sistCopy.camiones = new ArrayList<>();
+        sistCopy.darsena1 = new ServidorDarsena();
+        sistCopy.darsena2 = new ServidorDarsena();
+        sistCopy.recepcionista = new ServidorRecepcion();
+        return sistCopy;
+    }
+
+    String getProximoEvento() 
+    {
+        List<BeanEventoHora> lista = new ArrayList<>();
+        lista.add(new BeanEventoHora(Evento.LLEGADA_CAMION, horaProxLlegada));
+        lista.add(new BeanEventoHora(Evento.FIN_ATENCION_RECEPCION, horaFinAtencion));
+        lista.add(new BeanEventoHora(Evento.FIN_CALIBRADO, horaFinRecalibrado1));
+        lista.add(new BeanEventoHora(Evento.FIN_CALIBRADO, horaFinRecalibrado2));
+        lista.add(new BeanEventoHora(Evento.FIN_DESCARGA, horaFinDescarga1));
+        lista.add(new BeanEventoHora(Evento.FIN_DESCARGA, horaFinDescarga2));
+        lista.add(new BeanEventoHora(Evento.FIN_PESAJE, horaFinPesado));
+        lista.sort(null);
+        
+        return lista.get(0).evento;
+    }
+
+    @Override
+    public int compareTo(Sistema o) 
+    {
+        if (o == null || o.camiones == null || o.camiones.isEmpty())
+        {
+            return 1;
+        }
+        else if (this.camiones == null || this.camiones.isEmpty())
+        {
+            return -1;
+        }
+        return this.camiones.size() - o.camiones.size();
+    }
+
+    private class BeanEventoHora implements Comparable<BeanEventoHora>
+    {
+        String evento;
+        LocalTime hora;
+        public BeanEventoHora(String e, LocalTime h)
+        {
+            evento = e;
+            hora = h;
+        }
+
+        @Override
+        public int compareTo(BeanEventoHora o) 
+        {
+            if (o == null)
+            {
+                return 1;
+            }
+            return this.hora.compareTo(o.hora);
+        }           
+    }
 }

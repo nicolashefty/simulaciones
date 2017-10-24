@@ -19,6 +19,11 @@ public class ServidorRecepcion implements Servidor
     private EstadoServidor estado;
     private Cola cola;
     
+    public ServidorRecepcion()
+    {
+        cola = new Cola();
+        estado = new EstadoRecepcionLibre();
+    }
     @Override
     public EstadoServidor getEstado() {
         return estado;
@@ -85,6 +90,8 @@ public class ServidorRecepcion implements Servidor
         public void finPesaje(Servidor s) {
         }
         
+    }
+    
         public class EstadoRecepcionOcupada extends EstadoRecepcion
         {
 
@@ -131,5 +138,4 @@ public class ServidorRecepcion implements Servidor
             }
             
         }
-    }
 }
