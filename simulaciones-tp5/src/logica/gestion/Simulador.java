@@ -60,7 +60,11 @@ public class Simulador
         if(Evento.APERTURA.equals(vectorAnterior.getEvento()))
         {
             //Proxima llegada debiera ser la hora inicio llegada de camiones
-            rutinaLlegadaCamion();
+            vectorActual = vectorAnterior.copy();
+            vectorActual.setDia(vectorAnterior.getDia());
+            vectorActual.setReloj(LocalTime.of(12,0));
+            //Ojo q la llegada camion deberia modificar el reloj en todos los casos menos este
+            //rutinaLlegadaCamion();
             
             rotacionVector();
             return;
@@ -71,7 +75,7 @@ public class Simulador
             vectorActual.setDia(vectorAnterior.getDia()+1);
             vectorActual.setReloj(LocalTime.of(5,0));
             vectorActual.setEvento(Evento.APERTURA);
-            
+            //informar a los servidores del cierre
             rotacionVector();
             return;
         }
