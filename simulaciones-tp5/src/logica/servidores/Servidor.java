@@ -6,8 +6,7 @@
 package logica.servidores;
 
 import logica.servidores.colas.Cola;
-import logica.servidores.exceptions.NoAtendidos;
-import logica.servidores.exceptions.TieneQueCalibrar;
+import logica.servidores.exceptions.*;
 import logica.servidores.state.EstadoServidor;
 
 /**
@@ -59,7 +58,7 @@ public interface Servidor
     {
         getEstado().inicioPesaje(this);
     }
-    default void finPesaje()
+    default void finPesaje() throws NecesitaCalcularRNDPesaje
     {
         getEstado().finPesaje(this);
     }

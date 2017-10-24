@@ -25,5 +25,5 @@ public interface EstadoServidor
     void inicioDescarga(Servidor s);
     void finDescarga(Servidor s) throws TieneQueCalibrar;
     void inicioPesaje(Servidor s);
-    void finPesaje(Servidor s);  
+    void finPesaje(Servidor s) throws NecesitaCalcularRNDPesaje;  
 }

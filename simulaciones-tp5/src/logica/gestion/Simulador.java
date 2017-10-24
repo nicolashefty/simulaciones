@@ -10,11 +10,14 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import logica.servidores.ServidorDarsena;
 import logica.servidores.ServidorPesaje;
 import logica.servidores.ServidorRecepcion;
+import logica.servidores.exceptions.NecesitaCalcularRNDPesaje;
+import logica.utilidades.Utilidades;
 
 /**
  *
@@ -171,7 +174,25 @@ public class Simulador
         vectorActual.setAcCantNOAtendidos(vectorAnterior.getAcCantNOAtendidos());
         vectorActual.setAcTiempoPermanencia(vectorAnterior.getAcTiempoPermanencia());
         
-        vectorActual.getBalanza().finPesaje();
+        try
+        {
+            vectorActual.getBalanza().finPesaje();
+        }
+        catch(NecesitaCalcularRNDPesaje ncrndp)
+        {
+            double rndP = new Random().nextDouble();
+            vectorActual.setRndTiempoPesado(rndP);
+            vectorActual.setTiempoPesado(Utilidades.uniforme(5, 7, rndP));
+            vectorActual.setHoraFinPesado(vectorActual.getReloj()
+                    .plusSeconds(vectorActual.getTiempoPesado().getSecond())
+                    .plusMinutes(vectorActual.getTiempoPesado().getMinute())
+                    .plusHours(vectorActual.getTiempoPesado().getHour()));
+        }
+        
+        vectorActual.getDarsena1().inicioDescarga(); // Y ahora?
+        // Estaba pensando que capaz sea mejor que el servidor darsena sea uno solo...
+        // Es decir siguen siendo dos para los efectos del TP pero lo maneja un solo objeto.
+        // Mañana lo veo
         throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 

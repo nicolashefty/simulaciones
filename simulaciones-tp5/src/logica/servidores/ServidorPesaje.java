@@ -6,6 +6,7 @@
 package logica.servidores;
 
 import logica.servidores.colas.Cola;
+import logica.servidores.exceptions.NecesitaCalcularRNDPesaje;
 import logica.servidores.state.EstadoServidor;
 
 /**
@@ -104,14 +105,25 @@ public class ServidorPesaje implements Servidor
         }
 
         @Override
-        public void finPesaje(Servidor s) {
+        public void finPesaje(Servidor s) throws NecesitaCalcularRNDPesaje 
+        {
             //Si no hay mas en la cola paso a Libre
-            
+            if (cola.getCola() == 0)
+            {
+                estado = new EstadoPesajeLibre();
+            }
+            else
+            {
+                cola.disminuirCola();
+                throw new NecesitaCalcularRNDPesaje();
+            }
         }
 
         @Override
         public void inicioPesaje(Servidor s) {
             //Sigue ocupado
+            //este metodo podria ser llamado para agregar a la cola
+            cola.incrementarCola();
         }
 
     }
