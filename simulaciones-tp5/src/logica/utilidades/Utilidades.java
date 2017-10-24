@@ -6,6 +6,7 @@
 package logica.utilidades;
 
 import java.text.DecimalFormat;
+import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,17 +45,23 @@ public class Utilidades
         return "$"+COSTO.format(unCosto); //Ponerle $ y negativo si es necesario. Solo dos decimales;
     }
     
-    public static double calcularLlegadaCamion(float lambda, float random){
-        return (-1/lambda)*(Math.log(1-random));
+    public static LocalTime calcularLlegadaCamion(double lambda, double random){
+        Double result = (-1/lambda)*(Math.log(1-random));
+        Integer resultConverted = result.intValue();
+        return LocalTime.of(0, resultConverted);
     }
     
     /* Sirve tanto para atencion de cambion, balanza de peso y las darsenas */
-    public static double uniforme(int a, int b, float random){
-        return a + random * (b-a);
+    public static LocalTime uniforme(int a, int b, double random){
+        Double result = a + random * (b-a);
+        Integer resultConverted = result.intValue();
+        return LocalTime.of(0, resultConverted);
     }
     
-    public static double calcularRecalibramiento(float varianza, float media, float randomUno, float randomDos){
-        return (Math.sqrt(-2*Math.log(randomUno))*Math.cos(2*Math.PI*randomDos))*media + varianza;
+    public static LocalTime calcularRecalibramiento(double varianza, double media, double randomUno, double randomDos){
+        Double result = (Math.sqrt(-2*Math.log(randomUno))*Math.cos(2*Math.PI*randomDos))*media + varianza;
+        Integer resultConverted = result.intValue();
+        return LocalTime.of(0, resultConverted);
     }
 
 //    public static DatosMontecarlo getDatosMontecarlo() {
