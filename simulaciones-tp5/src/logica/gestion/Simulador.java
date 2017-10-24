@@ -190,7 +190,8 @@ public class Simulador
         col.add("Tiempo Descarga 1");
         col.add("Hora Fin Descarga 1");
         col.add("Cant Atendidos 1");
-        col.add("RND Calib 1");
+        col.add("RND Calib 1 1");
+        col.add("RND Calib 1 2");
         col.add("Tiempo Calibr 1");
         col.add("Hora fin Calibr 1");
         col.add("Estado Darsena 1");
@@ -199,7 +200,8 @@ public class Simulador
         col.add("Tiempo Descarga 2");
         col.add("Hora Fin Descarga 2");
         col.add("Cant Atendidos 2");
-        col.add("RND Calib 2");
+        col.add("RND Calib 2 1");
+        col.add("RND Calib 2 2");
         col.add("Tiempo Calibr 2");
         col.add("Hora fin Calibr 2");
         col.add("Estado Darsena 2");

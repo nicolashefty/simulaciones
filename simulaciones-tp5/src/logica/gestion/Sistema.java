@@ -40,7 +40,8 @@ public class Sistema implements Comparable<Sistema>
     private LocalTime tiempoDescarga1;
     private LocalTime horaFinDescarga1;
     
-    private double rndTiempoCalibrado1;
+    private double rndTiempoCalibrado11;
+    private double rndTiempoCalibrado12;
     private LocalTime tiempoRecalibrado1;
     private LocalTime horaFinRecalibrado1;
     private ServidorDarsena darsena1;
@@ -49,7 +50,8 @@ public class Sistema implements Comparable<Sistema>
     private LocalTime tiempoDescarga2;
     private LocalTime horaFinDescarga2;
     
-    private double rndTiempoCalibrado2;
+    private double rndTiempoCalibrado21;
+    private double rndTiempoCalibrado22;
     private LocalTime tiempoRecalibrado2;
     private LocalTime horaFinRecalibrado2;
     private ServidorDarsena darsena2;
@@ -201,14 +203,20 @@ public class Sistema implements Comparable<Sistema>
         this.horaFinDescarga1 = horaFinDescarga1;
     }
 
-    public double getRndTiempoCalibrado1() {
-        return rndTiempoCalibrado1;
+    public double getRndTiempoCalibrado11() {
+        return rndTiempoCalibrado11;
     }
 
-    public void setRndTiempoCalibrado1(double rndTiempoCalibrado1) {
-        this.rndTiempoCalibrado1 = rndTiempoCalibrado1;
+    public void setRndTiempoCalibrado11(double rndTiempoCalibrado11) {
+        this.rndTiempoCalibrado11 = rndTiempoCalibrado11;
+    }
+    public double getRndTiempoCalibrado12() {
+        return rndTiempoCalibrado12;
     }
 
+    public void setRndTiempoCalibrado12(double rndTiempoCalibrado12) {
+        this.rndTiempoCalibrado12 = rndTiempoCalibrado12;
+    }
     public LocalTime getTiempoRecalibrado1() {
         return tiempoRecalibrado1;
     }
@@ -257,14 +265,20 @@ public class Sistema implements Comparable<Sistema>
         this.horaFinDescarga2 = horaFinDescarga2;
     }
 
-    public double getRndTiempoCalibrado2() {
-        return rndTiempoCalibrado2;
+    public double getRndTiempoCalibrado21() {
+        return rndTiempoCalibrado21;
     }
 
-    public void setRndTiempoCalibrado2(double rndTiempoCalibrado2) {
-        this.rndTiempoCalibrado2 = rndTiempoCalibrado2;
+    public void setRndTiempoCalibrado21(double rndTiempoCalibrado21) {
+        this.rndTiempoCalibrado21 = rndTiempoCalibrado21;
+    }
+    public double getRndTiempoCalibrado22() {
+        return rndTiempoCalibrado22;
     }
 
+    public void setRndTiempoCalibrado22(double rndTiempoCalibrado22) {
+        this.rndTiempoCalibrado22 = rndTiempoCalibrado22;
+    }
     public LocalTime getTiempoRecalibrado2() {
         return tiempoRecalibrado2;
     }
@@ -335,9 +349,9 @@ public class Sistema implements Comparable<Sistema>
             ""+rndTiempoAtencion, tiempoAtencion.toString(), horaFinAtencion.toString(), recepcionista.getEstado().getNombre(), ""+recepcionista.getCola().getCola(),
             ""+rndTiempoPesado, tiempoPesado.toString(), horaFinPesado.toString(), balanza.getEstado().getNombre(), ""+balanza.getCola().getCola(),
             ""+rndTiempoDescarga1, tiempoDescarga1.toString(), horaFinDescarga1.toString(), ""+darsena1.getCantAtendidos(), 
-            ""+rndTiempoCalibrado1, tiempoRecalibrado1.toString(), horaFinRecalibrado1.toString(), darsena1.getEstado().getNombre(), ""+darsena1.getCola().getCola(),
+            ""+rndTiempoCalibrado11, ""+rndTiempoCalibrado12, tiempoRecalibrado1.toString(), horaFinRecalibrado1.toString(), darsena1.getEstado().getNombre(), ""+darsena1.getCola().getCola(),
             ""+rndTiempoDescarga2, tiempoDescarga2.toString(), horaFinDescarga2.toString(), ""+darsena2.getCantAtendidos(), 
-            ""+rndTiempoCalibrado2, tiempoRecalibrado2.toString(), horaFinRecalibrado2.toString(), darsena2.getEstado().getNombre(),
+            ""+rndTiempoCalibrado21, ""+rndTiempoCalibrado22, tiempoRecalibrado2.toString(), horaFinRecalibrado2.toString(), darsena2.getEstado().getNombre(),
             ""+ acCantAtendidos, ""+acCantNOAtendidos, formatDuration(acTiempoPermanencia)
         };
         vectorEstado = agregarCamiones(vectorEstado);
