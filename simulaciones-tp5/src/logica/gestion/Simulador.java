@@ -22,13 +22,7 @@ import logica.servidores.ServidorRecepcion;
  */
 public class Simulador 
 {
-    /*
-    Vamos a mostrar todos los dias juntos? Solo mostrar digo, calcular no es problema 
-    lo podemos hacer todo junto, lo complicado aca es mostrar.
-    De ser asi vamos a reusar columnas de camiones? (Mmmmmmm)
-    
-    */
-    
+        
     List<Sistema> datos;
     Sistema vectorActual;
     Sistema vectorAnterior;
@@ -58,9 +52,7 @@ public class Simulador
         // Crear servidores 
         //Iniciar contadores
         //Iniciar archivo de eventos
-        vectorAnterior = vectorActual;
-        datos.add(vectorActual);
-        vectorActual = null;
+        rotacionVector();
     }
     
     public void rutinaDeTiempo()
@@ -70,9 +62,7 @@ public class Simulador
             //Proxima llegada debiera ser la hora inicio llegada de camiones
             rutinaLlegadaCamion();
             
-            datos.add(vectorActual);
-            vectorAnterior = vectorActual;
-            vectorActual = null;
+            rotacionVector();
             return;
         }
         else if (Evento.CIERRE.equals(vectorAnterior.getEvento()))
@@ -82,9 +72,7 @@ public class Simulador
             vectorActual.setReloj(LocalTime.of(5,0));
             vectorActual.setEvento(Evento.APERTURA);
             
-            datos.add(vectorActual);
-            vectorAnterior = vectorActual;
-            vectorActual = null;
+            rotacionVector();
             return;
         }
         
@@ -108,12 +96,15 @@ public class Simulador
                 break;
         }
        
+        rotacionVector();
+    }
+    
+    private void rotacionVector()
+    {
         datos.add(vectorActual);
         vectorAnterior = vectorActual;
         vectorActual = null;
-        
     }
-    
     /**
      * Estructura
      */
@@ -137,9 +128,9 @@ public class Simulador
     {
         
     }
+    
     public void mostrarResultados()
     {
-        int max = 0; //Se debe calcular esto
         tableModel.setColumnIdentifiers(getColumnNames());
         for(Sistema row: datos)
         {
@@ -151,16 +142,19 @@ public class Simulador
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void rutinaFinCalibrado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void rutinaFinCalibrado() 
+    {
+        throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void rutinaFinDescarga() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void rutinaFinDescarga() 
+    {
+        throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void rutinaFinPesaje() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void rutinaFinPesaje() 
+    {
+        throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void rutinaLlegadaCamion() {
