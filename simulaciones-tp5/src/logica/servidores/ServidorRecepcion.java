@@ -92,50 +92,67 @@ public class ServidorRecepcion implements Servidor
         
     }
     
-        public class EstadoRecepcionOcupada extends EstadoRecepcion
-        {
+    public class EstadoRecepcionOcupada extends EstadoRecepcion {
 
-            @Override
-            public String getNombre() {
-                return "Ocupada";
-            }
-
-            @Override
-            public void inicioAtencionRecepcion(Servidor s) {
-                //sigue ocupada
-                s.getCola().disminuirCola();
-            }
-
-            @Override
-            public void finAtencionRecepcion(Servidor s) {
-                //si no hay mas en la cola setear a libre
-                
-                if (s.getCola().getCola() == 0)
-                {
-                    s.setEstado(new EstadoRecepcionLibre());
-                }
-            }
-            
+        @Override
+        public String getNombre() {
+            return "Ocupada";
         }
-        
-        public class EstadoRecepcionLibre extends EstadoRecepcion
-        {
 
-            @Override
-            public String getNombre() {
-                return "Libre";
-            }
-
-            @Override
-            public void inicioAtencionRecepcion(Servidor s) {
-                s.setEstado(new EstadoRecepcionOcupada());
-                s.getCola().disminuirCola();
-            }
-
-            @Override
-            public void finAtencionRecepcion(Servidor s) {
-                //No deberia pasar
-            }
-            
+        @Override
+        public void inicioAtencionRecepcion(Servidor s) {
+            //sigue ocupada
+            s.getCola().disminuirCola();
         }
+
+        @Override
+        public void finAtencionRecepcion(Servidor s) {
+            //si no hay mas en la cola setear a libre
+
+            if (s.getCola().getCola() == 0) {
+                s.setEstado(new EstadoRecepcionLibre());
+            }
+        }
+
+        @Override
+        public boolean esLibre() {
+            return false;
+        }
+
+        @Override
+        public boolean esOcupado() {
+            return true;
+        }
+      
+    }
+
+    public class EstadoRecepcionLibre extends EstadoRecepcion {
+
+        @Override
+        public String getNombre() {
+            return "Libre";
+        }
+
+        @Override
+        public void inicioAtencionRecepcion(Servidor s) {
+            s.setEstado(new EstadoRecepcionOcupada());
+            s.getCola().disminuirCola();
+        }
+
+        @Override
+        public void finAtencionRecepcion(Servidor s) {
+            //No deberia pasar
+        }
+
+        @Override
+        public boolean esLibre() {
+            return true;
+        }
+
+        @Override
+        public boolean esOcupado() {
+            return false;
+        }
+
+    }
 }

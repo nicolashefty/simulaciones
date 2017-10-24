@@ -61,5 +61,13 @@ public interface Servidor
     default void finPesaje() throws NecesitaCalcularRNDPesaje
     {
         getEstado().finPesaje(this);
+    } 
+    default boolean estaLibre()
+    {
+        return getEstado().esLibre();
+    }
+    default boolean estaOcupado()
+    {
+        return getEstado().esOcupado();
     }
 }

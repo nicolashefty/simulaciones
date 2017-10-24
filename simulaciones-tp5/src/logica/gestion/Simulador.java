@@ -188,11 +188,20 @@ public class Simulador
                     .plusMinutes(vectorActual.getTiempoPesado().getMinute())
                     .plusHours(vectorActual.getTiempoPesado().getHour()));
         }
+        if(vectorActual.getDarsena1().estaLibre())
+        {
+            vectorActual.getDarsena1().inicioDescarga(); 
+        }
+        else if (vectorActual.getDarsena2().estaLibre())
+        {
+            vectorActual.getDarsena2().inicioDescarga();
+        }
+        else
+        {
+            //A cualquiera es lo mismo
+            vectorActual.getDarsena1().inicioDescarga();
+        }
         
-        vectorActual.getDarsena1().inicioDescarga(); // Y ahora?
-        // Estaba pensando que capaz sea mejor que el servidor darsena sea uno solo...
-        // Es decir siguen siendo dos para los efectos del TP pero lo maneja un solo objeto.
-        // Mañana lo veo
         throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 

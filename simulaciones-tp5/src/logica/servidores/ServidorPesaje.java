@@ -126,6 +126,16 @@ public class ServidorPesaje implements Servidor
             cola.incrementarCola();
         }
 
+        @Override
+        public boolean esLibre() {
+            return false;
+        }
+
+        @Override
+        public boolean esOcupado() {
+            return true;
+        }
+
     }
     
     public class EstadoPesajeLibre extends EstadoPesaje
@@ -146,6 +156,16 @@ public class ServidorPesaje implements Servidor
         public void inicioPesaje(Servidor s) {
             s.setEstado(new EstadoPesajeOcupado());
             //disminiur la cola?
+        }
+
+        @Override
+        public boolean esLibre() {
+            return true;
+        }
+
+        @Override
+        public boolean esOcupado() {
+            return false;
         }
     }
 }

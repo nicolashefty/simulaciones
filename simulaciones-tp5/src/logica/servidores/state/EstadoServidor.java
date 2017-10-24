@@ -26,4 +26,7 @@ public interface EstadoServidor
     void finDescarga(Servidor s) throws TieneQueCalibrar;
     void inicioPesaje(Servidor s);
     void finPesaje(Servidor s) throws NecesitaCalcularRNDPesaje;  
+
+    public boolean esLibre();
+    public boolean esOcupado();
 }

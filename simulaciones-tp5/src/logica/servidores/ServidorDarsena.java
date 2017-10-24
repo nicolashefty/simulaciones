@@ -61,7 +61,7 @@ public class ServidorDarsena implements Servidor
     public String getNombre() {
         return "Darsena";
     }
-        
+    
     //Desgraciadamente este se va a comportar distinto y no va a usar el state.
     @Override
     public void apertura()
@@ -207,6 +207,16 @@ public class ServidorDarsena implements Servidor
         public void finDescarga(Servidor s) {
         }
 
+        @Override
+        public boolean esLibre() {
+            return false;
+        }
+
+        @Override
+        public boolean esOcupado() {
+            return false;
+        }
+
 
     }
     
@@ -253,6 +263,16 @@ public class ServidorDarsena implements Servidor
             }
         }
 
+        @Override
+        public boolean esLibre() {
+            return false;
+        }
+
+        @Override
+        public boolean esOcupado() {
+            return true;
+        }
+
     }
     
     public class EstadoDarsenaLibre extends EstadoDarsena
@@ -281,6 +301,16 @@ public class ServidorDarsena implements Servidor
 
         @Override
         public void finDescarga(Servidor s) {
+        }
+
+        @Override
+        public boolean esLibre() {
+            return true;
+        }
+
+        @Override
+        public boolean esOcupado() {
+            return false;
         }
 
     }
