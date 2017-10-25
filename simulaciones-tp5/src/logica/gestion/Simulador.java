@@ -159,21 +159,9 @@ public class Simulador
 
     private void rutinaFinPesaje(LocalTime newTime) 
     {
-        vectorActual = vectorAnterior.copy();
-        vectorActual.setDia(vectorAnterior.getDia());
+        vectorActual = vectorAnterior.clone();
         vectorActual.setReloj(newTime);
         vectorActual.setEvento(Evento.FIN_PESAJE);
-        
-        //Arrastro lo que no calculo:
-        vectorActual.setHoraFinAtencion(vectorAnterior.getHoraFinAtencion());
-        vectorActual.setHoraFinDescarga1(vectorAnterior.getHoraFinDescarga1());
-        vectorActual.setHoraFinDescarga2(vectorAnterior.getHoraFinDescarga2());
-        vectorActual.setHoraFinRecalibrado1(vectorAnterior.getHoraFinRecalibrado1());
-        vectorActual.setHoraFinRecalibrado2(vectorAnterior.getHoraFinRecalibrado2());
-        vectorActual.setHoraProxLlegada(vectorAnterior.getHoraProxLlegada());
-        vectorActual.setAcCantAtendidos(vectorAnterior.getAcCantAtendidos());
-        vectorActual.setAcCantNOAtendidos(vectorAnterior.getAcCantNOAtendidos());
-        vectorActual.setAcTiempoPermanencia(vectorAnterior.getAcTiempoPermanencia());
         
         try
         {
@@ -189,6 +177,7 @@ public class Simulador
                     .plusMinutes(vectorActual.getTiempoPesado().getMinute())
                     .plusHours(vectorActual.getTiempoPesado().getHour()));
         }
+        //Siguiente en el proceso es Descarga
         if(vectorActual.getDarsena1().estaLibre())
         {
             try
@@ -241,7 +230,8 @@ public class Simulador
                         .plusHours(vectorActual.getTiempoDescarga1().getHour()));
             }
         }
-        
+        //Faltaria actualizar el camion al q se le termino de atender en Pesaje y se lo paso a Descarga
+        //Al igual q el q seguia en la cola de Pesado decirle q lo estan atendiendo en Pesaje
         throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
