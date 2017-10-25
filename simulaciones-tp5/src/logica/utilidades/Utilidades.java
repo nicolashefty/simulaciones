@@ -65,6 +65,24 @@ public class Utilidades
         Double seconds = result - resultConverted;
         return LocalTime.of(0, resultConverted,seconds.intValue());
     }
+    
+    public static String formatParaRandom(double rnd){
+        if(rnd == 0){
+            return "N/A";
+        }
+        else{
+            return ""+RANDOM.format(rnd);
+        }
+    }
+    
+    public static String formatParaLocalTime(LocalTime localTime){
+        if(localTime == null){
+            return "N/A";
+        }
+        else{
+            return localTime.toString();
+        }
+    }
 
 //    public static DatosMontecarlo getDatosMontecarlo() {
 //        DatosMontecarlo datos = new DatosMontecarlo();

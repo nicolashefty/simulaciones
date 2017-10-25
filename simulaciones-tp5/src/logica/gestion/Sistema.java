@@ -9,6 +9,7 @@ import java.time.*;
 import java.util.*;
 import logica.clientes.*;
 import logica.servidores.*;
+import logica.utilidades.Utilidades;
 
 /**
  *
@@ -344,14 +345,14 @@ public class Sistema implements Comparable<Sistema>
     {
         //Se deberia usar de utilidades un metodo q nos ponga en N/A los q no se tienen q mostrar por ejemplo los rnd cuando no se calcularon
         String[] vectorEstado = {
-        ""+dia, ""+reloj, evento, 
-            ""+rndLlegadaCamiones, proximaLlegada.toString(), horaProxLlegada.toString(),
-            ""+rndTiempoAtencion, tiempoAtencion.toString(), horaFinAtencion.toString(), recepcionista.getEstado().getNombre(), ""+recepcionista.getCola().getCola(),
-            ""+rndTiempoPesado, tiempoPesado.toString(), horaFinPesado.toString(), balanza.getEstado().getNombre(), ""+balanza.getCola().getCola(),
-            ""+rndTiempoDescarga1, tiempoDescarga1.toString(), horaFinDescarga1.toString(), ""+darsena1.getCantAtendidos(), 
-            ""+rndTiempoCalibrado11, ""+rndTiempoCalibrado12, tiempoRecalibrado1.toString(), horaFinRecalibrado1.toString(), darsena1.getEstado().getNombre(), ""+darsena1.getCola().getCola(),
-            ""+rndTiempoDescarga2, tiempoDescarga2.toString(), horaFinDescarga2.toString(), ""+darsena2.getCantAtendidos(), 
-            ""+rndTiempoCalibrado21, ""+rndTiempoCalibrado22, tiempoRecalibrado2.toString(), horaFinRecalibrado2.toString(), darsena2.getEstado().getNombre(),
+        ""+dia, ""+Utilidades.formatParaLocalTime(reloj), evento, 
+            ""+Utilidades.formatParaRandom(rndLlegadaCamiones), Utilidades.formatParaLocalTime(proximaLlegada), Utilidades.formatParaLocalTime(horaProxLlegada),
+            ""+Utilidades.formatParaRandom(rndTiempoAtencion), Utilidades.formatParaLocalTime(tiempoAtencion), Utilidades.formatParaLocalTime(horaFinAtencion), recepcionista.getEstado().getNombre(), ""+recepcionista.getCola().getCola(),
+            ""+Utilidades.formatParaRandom(rndTiempoPesado), Utilidades.formatParaLocalTime(tiempoPesado), Utilidades.formatParaLocalTime(horaFinPesado), balanza.getEstado().getNombre(), ""+balanza.getCola().getCola(),
+            ""+Utilidades.formatParaRandom(rndTiempoDescarga1), Utilidades.formatParaLocalTime(tiempoDescarga1), Utilidades.formatParaLocalTime(horaFinDescarga1), ""+darsena1.getCantAtendidos(), 
+            ""+Utilidades.formatParaRandom(rndTiempoCalibrado11), ""+Utilidades.formatParaRandom(rndTiempoCalibrado12), Utilidades.formatParaLocalTime(tiempoRecalibrado1), Utilidades.formatParaLocalTime(horaFinRecalibrado1), darsena1.getEstado().getNombre(), ""+darsena1.getCola().getCola(),
+            ""+Utilidades.formatParaRandom(rndTiempoDescarga2), Utilidades.formatParaLocalTime(tiempoDescarga2), Utilidades.formatParaLocalTime(horaFinDescarga2), ""+darsena2.getCantAtendidos(), 
+            ""+Utilidades.formatParaRandom(rndTiempoCalibrado21), ""+Utilidades.formatParaRandom(rndTiempoCalibrado22), Utilidades.formatParaLocalTime(tiempoRecalibrado2), Utilidades.formatParaLocalTime(horaFinRecalibrado2), darsena2.getEstado().getNombre(),
             ""+ acCantAtendidos, ""+acCantNOAtendidos, formatDuration(acTiempoPermanencia)
         };
         vectorEstado = agregarCamiones(vectorEstado);
@@ -382,8 +383,8 @@ public class Sistema implements Comparable<Sistema>
             {
                 lista.add(camion.getEstado().toString());
                 lista.add(camion.getServidorAtendido().getNombre());
-                lista.add(camion.getTiempoLlegada().toString());
-                lista.add(camion.getTiempoFin().toString());
+                lista.add(Utilidades.formatParaLocalTime(camion.getTiempoLlegada()));
+                lista.add(Utilidades.formatParaLocalTime(camion.getTiempoFin()));
             }
         }
         
