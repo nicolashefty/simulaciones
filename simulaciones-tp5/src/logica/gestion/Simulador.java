@@ -164,7 +164,7 @@ public class Simulador
 
         try {
             vectorActual.getRecepcionista().finAtencionRecepcion();
-        } catch (NecesitaCalcularRNDFinAtencion e) {
+        } catch (NecesitaCalcularRNDFinAtencion | NecesitaCalcularRNDInicioAtencion e) {
             
             try {
 

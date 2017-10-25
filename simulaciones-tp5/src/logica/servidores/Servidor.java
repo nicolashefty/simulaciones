@@ -34,7 +34,7 @@ public interface Servidor
     {
         getEstado().inicioAtencionRecepcion(this);
     }
-    default void finAtencionRecepcion() throws NecesitaCalcularRNDFinAtencion
+    default void finAtencionRecepcion() throws NecesitaCalcularRNDFinAtencion, NecesitaCalcularRNDInicioAtencion
     {
         getEstado().finAtencionRecepcion(this);
     }
