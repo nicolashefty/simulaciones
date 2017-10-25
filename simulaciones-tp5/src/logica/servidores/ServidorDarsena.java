@@ -16,20 +16,18 @@ import logica.servidores.state.EstadoServidor;
  *
  * @author heftyn
  */
-public class ServidorDarsena implements Servidor
-{
+public class ServidorDarsena implements Servidor {
 
     private EstadoServidor estado;
     private int cantAtendidos;
     private static Cola cola;
-    
-    public ServidorDarsena()
-    {
+
+    public ServidorDarsena() {
         estado = new EstadoDarsenaLibre();
         cantAtendidos = 0;
         cola = new Cola();
     }
-    
+
     @Override
     public EstadoServidor getEstado() {
         return estado;
@@ -57,19 +55,16 @@ public class ServidorDarsena implements Servidor
     public void setCantAtendidos(int cantAtendidos) {
         this.cantAtendidos = cantAtendidos;
     }
-    
+
     @Override
     public String getNombre() {
         return "Darsena";
     }
-    
-    
-    public abstract class EstadoDarsena implements EstadoServidor
-    {
-        
+
+    public abstract class EstadoDarsena implements EstadoServidor {
+
         @Override
-        public void apertura(Servidor s) 
-        {
+        public void apertura(Servidor s) {
             s.getCola().inicializar();
             cantAtendidos = 0;
         }
@@ -92,14 +87,10 @@ public class ServidorDarsena implements Servidor
         public void inicioCalibrado(Servidor s) {
         }
 
-        @Override
-        public void finCalibrado(Servidor s) {
-        }
 
         @Override
-        public void inicioDescarga(Servidor s) throws NecesitaCalcularRNDDarsena{
+        public void inicioDescarga(Servidor s) throws NecesitaCalcularRNDDarsena {
         }
-
 
         @Override
         public void inicioPesaje(Servidor s) {
@@ -108,14 +99,13 @@ public class ServidorDarsena implements Servidor
         @Override
         public void finPesaje(Servidor s) {
         }
-        
+
     }
-    public class EstadoDarsenaCalibrando extends EstadoDarsena
-    {
+
+    public class EstadoDarsenaCalibrando extends EstadoDarsena {
 
         @Override
-        public String getNombre() 
-        {
+        public String getNombre() {
             return "Calibrando";
         }
 
@@ -125,25 +115,21 @@ public class ServidorDarsena implements Servidor
         }
 
         @Override
-        public void finCalibrado(Servidor s) {
-            if(s.getCola().getCola() > 0)
-            {
+        public void finCalibrado(Servidor s) throws NecesitaCalcularRNDDarsena{
+            if (s.getCola().getCola() > 0) {
                 s.getCola().disminuirCola();
                 s.setEstado(new EstadoDarsenaOcupada());
-            }
-            else
-            {
+                throw new NecesitaCalcularRNDDarsena();
+            } else {
                 s.setEstado(new EstadoDarsenaLibre());
             }
             cantAtendidos = 0;
         }
 
         @Override
-        public void inicioDescarga(Servidor s) 
-                throws NecesitaCalcularRNDDarsena
-        {
+        public void inicioDescarga(Servidor s)
+                throws NecesitaCalcularRNDDarsena {
             cola.incrementarCola();
-            throw new NecesitaCalcularRNDDarsena();
         }
 
         @Override
@@ -160,18 +146,15 @@ public class ServidorDarsena implements Servidor
             return false;
         }
 
-
     }
-    
-    public class EstadoDarsenaOcupada extends EstadoDarsena
-    {
+
+    public class EstadoDarsenaOcupada extends EstadoDarsena {
 
         @Override
-        public String getNombre() 
-        {
+        public String getNombre() {
             return "Ocupada";
         }
-        
+
         @Override
         public void inicioCalibrado(Servidor s) {
             s.setEstado(new EstadoDarsenaCalibrando());
@@ -182,29 +165,24 @@ public class ServidorDarsena implements Servidor
         }
 
         @Override
-        public void inicioDescarga(Servidor s) 
-                throws NecesitaCalcularRNDDarsena
-        {
+        public void inicioDescarga(Servidor s)
+                throws NecesitaCalcularRNDDarsena {
             cola.incrementarCola();
             throw new NecesitaCalcularRNDDarsena();
         }
 
         @Override
-        public void finDescarga(Servidor s) 
-        throws TieneQueCalibrar, NecesitaCalcularRNDDarsena{
-            
+        public void finDescarga(Servidor s)
+                throws TieneQueCalibrar, NecesitaCalcularRNDDarsena {
+
             cantAtendidos++;
-            if (cantAtendidos == 15)
-            {
+            if (cantAtendidos == 15) {
                 throw new TieneQueCalibrar();
             }
-            if(s.getCola().getCola() > 0)
-            {
+            if (s.getCola().getCola() > 0) {
                 s.getCola().disminuirCola();
                 throw new NecesitaCalcularRNDDarsena();
-            }
-            else
-            {
+            } else {
                 s.setEstado(new EstadoDarsenaLibre());
             }
         }
@@ -220,19 +198,17 @@ public class ServidorDarsena implements Servidor
         }
 
     }
-    
-    public class EstadoDarsenaLibre extends EstadoDarsena
-    {
+
+    public class EstadoDarsenaLibre extends EstadoDarsena {
 
         @Override
-        public String getNombre() 
-        {
+        public String getNombre() {
             return "Libre";
         }
-     
+
         @Override
         public void inicioCalibrado(Servidor s) {
-            
+
         }
 
         @Override
@@ -240,9 +216,8 @@ public class ServidorDarsena implements Servidor
         }
 
         @Override
-        public void inicioDescarga(Servidor s) 
-        throws NecesitaCalcularRNDDarsena
-        {
+        public void inicioDescarga(Servidor s)
+                throws NecesitaCalcularRNDDarsena {
             s.getCola().disminuirCola();
             s.setEstado(new EstadoDarsenaOcupada());
             throw new NecesitaCalcularRNDDarsena();

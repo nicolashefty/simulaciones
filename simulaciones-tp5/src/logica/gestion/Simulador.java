@@ -18,6 +18,7 @@ import logica.servidores.ServidorPesaje;
 import logica.servidores.ServidorRecepcion;
 import logica.servidores.exceptions.NecesitaCalcularRNDDarsena;
 import logica.servidores.exceptions.NecesitaCalcularRNDPesaje;
+import logica.servidores.exceptions.TieneQueCalibrar;
 import logica.utilidades.Utilidades;
 
 /**
@@ -143,17 +144,130 @@ public class Simulador
         }
     }
 
-    private void rutinaFinAtencionRecepcion(LocalTime newTime) {
+    private void rutinaFinAtencionRecepcion(LocalTime newTime) 
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void rutinaFinCalibrado(LocalTime newTime) 
     {
+        vectorActual = vectorAnterior.clone();
+        vectorActual.setReloj(newTime);
+        vectorActual.setEvento(Evento.FIN_CALIBRADO);
+        
+        //Cual dársena!!?
+        if (vectorActual.getHoraFinDescarga1().equals(newTime))
+        {
+            try
+            {
+                vectorActual.getDarsena1().finCalibrado();
+            }
+            catch (NecesitaCalcularRNDDarsena ncrndD)
+            {
+                //TODO: ver qué camion pasa a estar Descargando!
+                
+                double rndD = new Random().nextDouble();
+                vectorActual.setRndTiempoDescarga1(rndD);
+                vectorActual.setTiempoDescarga1(Utilidades.uniforme(20, 25, rndD));
+                vectorActual.setHoraFinDescarga1(vectorActual.getReloj()
+                        .plusSeconds(vectorActual.getTiempoDescarga1().getSecond())
+                        .plusMinutes(vectorActual.getTiempoDescarga1().getMinute())
+                        .plusHours(vectorActual.getTiempoDescarga1().getHour()));
+            }
+        }
+        else
+        {
+            try
+            {
+                vectorActual.getDarsena2().finCalibrado();
+            }
+            catch(NecesitaCalcularRNDDarsena ncrndD)
+            {
+                //TODO: Ver que camion pasa a estar descargando!!
+                double rndD = new Random().nextDouble();
+                vectorActual.setRndTiempoDescarga2(rndD);
+                vectorActual.setTiempoDescarga2(Utilidades.uniforme(20, 25, rndD));
+                vectorActual.setHoraFinDescarga2(vectorActual.getReloj()
+                        .plusSeconds(vectorActual.getTiempoDescarga2().getSecond())
+                        .plusMinutes(vectorActual.getTiempoDescarga2().getMinute())
+                        .plusHours(vectorActual.getTiempoDescarga2().getHour()));
+            }
+        }
+        
         throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void rutinaFinDescarga(LocalTime newTime) 
     {
+        vectorActual = vectorAnterior.clone();
+        vectorActual.setReloj(newTime);
+        vectorActual.setEvento(Evento.FIN_DESCARGA);
+        
+        //Cual dársena!!?
+        if (vectorActual.getHoraFinDescarga1().equals(newTime))
+        {
+            try
+            {
+                vectorActual.getDarsena1().finDescarga();
+                
+            }
+            catch(TieneQueCalibrar tqc)
+            {
+                //Calibrar
+                vectorActual.getDarsena1().inicioCalibrado();
+                //Siempre que hay inicio de calibrado calculo los rnd
+                double rndC1 = new Random().nextDouble();
+                double rndC2 = new Random().nextDouble();
+                vectorActual.setRndTiempoCalibrado11(rndC1);
+                vectorActual.setRndTiempoCalibrado12(rndC2);
+                vectorActual.setTiempoRecalibrado1(Utilidades.calcularRecalibramiento(0.7, 10, rndC1, rndC2));
+            }
+            catch(NecesitaCalcularRNDDarsena ncrndd)
+            {
+                //TODO: ver qué camion pasa a estar Descargando!
+                
+                double rndD = new Random().nextDouble();
+                vectorActual.setRndTiempoDescarga1(rndD);
+                vectorActual.setTiempoDescarga1(Utilidades.uniforme(20, 25, rndD));
+                vectorActual.setHoraFinDescarga1(vectorActual.getReloj()
+                        .plusSeconds(vectorActual.getTiempoDescarga1().getSecond())
+                        .plusMinutes(vectorActual.getTiempoDescarga1().getMinute())
+                        .plusHours(vectorActual.getTiempoDescarga1().getHour()));
+            }
+            //Se va el camion que estaba descargando en darsena 1
+        }
+        else
+        {
+            try
+            {
+                vectorActual.getDarsena2().finDescarga();
+                
+            }
+            catch(TieneQueCalibrar tqc)
+            {
+                //Calibrar
+                vectorActual.getDarsena2().inicioCalibrado();
+                //Siempre que hay inicio de calibrado calculo los rnd
+                double rndC1 = new Random().nextDouble();
+                double rndC2 = new Random().nextDouble();
+                vectorActual.setRndTiempoCalibrado21(rndC1);
+                vectorActual.setRndTiempoCalibrado22(rndC2);
+                vectorActual.setTiempoRecalibrado1(Utilidades.calcularRecalibramiento(0.7, 10, rndC1, rndC2));
+            }
+            catch(NecesitaCalcularRNDDarsena ncrndd)
+            {
+                //TODO: Ver que camion pasa a estar descargando!!
+                double rndD = new Random().nextDouble();
+                vectorActual.setRndTiempoDescarga2(rndD);
+                vectorActual.setTiempoDescarga2(Utilidades.uniforme(20, 25, rndD));
+                vectorActual.setHoraFinDescarga2(vectorActual.getReloj()
+                        .plusSeconds(vectorActual.getTiempoDescarga2().getSecond())
+                        .plusMinutes(vectorActual.getTiempoDescarga2().getMinute())
+                        .plusHours(vectorActual.getTiempoDescarga2().getHour()));
+            }
+            //Se va el camion que estaba descargando en Darsena2
+        }
+        
         throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 

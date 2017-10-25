@@ -21,7 +21,7 @@ public interface EstadoServidor
     void inicioAtencionRecepcion(Servidor s);
     void finAtencionRecepcion(Servidor s);
     void inicioCalibrado(Servidor s);
-    void finCalibrado(Servidor s);
+    void finCalibrado(Servidor s) throws NecesitaCalcularRNDDarsena;
     void inicioDescarga(Servidor s) throws NecesitaCalcularRNDDarsena;
     void finDescarga(Servidor s) throws TieneQueCalibrar, NecesitaCalcularRNDDarsena;
     void inicioPesaje(Servidor s);

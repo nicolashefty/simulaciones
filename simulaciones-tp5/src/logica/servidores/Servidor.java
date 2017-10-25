@@ -42,7 +42,7 @@ public interface Servidor
     {
         getEstado().inicioCalibrado(this);
     }
-    default void finCalibrado()
+    default void finCalibrado() throws NecesitaCalcularRNDDarsena
     {
         getEstado().finCalibrado(this);
     }
