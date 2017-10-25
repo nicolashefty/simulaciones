@@ -38,13 +38,20 @@ public class Simulador
     LocalTime horaInicioLlegadaCamiones;
     DefaultTableModel tableModel;
 
-    public Simulador(LocalTime inicioLlCamiones, DefaultTableModel tableModel)
+    public Simulador(LocalTime inicioLlCamiones, DefaultTableModel tableModel, int diaDesde, int diaHasta)
     {
         horaInicioLlegadaCamiones = inicioLlCamiones;
         this.tableModel = tableModel;
+        datos = new ArrayList<>();
+        rutinaDeInicializacion();
+        while(!fin())
+        {
+            rutinaDeTiempo();
+        }
+        rutinaGeneradoraDeReportes();
     }
 
-    public void rutinaDeInicializacion()
+    public final void rutinaDeInicializacion()
     {
         vectorActual = new Sistema();
         vectorActual.setDia(1);
@@ -64,7 +71,7 @@ public class Simulador
         rotacionVector();
     }
 
-    public void rutinaDeTiempo()
+    public final void rutinaDeTiempo()
     {
         if(Evento.APERTURA.equals(vectorAnterior.getEvento()))
         {
@@ -129,7 +136,7 @@ public class Simulador
     /**
      * Arma como devolver los datos al cliente
      */
-    public void rutinaGeneradoraDeReportes()
+    public final void rutinaGeneradoraDeReportes()
     {
         calcularParametrosDeInteres();
         mostrarResultados();
@@ -396,14 +403,22 @@ public class Simulador
         } catch (NecesitaCalcularRNDInicioAtencion e) {
 
             double rnd = new Random().nextDouble();
-            vectorActual.setRndLlegadaCamiones(rnd);
+            vectorActual.setRndTiempoAtencion(rnd);
 
-            vectorActual.setProximaLlegada(Utilidades.calcularLlegadaCamion(7.3, rnd));
-            vectorActual.setHoraProxLlegada(vectorActual.getReloj()
-                    .plusSeconds(vectorActual.getProximaLlegada().getSecond())
-                    .plusMinutes(vectorActual.getProximaLlegada().getMinute())
-                    .plusHours(vectorActual.getProximaLlegada().getHour()));
+            vectorActual.setTiempoAtencion(Utilidades.uniforme(3, 7, rnd));
+            vectorActual.setHoraFinAtencion(vectorActual.getReloj()
+                    .plusSeconds(vectorActual.getTiempoAtencion().getSecond())
+                    .plusMinutes(vectorActual.getTiempoAtencion().getMinute())
+                    .plusHours(vectorActual.getTiempoAtencion().getHour()));
         }
+        double rnd = new Random().nextDouble();
+        vectorActual.setRndLlegadaCamiones(rnd);
+
+        vectorActual.setProximaLlegada(Utilidades.calcularLlegadaCamion(15, rnd));
+        vectorActual.setHoraProxLlegada(vectorActual.getReloj()
+                .plusSeconds(vectorActual.getProximaLlegada().getSecond())
+                .plusMinutes(vectorActual.getProximaLlegada().getMinute())
+                .plusHours(vectorActual.getProximaLlegada().getHour()));
 
     }
     private String[] getColumnNames() 
@@ -471,5 +486,12 @@ public class Simulador
         Collections.copy(listCopy, datos);
         listCopy.sort(null);
         return listCopy.get(0).getCamiones().size();
+    }
+
+    private boolean fin() {
+        if (vectorAnterior.getDia() == 30 && vectorAnterior.getEvento().equals(Evento.CIERRE)) {
+            return true;
+        }
+        return false;
     }
 }

@@ -449,7 +449,13 @@ public class Sistema implements Comparable<Sistema>
         lista.add(new BeanEventoHora(Evento.FIN_DESCARGA, horaFinDescarga2));
         lista.add(new BeanEventoHora(Evento.FIN_PESAJE, horaFinPesado));
         lista.sort(null);
-        
+        for (BeanEventoHora beh : lista)
+        {
+            if (beh.hora != null)
+            {
+                return beh;
+            }
+        }
         return lista.get(0);
     }
 
@@ -480,9 +486,17 @@ public class Sistema implements Comparable<Sistema>
         @Override
         public int compareTo(BeanEventoHora o) 
         {
-            if (o == null)
+            if (o == null && hora != null)
             {
                 return 1;
+            }
+            else if (hora == null && o != null && o.hora != null)
+            {
+                return -1;
+            }
+            else if (hora == null && o != null && o.hora == null)
+            {
+                return 0;
             }
             return this.hora.compareTo(o.hora);
         }           

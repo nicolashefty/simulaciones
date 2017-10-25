@@ -46,9 +46,10 @@ public class Utilidades
     }
     
     public static LocalTime calcularLlegadaCamion(double lambda, double random){
+        //Algo esta mal... no avanza mas.. siempre da 0 minutos
         Double result = (-1/lambda)*(Math.log(1-random));
         Integer resultConverted = result.intValue();
-        Double seconds = result - resultConverted;
+        Double seconds = (result - resultConverted)*60;
         return LocalTime.of(0, resultConverted, seconds.intValue());
     }
     
@@ -56,7 +57,8 @@ public class Utilidades
     public static LocalTime uniforme(int a, int b, double random){
         Double result = a + random * (b-a);
         Integer resultConverted = result.intValue();
-        return LocalTime.of(0, resultConverted);
+        Double seconds = (result - resultConverted)*60;
+        return LocalTime.of(0, resultConverted,seconds.intValue());
     }
     
     public static LocalTime calcularRecalibramiento(double varianza, double media, double randomUno, double randomDos){

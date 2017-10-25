@@ -6,6 +6,7 @@
 package logica.servidores;
 
 import logica.servidores.colas.Cola;
+import logica.servidores.exceptions.NecesitaCalcularRNDInicioAtencion;
 import logica.servidores.exceptions.NoAtendidos;
 import logica.servidores.state.EstadoServidor;
 
@@ -100,17 +101,23 @@ public class ServidorRecepcion implements Servidor
         }
 
         @Override
-        public void inicioAtencionRecepcion(Servidor s) {
+        public void inicioAtencionRecepcion(Servidor s) throws NecesitaCalcularRNDInicioAtencion{
             //sigue ocupada
-            s.getCola().disminuirCola();
+            s.getCola().incrementarCola();
         }
 
         @Override
-        public void finAtencionRecepcion(Servidor s) {
+        public void finAtencionRecepcion(Servidor s) throws NecesitaCalcularRNDInicioAtencion{
             //si no hay mas en la cola setear a libre
 
             if (s.getCola().getCola() == 0) {
                 s.setEstado(new EstadoRecepcionLibre());
+            }
+            else
+            {
+                //Sigue atendiendo:
+                cola.disminuirCola();
+                throw new NecesitaCalcularRNDInicioAtencion();
             }
         }
 
@@ -134,9 +141,10 @@ public class ServidorRecepcion implements Servidor
         }
 
         @Override
-        public void inicioAtencionRecepcion(Servidor s) {
+        public void inicioAtencionRecepcion(Servidor s) throws NecesitaCalcularRNDInicioAtencion
+        {
             s.setEstado(new EstadoRecepcionOcupada());
-            s.getCola().disminuirCola();
+            throw new NecesitaCalcularRNDInicioAtencion();
         }
 
         @Override

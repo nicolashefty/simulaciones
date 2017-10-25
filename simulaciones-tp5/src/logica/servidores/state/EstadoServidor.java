@@ -18,8 +18,8 @@ public interface EstadoServidor
     
     void apertura(Servidor s);
     void cierre(Servidor s) throws NoAtendidos;
-    void inicioAtencionRecepcion(Servidor s);
-    void finAtencionRecepcion(Servidor s);
+    void inicioAtencionRecepcion(Servidor s) throws NecesitaCalcularRNDInicioAtencion;
+    void finAtencionRecepcion(Servidor s) throws NecesitaCalcularRNDInicioAtencion;
     void inicioCalibrado(Servidor s);
     void finCalibrado(Servidor s) throws NecesitaCalcularRNDDarsena;
     void inicioDescarga(Servidor s) throws NecesitaCalcularRNDDarsena;
