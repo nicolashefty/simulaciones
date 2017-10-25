@@ -393,6 +393,10 @@ public class Sistema implements Comparable<Sistema>
         return nuevaLista.toArray(new String[0]);
     }
 
+    /**
+     * Copia pero no mantiene mas que los acumulados
+     * @return 
+     */
     public Sistema copy() 
     {
         Sistema sistCopy = new Sistema();
@@ -407,6 +411,32 @@ public class Sistema implements Comparable<Sistema>
         return sistCopy;
     }
 
+    public Sistema clone()
+    {
+        Sistema clone = new Sistema();
+        
+        clone.dia = this.dia;
+        clone.reloj = this.reloj;
+        clone.evento = this.evento;
+        clone.horaProxLlegada = this.horaProxLlegada;
+        clone.horaFinAtencion = this.horaFinAtencion;
+        clone.recepcionista = this.recepcionista;
+        clone.horaFinPesado = this.horaFinPesado;
+        clone.balanza = this.balanza;
+        clone.horaFinDescarga1 = this.horaFinDescarga1;
+        clone.darsena1 = this.darsena1;
+        clone.horaFinRecalibrado1 = this.horaFinRecalibrado1;
+        clone.horaFinDescarga2 = this.horaFinDescarga2;
+        clone.darsena2 = this.darsena2;
+        clone.horaFinRecalibrado2 = this.horaFinRecalibrado2;
+        clone.acCantAtendidos = this.acCantAtendidos;
+        clone.acCantNOAtendidos = this.acCantNOAtendidos;
+        clone.acTiempoPermanencia = this.acTiempoPermanencia;
+        clone.camiones = this.camiones;             
+       
+        return clone;
+    }
+    
     BeanEventoHora getProximoEvento() 
     {
         List<BeanEventoHora> lista = new ArrayList<>();
