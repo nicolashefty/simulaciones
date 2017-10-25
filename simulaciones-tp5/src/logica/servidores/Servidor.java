@@ -30,11 +30,11 @@ public interface Servidor
     {
         getEstado().cierre(this);
     }
-    default void inicioAtencionRecepcion()
+    default void inicioAtencionRecepcion() throws NecesitaCalcularRNDInicioAtencion
     {
         getEstado().inicioAtencionRecepcion(this);
     }
-    default void finAtencionRecepcion()
+    default void finAtencionRecepcion() throws NecesitaCalcularRNDFinAtencion
     {
         getEstado().finAtencionRecepcion(this);
     }

@@ -12,11 +12,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import logica.servidores.ServidorDarsena;
 import logica.servidores.ServidorPesaje;
 import logica.servidores.ServidorRecepcion;
 import logica.servidores.exceptions.NecesitaCalcularRNDDarsena;
+import logica.servidores.exceptions.NecesitaCalcularRNDFinAtencion;
+import logica.servidores.exceptions.NecesitaCalcularRNDInicioAtencion;
 import logica.servidores.exceptions.NecesitaCalcularRNDPesaje;
 import logica.servidores.exceptions.TieneQueCalibrar;
 import logica.utilidades.Utilidades;
@@ -27,19 +31,19 @@ import logica.utilidades.Utilidades;
  */
 public class Simulador 
 {
-        
+
     List<Sistema> datos;
     Sistema vectorActual;
     Sistema vectorAnterior;
     LocalTime horaInicioLlegadaCamiones;
     DefaultTableModel tableModel;
-    
+
     public Simulador(LocalTime inicioLlCamiones, DefaultTableModel tableModel)
     {
         horaInicioLlegadaCamiones = inicioLlCamiones;
         this.tableModel = tableModel;
     }
-     
+
     public void rutinaDeInicializacion()
     {
         vectorActual = new Sistema();
@@ -59,7 +63,7 @@ public class Simulador
         //Iniciar archivo de eventos
         rotacionVector();
     }
-    
+
     public void rutinaDeTiempo()
     {
         if(Evento.APERTURA.equals(vectorAnterior.getEvento()))
@@ -67,7 +71,7 @@ public class Simulador
             //Proxima llegada debiera ser la hora inicio llegada de camiones
             //Ojo q la llegada camion deberia modificar el reloj en todos los casos menos este
             rutinaLlegadaCamion(LocalTime.of(12,0));
-            
+
             rotacionVector();
             return;
         }
@@ -81,7 +85,7 @@ public class Simulador
             rotacionVector();
             return;
         }
-        
+
         Sistema.BeanEventoHora eventoSig = vectorAnterior.getProximoEvento();
         switch (eventoSig.evento)
         {
@@ -101,16 +105,17 @@ public class Simulador
                 rutinaLlegadaCamion(eventoSig.hora);
                 break;
         }
-       
+
         rotacionVector();
     }
-    
+
     private void rotacionVector()
     {
         datos.add(vectorActual);
         vectorAnterior = vectorActual;
         vectorActual = null;
     }
+
     /**
      * Estructura
      */
@@ -120,7 +125,7 @@ public class Simulador
         //Actualizar contadores estadisticos
         //Generar eventos futuros y adicionarlos al archivo de eventos
     }
-    
+
     /**
      * Arma como devolver los datos al cliente
      */
@@ -129,12 +134,12 @@ public class Simulador
         calcularParametrosDeInteres();
         mostrarResultados();
     }
-    
+
     public void calcularParametrosDeInteres()
     {
-        
+
     }
-    
+
     public void mostrarResultados()
     {
         tableModel.setColumnIdentifiers(getColumnNames());
@@ -144,9 +149,39 @@ public class Simulador
         }
     }
 
-    private void rutinaFinAtencionRecepcion(LocalTime newTime) 
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void rutinaFinAtencionRecepcion(LocalTime newTime) {
+        vectorActual = vectorAnterior.clone();
+        vectorActual.setDia(vectorAnterior.getDia());
+        vectorActual.setReloj(newTime);
+        vectorActual.setEvento(Evento.FIN_ATENCION_RECEPCION);
+
+        try {
+            vectorActual.getRecepcionista().finAtencionRecepcion();
+        } catch (NecesitaCalcularRNDFinAtencion e) {
+            
+            try {
+
+                vectorActual.getRecepcionista().inicioAtencionRecepcion();
+
+            } catch (NecesitaCalcularRNDInicioAtencion ex) {
+
+                double rndP = new Random().nextDouble();
+
+                vectorActual.setRndTiempoAtencion(rndP);
+                vectorActual.setTiempoAtencion(Utilidades.uniforme(3, 7, rndP));
+                vectorActual.setHoraFinAtencion(vectorActual.getReloj()
+                        .plusSeconds(vectorActual.getTiempoAtencion().getSecond())
+                        .plusMinutes(vectorActual.getTiempoAtencion().getMinute())
+                        .plusHours(vectorActual.getTiempoAtencion().getHour()));
+            
+                  
+            
+            
+        }
+
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          
+        }
     }
 
     private void rutinaFinCalibrado(LocalTime newTime) 
@@ -296,7 +331,7 @@ public class Simulador
         {
             try
             {
-                vectorActual.getDarsena1().inicioDescarga(); 
+                vectorActual.getDarsena1().inicioDescarga();
             }
             catch (NecesitaCalcularRNDDarsena ncrndd)
             {
@@ -313,7 +348,7 @@ public class Simulador
         {
             try
             {
-                vectorActual.getDarsena2().inicioDescarga(); 
+                vectorActual.getDarsena2().inicioDescarga();
             }
             catch (NecesitaCalcularRNDDarsena ncrndd)
             {
@@ -329,9 +364,9 @@ public class Simulador
         else
         {
             //A cualquiera es lo mismo pero vamos a la 1
-            try
+            try 
             {
-                vectorActual.getDarsena1().inicioDescarga(); 
+                vectorActual.getDarsena1().inicioDescarga();
             }
             catch (NecesitaCalcularRNDDarsena ncrndd)
             {
@@ -350,9 +385,27 @@ public class Simulador
     }
 
     private void rutinaLlegadaCamion(LocalTime newTime) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
+        vectorActual = vectorAnterior.clone();
+        vectorActual.setDia(vectorAnterior.getDia());
+        vectorActual.setReloj(newTime);
+        vectorActual.setEvento(Evento.LLEGADA_CAMION);
+
+        try {
+            vectorActual.getRecepcionista().inicioAtencionRecepcion();
+        } catch (NecesitaCalcularRNDInicioAtencion e) {
+
+            double rnd = new Random().nextDouble();
+            vectorActual.setRndLlegadaCamiones(rnd);
+
+            vectorActual.setProximaLlegada(Utilidades.calcularLlegadaCamion(7.3, rnd));
+            vectorActual.setHoraProxLlegada(vectorActual.getReloj()
+                    .plusSeconds(vectorActual.getProximaLlegada().getSecond())
+                    .plusMinutes(vectorActual.getProximaLlegada().getMinute())
+                    .plusHours(vectorActual.getProximaLlegada().getHour()));
+        }
+
+    }
     private String[] getColumnNames() 
     {
         List<String> col = new ArrayList<>();
@@ -394,7 +447,7 @@ public class Simulador
         col.add("AC Cant Atendidos");
         col.add("AC Cant NO Atendidos");
         col.add("AC Tiempo Permanencia");
-        
+
         agregarColumnasCamiones(col);
         return col.toArray(new String[0]);
     }
@@ -402,7 +455,7 @@ public class Simulador
     private void agregarColumnasCamiones(List<String> col) 
     {
         int maximaCantCamiones = buscarCantidadMaximaDeCamiones();
-        
+
         for(int i = 0; i < maximaCantCamiones; i++)
         {
             col.add("Estado Camion");

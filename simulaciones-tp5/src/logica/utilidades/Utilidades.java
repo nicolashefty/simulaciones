@@ -48,7 +48,8 @@ public class Utilidades
     public static LocalTime calcularLlegadaCamion(double lambda, double random){
         Double result = (-1/lambda)*(Math.log(1-random));
         Integer resultConverted = result.intValue();
-        return LocalTime.of(0, resultConverted);
+        Double seconds = result - resultConverted;
+        return LocalTime.of(0, resultConverted, seconds.intValue());
     }
     
     /* Sirve tanto para atencion de cambion, balanza de peso y las darsenas */
@@ -61,7 +62,8 @@ public class Utilidades
     public static LocalTime calcularRecalibramiento(double varianza, double media, double randomUno, double randomDos){
         Double result = (Math.sqrt(-2*Math.log(randomUno))*Math.cos(2*Math.PI*randomDos))*media + varianza;
         Integer resultConverted = result.intValue();
-        return LocalTime.of(0, resultConverted);
+        Double seconds = result - resultConverted;
+        return LocalTime.of(0, resultConverted,seconds.intValue());
     }
 
 //    public static DatosMontecarlo getDatosMontecarlo() {
