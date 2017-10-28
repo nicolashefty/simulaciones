@@ -6,6 +6,7 @@
 package vista.tablas;
 
 import java.time.LocalTime;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import logica.gestion.Simulador;
 
@@ -20,8 +21,20 @@ public class VentanaColas extends javax.swing.JFrame {
      */
     public VentanaColas(int diaInicio, int diaFin) {
                 initComponents();
-                new Simulador(LocalTime.NOON, (DefaultTableModel)tbl_politica_principal.getModel(), diaInicio, diaFin);
-                
+                Runnable thread1 = new Runnable() {
+                    @Override
+                    public void run() {
+                        new Simulador(LocalTime.NOON, (DefaultTableModel)tbl_politica_principal.getModel(), diaInicio, diaFin);
+                    }
+                };
+                thread1.run();
+                Runnable thread2 = new Runnable() {
+                    @Override
+                    public void run() {
+                        new Simulador(LocalTime.of(5,0,0), (DefaultTableModel)tbl_politica_alternativa.getModel(), diaInicio, diaFin);
+                    }
+                };
+                thread2.run();
     }
 
     /**
