@@ -421,19 +421,19 @@ public class Sistema implements Comparable<Sistema>
         clone.evento = this.evento;
         clone.horaProxLlegada = this.horaProxLlegada;
         clone.horaFinAtencion = this.horaFinAtencion;
-        clone.recepcionista = this.recepcionista;
+        clone.recepcionista = (ServidorRecepcion) this.recepcionista.clone();
         clone.horaFinPesado = this.horaFinPesado;
-        clone.balanza = this.balanza;
+        clone.balanza = (ServidorPesaje) this.balanza.clone();
         clone.horaFinDescarga1 = this.horaFinDescarga1;
-        clone.darsena1 = this.darsena1;
+        clone.darsena1 = (ServidorDarsena) this.darsena1.clone();
         clone.horaFinRecalibrado1 = this.horaFinRecalibrado1;
         clone.horaFinDescarga2 = this.horaFinDescarga2;
-        clone.darsena2 = this.darsena2;
+        clone.darsena2 = (ServidorDarsena) this.darsena2.clone();
         clone.horaFinRecalibrado2 = this.horaFinRecalibrado2;
         clone.acCantAtendidos = this.acCantAtendidos;
         clone.acCantNOAtendidos = this.acCantNOAtendidos;
         clone.acTiempoPermanencia = this.acTiempoPermanencia;
-        clone.camiones = this.camiones;             
+        clone.camiones = new ArrayList<>(this.camiones);             
        
         return clone;
     }

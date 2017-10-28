@@ -7,6 +7,7 @@ package logica.gestion;
 
 import java.time.*;
 import java.util.*;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import logica.servidores.ServidorDarsena;
 import logica.servidores.ServidorPesaje;
@@ -31,11 +32,13 @@ public class Simulador
     Sistema vectorAnterior;
     LocalTime horaInicioLlegadaCamiones;
     DefaultTableModel tableModel;
+    JTable table;
 
-    public Simulador(LocalTime inicioLlCamiones, DefaultTableModel tableModel, int diaDesde, int diaHasta)
+    public Simulador(LocalTime inicioLlCamiones, JTable table, int diaDesde, int diaHasta)
     {
         horaInicioLlegadaCamiones = inicioLlCamiones;
-        this.tableModel = tableModel;
+        this.table = table;
+        this.tableModel = (DefaultTableModel) table.getModel();
         datos = new ArrayList<>();
         rutinaDeInicializacion();
         while(!fin())
@@ -72,7 +75,7 @@ public class Simulador
         {
             //Proxima llegada debiera ser la hora inicio llegada de camiones
             //Ojo q la llegada camion deberia modificar el reloj en todos los casos menos este
-            rutinaLlegadaCamion(LocalTime.of(12,0));
+            rutinaLlegadaCamion(horaInicioLlegadaCamiones);
 
             rotacionVector();
             return;
@@ -158,6 +161,11 @@ public class Simulador
         for(Sistema row: datos)
         {
             tableModel.addRow(row.getVectorFila());
+        }
+        for(int i = 0; i< tableModel.getColumnCount(); i++)
+        {
+            table.getColumnModel().getColumn(i).setResizable(false);
+            table.getColumnModel().getColumn(i).setPreferredWidth(150);
         }
     }
 
@@ -266,7 +274,7 @@ public class Simulador
         vectorActual = vectorAnterior.clone();
         vectorActual.setReloj(newTime);
         vectorActual.setEvento(Evento.FIN_DESCARGA);
-        
+        vectorActual.setAcCantAtendidos(vectorAnterior.getAcCantAtendidos()+1);
         //Cual dársena!!?
         if (vectorActual.getHoraFinDescarga1() != null 
                 && vectorActual.getHoraFinDescarga1().equals(newTime))
@@ -452,7 +460,7 @@ public class Simulador
         col.add("Dia");
         col.add("Hora");
         col.add("Evento");
-        col.add("RND LL CA");
+        col.add("RND \nLL CA");
         col.add("Tiempo Prox Llegada");
         col.add("Hora Prox Llegada");
         col.add("RND T ATN");

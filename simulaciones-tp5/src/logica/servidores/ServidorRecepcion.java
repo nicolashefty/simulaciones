@@ -49,10 +49,24 @@ public class ServidorRecepcion implements Servidor
     public String getNombre() {
         return "Recepcion";
     }
+
+    @Override
+    public Servidor clone() 
+    {
+        ServidorRecepcion clon = new ServidorRecepcion();
+        
+        clon.setEstado(estado.clone());
+        clon.setCola(cola.clone());
+        
+        return clon;
+    }
     
     public abstract class EstadoRecepcion implements EstadoServidor
     {
           
+        @Override
+        public abstract EstadoServidor clone();
+        
         @Override
         public void apertura(Servidor s) 
         {
@@ -130,6 +144,12 @@ public class ServidorRecepcion implements Servidor
         public boolean esOcupado() {
             return true;
         }
+
+        @Override
+        public EstadoServidor clone() 
+        {
+            return new EstadoRecepcionOcupada();
+        }
       
     }
 
@@ -160,6 +180,12 @@ public class ServidorRecepcion implements Servidor
         @Override
         public boolean esOcupado() {
             return false;
+        }
+
+        @Override
+        public EstadoServidor clone() 
+        {
+            return new EstadoRecepcionLibre();
         }
 
     }

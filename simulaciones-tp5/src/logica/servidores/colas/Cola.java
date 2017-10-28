@@ -37,4 +37,13 @@ public class Cola
     {
         enCola = 0;
     }
+    
+    @Override
+    public Cola clone()
+    {
+        Cola clon = new Cola();
+        clon.enCola = this.enCola;
+        
+        return clon;
+    }
 }

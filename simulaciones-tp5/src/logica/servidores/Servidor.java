@@ -19,6 +19,7 @@ public interface Servidor
     void setEstado(EstadoServidor es);
     Cola getCola();
     void setCola(Cola c);
+    Servidor clone();
 
     String getNombre();
     

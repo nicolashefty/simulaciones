@@ -61,6 +61,17 @@ public class ServidorDarsena implements Servidor {
         return "Darsena";
     }
 
+    @Override
+    public Servidor clone() 
+    {
+        ServidorDarsena clon = new ServidorDarsena();
+        clon.setCola(cola.clone());
+        clon.setEstado(estado.clone());
+        clon.cantAtendidos = this.cantAtendidos;
+        
+        return clon;
+    }
+
     public abstract class EstadoDarsena implements EstadoServidor {
 
         @Override
@@ -100,6 +111,8 @@ public class ServidorDarsena implements Servidor {
         public void finPesaje(Servidor s) {
         }
 
+        @Override
+        public abstract EstadoServidor clone();
     }
 
     public class EstadoDarsenaCalibrando extends EstadoDarsena {
@@ -146,6 +159,11 @@ public class ServidorDarsena implements Servidor {
             return false;
         }
 
+        @Override
+        public EstadoServidor clone() 
+        {
+            return new EstadoDarsenaCalibrando();
+        }
     }
 
     public class EstadoDarsenaOcupada extends EstadoDarsena {
@@ -197,6 +215,12 @@ public class ServidorDarsena implements Servidor {
             return true;
         }
 
+        @Override
+        public EstadoServidor clone() 
+        {
+            return new EstadoDarsenaOcupada();
+        }
+
     }
 
     public class EstadoDarsenaLibre extends EstadoDarsena {
@@ -235,6 +259,12 @@ public class ServidorDarsena implements Servidor {
         @Override
         public boolean esOcupado() {
             return false;
+        }
+
+        @Override
+        public EstadoServidor clone() 
+        {
+            return new EstadoDarsenaLibre();
         }
 
     }

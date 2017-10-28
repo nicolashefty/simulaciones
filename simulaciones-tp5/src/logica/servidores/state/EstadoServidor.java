@@ -29,4 +29,6 @@ public interface EstadoServidor
 
     public boolean esLibre();
     public boolean esOcupado();
+    
+    public EstadoServidor clone();
 }

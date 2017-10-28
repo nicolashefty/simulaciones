@@ -49,10 +49,22 @@ public class ServidorPesaje implements Servidor
     public String getNombre() {
         return "Pesaje";
     }
+
+    @Override
+    public Servidor clone() 
+    {
+        Servidor clon = new ServidorPesaje();
+        
+        clon.setEstado(estado.clone());
+        clon.setCola(cola.clone());
+        
+        return clon;
+    }
     
     public abstract class EstadoPesaje implements EstadoServidor
     {
-        
+        @Override
+        public abstract EstadoServidor clone();
         @Override
         public void apertura(Servidor s) 
         {
@@ -136,6 +148,12 @@ public class ServidorPesaje implements Servidor
             return true;
         }
 
+        @Override
+        public EstadoServidor clone() 
+        {
+            return new EstadoPesajeOcupado();
+        }
+
     }
     
     public class EstadoPesajeLibre extends EstadoPesaje
@@ -168,6 +186,12 @@ public class ServidorPesaje implements Servidor
         @Override
         public boolean esOcupado() {
             return false;
+        }
+
+        @Override
+        public EstadoServidor clone() 
+        {
+            return new EstadoPesajeLibre();
         }
     }
 }

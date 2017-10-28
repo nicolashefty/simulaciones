@@ -63,8 +63,8 @@ public class Utilidades
     }
     
     public static LocalTime calcularRecalibramiento(double varianza, double media, double randomUno, double randomDos){
-        Double result = (Math.sqrt(-2*Math.log(randomUno))*Math.cos(2*Math.PI*randomDos))*media + varianza;
-        Integer resultConverted = result.intValue();
+        Double result = Math.abs(((Math.sqrt(-2*Math.log(randomUno))*Math.cos(2*Math.PI*randomDos))*media) + varianza);
+        Integer resultConverted = ((Double)Math.floor(result)).intValue();
         Double seconds = result - resultConverted;
         return LocalTime.of(0, resultConverted,seconds.intValue());
     }

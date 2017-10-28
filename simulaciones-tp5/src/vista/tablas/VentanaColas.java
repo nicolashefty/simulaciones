@@ -6,6 +6,8 @@
 package vista.tablas;
 
 import java.time.LocalTime;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import logica.gestion.Simulador;
@@ -21,20 +23,23 @@ public class VentanaColas extends javax.swing.JFrame {
      */
     public VentanaColas(int diaInicio, int diaFin) {
                 initComponents();
+                
+                acomodarTablas();
                 Runnable thread1 = new Runnable() {
                     @Override
                     public void run() {
-                        new Simulador(LocalTime.NOON, (DefaultTableModel)tbl_politica_principal.getModel(), diaInicio, diaFin);
+                        new Simulador(LocalTime.NOON, tbl_politica_principal, diaInicio, diaFin);
                     }
                 };
                 thread1.run();
                 Runnable thread2 = new Runnable() {
                     @Override
                     public void run() {
-                        new Simulador(LocalTime.of(5,0,0), (DefaultTableModel)tbl_politica_alternativa.getModel(), diaInicio, diaFin);
+                        new Simulador(LocalTime.of(5,0,0), tbl_politica_alternativa, diaInicio, diaFin);
                     }
                 };
                 thread2.run();
+                
     }
 
     /**
@@ -58,30 +63,29 @@ public class VentanaColas extends javax.swing.JFrame {
 
         tbl_politica_principal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
             }
         ));
+        tbl_politica_principal.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(tbl_politica_principal);
 
         vector_estado.addTab("Politica principal", jScrollPane2);
 
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
         tbl_politica_alternativa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
             }
         ));
+        tbl_politica_alternativa.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane3.setViewportView(tbl_politica_alternativa);
 
         vector_estado.addTab("Politica alternativa", jScrollPane3);
@@ -114,4 +118,10 @@ public class VentanaColas extends javax.swing.JFrame {
     private javax.swing.JTable tbl_politica_principal;
     private javax.swing.JTabbedPane vector_estado;
     // End of variables declaration//GEN-END:variables
+
+    private void acomodarTablas() 
+    {
+        jScrollPane2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    }
 }
