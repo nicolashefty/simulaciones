@@ -47,10 +47,11 @@ public class Utilidades
     
     public static LocalTime calcularLlegadaCamion(double lambda, double random){
         //Algo esta mal... no avanza mas.. siempre da 0 minutos
-        Double result = (-1/lambda)*(Math.log(1-random));
-        Integer resultConverted = result.intValue();
-        Double seconds = (result - resultConverted)*60;
-        return LocalTime.of(0, resultConverted, seconds.intValue());
+//        Double result = (-1/lambda)*(Math.log(1-random));
+//        Integer resultConverted = result.intValue();
+//        Double seconds = (result - resultConverted)*60;
+//        return LocalTime.of(0, resultConverted, seconds.intValue());
+        return LocalTime.of(0,2,0);
     }
     
     /* Sirve tanto para atencion de cambion, balanza de peso y las darsenas */

@@ -5,15 +5,8 @@
  */
 package logica.gestion;
 
-import java.time.Duration;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.time.*;
+import java.util.*;
 import javax.swing.table.DefaultTableModel;
 import logica.servidores.ServidorDarsena;
 import logica.servidores.ServidorPesaje;
@@ -22,6 +15,7 @@ import logica.servidores.exceptions.NecesitaCalcularRNDDarsena;
 import logica.servidores.exceptions.NecesitaCalcularRNDFinAtencion;
 import logica.servidores.exceptions.NecesitaCalcularRNDInicioAtencion;
 import logica.servidores.exceptions.NecesitaCalcularRNDPesaje;
+import logica.servidores.exceptions.NoAtendidos;
 import logica.servidores.exceptions.TieneQueCalibrar;
 import logica.utilidades.Utilidades;
 
@@ -64,6 +58,7 @@ public class Simulador
         vectorActual.setDarsena1(new ServidorDarsena());
         vectorActual.setDarsena2(new ServidorDarsena());
         vectorActual.setEvento(Evento.APERTURA);
+        vectorActual.setCamiones(new ArrayList<>());
         //Reloj en 0
         // Crear servidores 
         //Iniciar contadores
@@ -88,12 +83,17 @@ public class Simulador
             vectorActual.setDia(vectorAnterior.getDia()+1);
             vectorActual.setReloj(LocalTime.of(5,0));
             vectorActual.setEvento(Evento.APERTURA);
-            //informar a los servidores del cierre
             rotacionVector();
             return;
         }
 
         Sistema.BeanEventoHora eventoSig = vectorAnterior.getProximoEvento();
+        if (eventoSig.hora.isAfter(LocalTime.of(18, 0)))
+        {
+            rutinaDeCierre();
+            rotacionVector();
+            return;
+        }
         switch (eventoSig.evento)
         {
             case Evento.FIN_ATENCION_RECEPCION:
@@ -119,6 +119,11 @@ public class Simulador
     private void rotacionVector()
     {
         datos.add(vectorActual);
+        for(String v : vectorActual.getVectorFila())
+        {
+            
+            System.out.println(v + "\t");
+        }
         vectorAnterior = vectorActual;
         vectorActual = null;
     }
@@ -163,12 +168,21 @@ public class Simulador
         vectorActual.setEvento(Evento.FIN_ATENCION_RECEPCION);
 
         try {
+            vectorActual.setHoraFinAtencion(null);
             vectorActual.getRecepcionista().finAtencionRecepcion();
         } catch (NecesitaCalcularRNDFinAtencion | NecesitaCalcularRNDInicioAtencion e) {
             
             try {
 
                 vectorActual.getRecepcionista().inicioAtencionRecepcion();
+                double rndP = new Random().nextDouble();
+
+                vectorActual.setRndTiempoAtencion(rndP);
+                vectorActual.setTiempoAtencion(Utilidades.uniforme(3, 7, rndP));
+                vectorActual.setHoraFinAtencion(vectorActual.getReloj()
+                        .plusSeconds(vectorActual.getTiempoAtencion().getSecond())
+                        .plusMinutes(vectorActual.getTiempoAtencion().getMinute())
+                        .plusHours(vectorActual.getTiempoAtencion().getHour())); 
 
             } catch (NecesitaCalcularRNDInicioAtencion ex) {
 
@@ -179,16 +193,22 @@ public class Simulador
                 vectorActual.setHoraFinAtencion(vectorActual.getReloj()
                         .plusSeconds(vectorActual.getTiempoAtencion().getSecond())
                         .plusMinutes(vectorActual.getTiempoAtencion().getMinute())
-                        .plusHours(vectorActual.getTiempoAtencion().getHour()));
-            
-                  
-            
-            
+                        .plusHours(vectorActual.getTiempoAtencion().getHour()));   
+            }
         }
-
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-          
+        
+        try {
+            vectorActual.getBalanza().inicioPesaje();
+        } catch (NecesitaCalcularRNDPesaje ex) {
+            double rndP = new Random().nextDouble();
+            
+            vectorActual.setRndTiempoPesado(rndP);
+            vectorActual.setTiempoPesado(Utilidades.uniforme(5, 7, rndP));
+            vectorActual.setHoraFinPesado(vectorActual.getReloj().plusHours(vectorActual.getTiempoPesado().getHour())
+            .plusMinutes(vectorActual.getTiempoPesado().getMinute())
+            .plusSeconds(vectorActual.getTiempoPesado().getSecond()));
         }
+        
     }
 
     private void rutinaFinCalibrado(LocalTime newTime) 
@@ -202,6 +222,7 @@ public class Simulador
         {
             try
             {
+                vectorActual.setHoraFinRecalibrado1(null);
                 vectorActual.getDarsena1().finCalibrado();
             }
             catch (NecesitaCalcularRNDDarsena ncrndD)
@@ -221,6 +242,7 @@ public class Simulador
         {
             try
             {
+                vectorActual.setHoraFinRecalibrado2(null);
                 vectorActual.getDarsena2().finCalibrado();
             }
             catch(NecesitaCalcularRNDDarsena ncrndD)
@@ -236,7 +258,7 @@ public class Simulador
             }
         }
         
-        throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void rutinaFinDescarga(LocalTime newTime) 
@@ -246,10 +268,12 @@ public class Simulador
         vectorActual.setEvento(Evento.FIN_DESCARGA);
         
         //Cual dársena!!?
-        if (vectorActual.getHoraFinDescarga1().equals(newTime))
+        if (vectorActual.getHoraFinDescarga1() != null 
+                && vectorActual.getHoraFinDescarga1().equals(newTime))
         {
             try
             {
+                vectorActual.setHoraFinDescarga1(null);
                 vectorActual.getDarsena1().finDescarga();
                 
             }
@@ -282,6 +306,7 @@ public class Simulador
         {
             try
             {
+                vectorActual.setHoraFinDescarga2(null);
                 vectorActual.getDarsena2().finDescarga();
                 
             }
@@ -310,7 +335,7 @@ public class Simulador
             //Se va el camion que estaba descargando en Darsena2
         }
         
-        throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void rutinaFinPesaje(LocalTime newTime) 
@@ -318,7 +343,7 @@ public class Simulador
         vectorActual = vectorAnterior.clone();
         vectorActual.setReloj(newTime);
         vectorActual.setEvento(Evento.FIN_PESAJE);
-        
+        vectorActual.setHoraFinPesado(null);
         try
         {
             vectorActual.getBalanza().finPesaje();
@@ -388,7 +413,7 @@ public class Simulador
         }
         //Faltaria actualizar el camion al q se le termino de atender en Pesaje y se lo paso a Descarga
         //Al igual q el q seguia en la cola de Pesado decirle q lo estan atendiendo en Pesaje
-        throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void rutinaLlegadaCamion(LocalTime newTime) {
@@ -463,7 +488,7 @@ public class Simulador
         col.add("AC Cant NO Atendidos");
         col.add("AC Tiempo Permanencia");
 
-        agregarColumnasCamiones(col);
+//        agregarColumnasCamiones(col);
         return col.toArray(new String[0]);
     }
 
@@ -489,9 +514,29 @@ public class Simulador
     }
 
     private boolean fin() {
-        if (vectorAnterior.getDia() == 30 && vectorAnterior.getEvento().equals(Evento.CIERRE)) {
+        if (vectorAnterior.getDia() == 2)// && vectorAnterior.getEvento().equals(Evento.CIERRE)) 
+        {
             return true;
         }
         return false;
+    }
+
+    private void rutinaDeCierre() 
+    {
+        
+        vectorActual = vectorAnterior.clone();
+        vectorActual.setDia(vectorAnterior.getDia());
+        vectorActual.setReloj(LocalTime.of(18,0,0));
+        vectorActual.setEvento(Evento.CIERRE);
+        
+        try
+        {
+        vectorActual.getRecepcionista().cierre();
+        }
+        catch (NoAtendidos na)
+        {
+            vectorActual.setAcCantNOAtendidos(vectorAnterior.getAcCantNOAtendidos() + na.getNoAtendidos());
+            
+        }
     }
 }

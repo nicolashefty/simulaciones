@@ -24,7 +24,7 @@ public interface EstadoServidor
     void finCalibrado(Servidor s) throws NecesitaCalcularRNDDarsena;
     void inicioDescarga(Servidor s) throws NecesitaCalcularRNDDarsena;
     void finDescarga(Servidor s) throws TieneQueCalibrar, NecesitaCalcularRNDDarsena;
-    void inicioPesaje(Servidor s);
+    void inicioPesaje(Servidor s) throws NecesitaCalcularRNDPesaje;
     void finPesaje(Servidor s) throws NecesitaCalcularRNDPesaje;  
 
     public boolean esLibre();

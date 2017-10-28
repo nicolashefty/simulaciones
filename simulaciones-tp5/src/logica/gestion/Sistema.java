@@ -486,17 +486,13 @@ public class Sistema implements Comparable<Sistema>
         @Override
         public int compareTo(BeanEventoHora o) 
         {
-            if (o == null && hora != null)
-            {
-                return 1;
-            }
-            else if (hora == null && o != null && o.hora != null)
+            if (this.hora == null)
             {
                 return -1;
             }
-            else if (hora == null && o != null && o.hora == null)
+            if (o == null || o.hora == null)
             {
-                return 0;
+                return 1;
             }
             return this.hora.compareTo(o.hora);
         }           

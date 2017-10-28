@@ -54,7 +54,7 @@ public interface Servidor
     {
         getEstado().finDescarga(this);
     }
-    default void inicioPesaje()
+    default void inicioPesaje() throws NecesitaCalcularRNDPesaje
     {
         getEstado().inicioPesaje(this);
     }

@@ -153,8 +153,10 @@ public class ServidorPesaje implements Servidor
         }
 
         @Override
-        public void inicioPesaje(Servidor s) {
+        public void inicioPesaje(Servidor s) throws NecesitaCalcularRNDPesaje
+        {
             s.setEstado(new EstadoPesajeOcupado());
+            throw new NecesitaCalcularRNDPesaje();
             //disminiur la cola?
         }
 
