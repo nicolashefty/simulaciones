@@ -33,12 +33,15 @@ public class Simulador
     LocalTime horaInicioLlegadaCamiones;
     DefaultTableModel tableModel;
     JTable table;
+    int desde,hasta;
 
     public Simulador(LocalTime inicioLlCamiones, JTable table, int diaDesde, int diaHasta)
     {
         horaInicioLlegadaCamiones = inicioLlCamiones;
         this.table = table;
         this.tableModel = (DefaultTableModel) table.getModel();
+        desde = diaDesde;
+        hasta = diaHasta;
         datos = new ArrayList<>();
         rutinaDeInicializacion();
         while(!fin())
@@ -57,9 +60,13 @@ public class Simulador
         vectorActual.setAcCantNOAtendidos(0);
         vectorActual.setAcTiempoPermanencia(Duration.ZERO);
         vectorActual.setRecepcionista(new ServidorRecepcion());
+        vectorActual.getRecepcionista().getCola().inicializar();
         vectorActual.setBalanza(new ServidorPesaje());
+        vectorActual.getBalanza().getCola().inicializar();
         vectorActual.setDarsena1(new ServidorDarsena());
+        vectorActual.getDarsena1().getCola().inicializar();
         vectorActual.setDarsena2(new ServidorDarsena());
+        vectorActual.getDarsena2().getCola().inicializar();
         vectorActual.setEvento(Evento.APERTURA);
         vectorActual.setCamiones(new ArrayList<>());
         //Reloj en 0
@@ -295,6 +302,10 @@ public class Simulador
                 vectorActual.setRndTiempoCalibrado11(rndC1);
                 vectorActual.setRndTiempoCalibrado12(rndC2);
                 vectorActual.setTiempoRecalibrado1(Utilidades.calcularRecalibramiento(0.7, 10, rndC1, rndC2));
+                vectorActual.setHoraFinRecalibrado1(vectorActual.getReloj()
+                        .plusHours(vectorActual.getTiempoRecalibrado1().getHour())
+                        .plusMinutes(vectorActual.getTiempoRecalibrado1().getMinute())
+                        .plusSeconds(vectorActual.getTiempoRecalibrado1().getSecond()));
             }
             catch(NecesitaCalcularRNDDarsena ncrndd)
             {
@@ -327,7 +338,12 @@ public class Simulador
                 double rndC2 = new Random().nextDouble();
                 vectorActual.setRndTiempoCalibrado21(rndC1);
                 vectorActual.setRndTiempoCalibrado22(rndC2);
-                vectorActual.setTiempoRecalibrado1(Utilidades.calcularRecalibramiento(0.7, 10, rndC1, rndC2));
+                vectorActual.setTiempoRecalibrado2(Utilidades.calcularRecalibramiento(0.7, 10, rndC1, rndC2));
+                vectorActual.setHoraFinRecalibrado2(vectorActual.getReloj()
+                        .plusHours(vectorActual.getTiempoRecalibrado2().getHour())
+                        .plusMinutes(vectorActual.getTiempoRecalibrado2().getMinute())
+                        .plusSeconds(vectorActual.getTiempoRecalibrado2().getSecond()));
+                
             }
             catch(NecesitaCalcularRNDDarsena ncrndd)
             {
@@ -522,7 +538,7 @@ public class Simulador
     }
 
     private boolean fin() {
-        if (vectorAnterior.getDia() == 2)// && vectorAnterior.getEvento().equals(Evento.CIERRE)) 
+        if (vectorAnterior.getDia() == 30 && vectorAnterior.getEvento().equals(Evento.CIERRE)) 
         {
             return true;
         }

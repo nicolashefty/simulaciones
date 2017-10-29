@@ -45,13 +45,33 @@ public class Utilidades
         return "$"+COSTO.format(unCosto); //Ponerle $ y negativo si es necesario. Solo dos decimales;
     }
     
-    public static LocalTime calcularLlegadaCamion(double lambda, double random){
+    /**
+     * En minutos será el resultado
+     * @param media
+     * @param random
+     * @return 
+     */
+    public static LocalTime calcularLlegadaCamion(double media, double random){
         //Algo esta mal... no avanza mas.. siempre da 0 minutos
-//        Double result = (-1/lambda)*(Math.log(1-random));
-//        Integer resultConverted = result.intValue();
+        Double result = (-media)*(Math.log(1-random));
+        int hora = 0;
+        int minutos = 0;
+        int segundos = 0;
+        if (result > 59)
+        {
+            hora = ((Double)Math.floor(result/60)).intValue();
+            minutos = (int) (result % 60);
+            segundos = ((result % 60) - (int) (result % 60)) > 0 ? (int)((result % 60) - (int) (result % 60))*60 : 0;
+        }
+        else
+        {
+            minutos = ((Double)Math.floor(result)).intValue();
+            segundos = (int)((result - minutos)*60);
+        }
+//        Integer resultConverted = ((Double)Math.floor(result)).intValue();
 //        Double seconds = (result - resultConverted)*60;
-//        return LocalTime.of(0, resultConverted, seconds.intValue());
-        return LocalTime.of(0,2,0);
+        return LocalTime.of(hora, minutos, segundos);
+//        return LocalTime.of(0,2,0);
     }
     
     /* Sirve tanto para atencion de cambion, balanza de peso y las darsenas */
@@ -65,7 +85,7 @@ public class Utilidades
     public static LocalTime calcularRecalibramiento(double varianza, double media, double randomUno, double randomDos){
         Double result = Math.abs(((Math.sqrt(-2*Math.log(randomUno))*Math.cos(2*Math.PI*randomDos))*media) + varianza);
         Integer resultConverted = ((Double)Math.floor(result)).intValue();
-        Double seconds = result - resultConverted;
+        Double seconds = (result - resultConverted)*60;
         return LocalTime.of(0, resultConverted,seconds.intValue());
     }
     

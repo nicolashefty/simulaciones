@@ -347,11 +347,11 @@ public class Sistema implements Comparable<Sistema>
         String[] vectorEstado = {
         ""+dia, ""+Utilidades.formatParaLocalTime(reloj), evento, 
             ""+Utilidades.formatParaRandom(rndLlegadaCamiones), Utilidades.formatParaLocalTime(proximaLlegada), Utilidades.formatParaLocalTime(horaProxLlegada),
-            ""+Utilidades.formatParaRandom(rndTiempoAtencion), Utilidades.formatParaLocalTime(tiempoAtencion), Utilidades.formatParaLocalTime(horaFinAtencion), recepcionista.getEstado().getNombre(), ""+recepcionista.getCola().getCola(),
-            ""+Utilidades.formatParaRandom(rndTiempoPesado), Utilidades.formatParaLocalTime(tiempoPesado), Utilidades.formatParaLocalTime(horaFinPesado), balanza.getEstado().getNombre(), ""+balanza.getCola().getCola(),
-            ""+Utilidades.formatParaRandom(rndTiempoDescarga1), Utilidades.formatParaLocalTime(tiempoDescarga1), Utilidades.formatParaLocalTime(horaFinDescarga1), ""+darsena1.getCantAtendidos(), 
-            ""+Utilidades.formatParaRandom(rndTiempoCalibrado11), ""+Utilidades.formatParaRandom(rndTiempoCalibrado12), Utilidades.formatParaLocalTime(tiempoRecalibrado1), Utilidades.formatParaLocalTime(horaFinRecalibrado1), darsena1.getEstado().getNombre(), ""+darsena1.getCola().getCola(),
-            ""+Utilidades.formatParaRandom(rndTiempoDescarga2), Utilidades.formatParaLocalTime(tiempoDescarga2), Utilidades.formatParaLocalTime(horaFinDescarga2), ""+darsena2.getCantAtendidos(), 
+            ""+Utilidades.formatParaRandom(rndTiempoAtencion), Utilidades.formatParaLocalTime(tiempoAtencion), Utilidades.formatParaLocalTime(horaFinAtencion), recepcionista.getEstado().getNombre(), (Evento.APERTURA.equals(evento)) ? "0" : ""+recepcionista.getCola().getCola(),
+            ""+Utilidades.formatParaRandom(rndTiempoPesado), Utilidades.formatParaLocalTime(tiempoPesado), Utilidades.formatParaLocalTime(horaFinPesado), balanza.getEstado().getNombre(), (Evento.APERTURA.equals(evento)) ? "0" : ""+balanza.getCola().getCola(),
+            ""+Utilidades.formatParaRandom(rndTiempoDescarga1), Utilidades.formatParaLocalTime(tiempoDescarga1), Utilidades.formatParaLocalTime(horaFinDescarga1), (Evento.APERTURA.equals(evento)) ? "0" : ""+darsena1.getCantAtendidos(), 
+            ""+Utilidades.formatParaRandom(rndTiempoCalibrado11), ""+Utilidades.formatParaRandom(rndTiempoCalibrado12), Utilidades.formatParaLocalTime(tiempoRecalibrado1), Utilidades.formatParaLocalTime(horaFinRecalibrado1), darsena1.getEstado().getNombre(), (Evento.APERTURA.equals(evento)) ? "0" : ""+darsena1.getCola().getCola(),
+            ""+Utilidades.formatParaRandom(rndTiempoDescarga2), Utilidades.formatParaLocalTime(tiempoDescarga2), Utilidades.formatParaLocalTime(horaFinDescarga2), (Evento.APERTURA.equals(evento)) ? "0" : ""+darsena2.getCantAtendidos(), 
             ""+Utilidades.formatParaRandom(rndTiempoCalibrado21), ""+Utilidades.formatParaRandom(rndTiempoCalibrado22), Utilidades.formatParaLocalTime(tiempoRecalibrado2), Utilidades.formatParaLocalTime(horaFinRecalibrado2), darsena2.getEstado().getNombre(),
             ""+ acCantAtendidos, ""+acCantNOAtendidos, formatDuration(acTiempoPermanencia)
         };
