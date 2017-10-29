@@ -6,6 +6,9 @@
 package vista.tablas;
 
 import java.time.LocalTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -29,16 +32,27 @@ public class VentanaColas extends javax.swing.JFrame {
                     @Override
                     public void run() {
                         new Simulador(LocalTime.NOON, tbl_politica_principal, diaInicio, diaFin);
+//                        JOptionPane.showMessageDialog(null, "Lista la politica principal", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                     }
                 };
-                thread1.run();
-                Runnable thread2 = new Runnable() {
+                new Thread(thread1).start();
+//                thread1.run();
+                Runnable runn2 = new Runnable() {
                     @Override
                     public void run() {
                         new Simulador(LocalTime.of(5,0,0), tbl_politica_alternativa, diaInicio, diaFin);
+//                        JOptionPane.showMessageDialog(null, "Lista la politica alternativa", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                     }
                 };
-                thread2.run();
+                Thread thread2 = new Thread(runn2);
+                thread2.start();
+        try {
+            thread2.join();
+            
+//                thread2.run();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(VentanaColas.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 
     }
 

@@ -128,7 +128,12 @@ public class Simulador
 
     private void rotacionVector()
     {
-        datos.add(vectorActual);
+        if ((vectorActual.getDia() >= desde && vectorActual.getDia() <= hasta)
+                || (vectorActual.getDia() == 30 && Evento.CIERRE.equals(vectorActual.getEvento())))
+        {
+            //Solo guardamos los que vamos a mostrar
+            datos.add(vectorActual);
+        }
         for(String v : vectorActual.getVectorFila())
         {
             
