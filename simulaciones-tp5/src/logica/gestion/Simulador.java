@@ -196,41 +196,29 @@ public class Simulador
             vectorActual.getRecepcionista().finAtencionRecepcion();
         } catch (NecesitaCalcularRNDFinAtencion | NecesitaCalcularRNDInicioAtencion e) {
             
-            try {
+            Camion aAtender = getCamion(Evento.INICIO_ATENCION_RECEPCION);
+            aAtender.inicioAtencionRecepcion();
 
-                Camion aAtender = getCamion(Evento.INICIO_ATENCION_RECEPCION);
-                aAtender.inicioAtencionRecepcion();
-                
-                vectorActual.getRecepcionista().inicioAtencionRecepcion();
-                double rndP = new Random().nextDouble();
+            // Ya el fin atencion la disminuye a la cola y sigue ocupada...
+//                vectorActual.getRecepcionista().inicioAtencionRecepcion();
+            double rndP = new Random().nextDouble();
 
-                vectorActual.setRndTiempoAtencion(rndP);
-                vectorActual.setTiempoAtencion(Utilidades.uniforme(3, 7, rndP));
-                vectorActual.setHoraFinAtencion(vectorActual.getReloj()
-                        .plusSeconds(vectorActual.getTiempoAtencion().getSecond())
-                        .plusMinutes(vectorActual.getTiempoAtencion().getMinute())
-                        .plusHours(vectorActual.getTiempoAtencion().getHour())); 
+            vectorActual.setRndTiempoAtencion(rndP);
+            vectorActual.setTiempoAtencion(Utilidades.uniforme(3, 7, rndP));
+            vectorActual.setHoraFinAtencion(vectorActual.getReloj()
+                    .plusSeconds(vectorActual.getTiempoAtencion().getSecond())
+                    .plusMinutes(vectorActual.getTiempoAtencion().getMinute())
+                    .plusHours(vectorActual.getTiempoAtencion().getHour()));
 
-            } catch (NecesitaCalcularRNDInicioAtencion ex) {
-
-                double rndP = new Random().nextDouble();
-
-                vectorActual.setRndTiempoAtencion(rndP);
-                vectorActual.setTiempoAtencion(Utilidades.uniforme(3, 7, rndP));
-                vectorActual.setHoraFinAtencion(vectorActual.getReloj()
-                        .plusSeconds(vectorActual.getTiempoAtencion().getSecond())
-                        .plusMinutes(vectorActual.getTiempoAtencion().getMinute())
-                        .plusHours(vectorActual.getTiempoAtencion().getHour()));   
-            }
         }
         
+        Camion aPesar = getCamion(Evento.INICIO_PESAJE);
         try {
-            Camion aPesar = getCamion(Evento.INICIO_PESAJE);
-                aPesar.inicioAtencionPesaje();
+                
             vectorActual.getBalanza().inicioPesaje();
         } catch (NecesitaCalcularRNDPesaje ex) {
             double rndP = new Random().nextDouble();
-            
+            aPesar.inicioAtencionPesaje();
             vectorActual.setRndTiempoPesado(rndP);
             vectorActual.setTiempoPesado(Utilidades.uniforme(5, 7, rndP));
             vectorActual.setHoraFinPesado(vectorActual.getReloj().plusHours(vectorActual.getTiempoPesado().getHour())
@@ -682,6 +670,6 @@ public class Simulador
         }
         Camion ficticio = new Camion();
         ficticio.setEstado(ficticio.new EstadoCamionFin());
-        return ficticio;
+        return null;
     }
 }
