@@ -9,6 +9,8 @@ import java.time.*;
 import java.util.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import logica.clientes.Camion;
+import logica.clientes.Camion.EstadoCamionColaRecepcion;
 import logica.servidores.ServidorDarsena;
 import logica.servidores.ServidorPesaje;
 import logica.servidores.ServidorRecepcion;
@@ -452,6 +454,11 @@ public class Simulador
         vectorActual.setReloj(newTime);
         vectorActual.setEvento(Evento.LLEGADA_CAMION);
 
+        Camion llega = new Camion();
+        llega.setTiempoLlegada(newTime);
+        llega.llegadaCamion();
+        
+        
         try {
             vectorActual.getRecepcionista().inicioAtencionRecepcion();
         } catch (NecesitaCalcularRNDInicioAtencion e) {
@@ -464,6 +471,7 @@ public class Simulador
                     .plusSeconds(vectorActual.getTiempoAtencion().getSecond())
                     .plusMinutes(vectorActual.getTiempoAtencion().getMinute())
                     .plusHours(vectorActual.getTiempoAtencion().getHour()));
+            llega.finAtencionRecepcion();
         }
         double rnd = new Random().nextDouble();
         vectorActual.setRndLlegadaCamiones(rnd);
@@ -473,6 +481,7 @@ public class Simulador
                 .plusSeconds(vectorActual.getProximaLlegada().getSecond())
                 .plusMinutes(vectorActual.getProximaLlegada().getMinute())
                 .plusHours(vectorActual.getProximaLlegada().getHour()));
+        vectorActual.addCamion(llega);
 
     }
     private String[] getColumnNames() 
@@ -517,7 +526,7 @@ public class Simulador
         col.add("AC Cant NO Atendidos");
         col.add("AC Tiempo Permanencia");
 
-//        agregarColumnasCamiones(col);
+        agregarColumnasCamiones(col);
         return col.toArray(new String[0]);
     }
 
@@ -536,10 +545,10 @@ public class Simulador
 
     private int buscarCantidadMaximaDeCamiones() 
     {
-        List<Sistema> listCopy = new ArrayList<Sistema>();
-        Collections.copy(listCopy, datos);
+        List<Sistema> listCopy = new ArrayList<>(datos);
+        
         listCopy.sort(null);
-        return listCopy.get(0).getCamiones().size();
+        return listCopy.get(listCopy.size()-1).getCamiones().size();
     }
 
     private boolean fin() {

@@ -388,7 +388,7 @@ public class Sistema implements Comparable<Sistema>
             }
         }
         
-        List<String> nuevaLista = Arrays.asList(vectorEstado);
+        List<String> nuevaLista = new ArrayList<>(Arrays.asList(vectorEstado));
         nuevaLista.addAll(lista);
         
         return nuevaLista.toArray(new String[0]);
@@ -471,6 +471,15 @@ public class Sistema implements Comparable<Sistema>
             return -1;
         }
         return this.camiones.size() - o.camiones.size();
+    }
+
+    void addCamion(Camion llega) 
+    {
+        if (camiones == null)
+        {
+            camiones = new ArrayList<>();
+        }
+        camiones.add(llega);
     }
 
     public class BeanEventoHora implements Comparable<BeanEventoHora>

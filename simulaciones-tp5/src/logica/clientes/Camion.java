@@ -7,6 +7,7 @@ package logica.clientes;
 
 import java.time.LocalTime;
 import logica.servidores.Servidor;
+import logica.servidores.ServidorNull;
 
 /**
  *
@@ -90,8 +91,17 @@ public class Camion {
         return estado.esFueraDelSistema();
     }
 
-    public Servidor getServidorAtendido() {
+    public Servidor getServidorAtendido() 
+    {
+        if (servidor == null)
+        {
+            return new ServidorNull();
+        }
         return servidor;
+    }
+
+    public void llegadaCamion() {
+        setEstado(new EstadoCamionColaRecepcion());
     }
     
     
