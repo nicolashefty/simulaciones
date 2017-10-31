@@ -6,8 +6,6 @@
 package logica.clientes;
 
 import java.time.LocalTime;
-import logica.servidores.Servidor;
-import logica.servidores.ServidorNull;
 
 /**
  *
@@ -19,7 +17,7 @@ public class Camion {
      * No atendidos serian aquellos que estaban en la cola de recepcion al momento de cierre.
      */
     private EstadoCamion estado;
-    private Servidor servidor;
+    private String servidor;
     private LocalTime tiempoLlegada;
     private LocalTime tiempoFin;
 
@@ -31,11 +29,11 @@ public class Camion {
         this.estado = estado;
     }
 
-    public Servidor getServidor() {
+    public String getServidor() {
         return servidor;
     }
 
-    public void setServidor(Servidor servidor) {
+    public void setServidor(String servidor) {
         this.servidor = servidor;
     }
 
@@ -91,21 +89,44 @@ public class Camion {
         return estado.esFueraDelSistema();
     }
 
-    public Servidor getServidorAtendido() 
+    public String getServidorAtendido() 
     {
-        if (servidor == null)
-        {
-            return new ServidorNull();
-        }
         return servidor;
     }
 
     public void llegadaCamion() {
         setEstado(new EstadoCamionColaRecepcion());
     }
-    
-    
-    
+
+    public boolean estaEnRecepcion() {
+        return estado.estaEnRecepcion();
+    }
+
+    public boolean estaEnColaRecepcion() 
+    {
+        return estado.estaEnColaRecepcion();
+    }
+
+    public boolean estaEnColaPesaje() 
+    {
+        return estado.estaEnColaPesaje();
+    }
+
+    public boolean estaEnColaDescarga() 
+    {
+        return estado.estaEnColaDescarga();
+    }
+
+    public boolean estaEnBalanza() 
+    {
+        return estado.estaEnBalanza();
+    }
+
+    public boolean estaEnDarsena() 
+    {
+        return estado.estaEnDarsena();
+    }
+
     
     public abstract class EstadoCamion
     {
@@ -143,7 +164,37 @@ public class Camion {
             
         }
 
-        private boolean esFueraDelSistema()
+        public boolean esFueraDelSistema()
+        {
+            return false;
+        }
+
+        public boolean estaEnRecepcion()
+        {
+            return false;
+        }
+
+        public boolean estaEnColaRecepcion() 
+        {
+            return false;
+        }
+
+        public boolean estaEnColaPesaje() 
+        {
+            return false;
+        }
+
+        public boolean estaEnColaDescarga() 
+        {
+            return false;
+        }
+
+        public boolean estaEnBalanza() 
+        {
+            return false;
+        }
+
+        public boolean estaEnDarsena() 
         {
             return false;
         }
@@ -155,13 +206,18 @@ public class Camion {
         public void inicioAtencionRecepcion()
         {
             setEstado(new EstadoCamionRecepcion());
+            setServidor("Recepcion");
         }
 
         @Override
         public String toString() {
-            return "Esperando para Recepcion";
+            return "Cola Recepcion";
         }
 
+        public boolean estaEnColaRecepcion() 
+        {
+            return true;
+        }
     }
     
     public class EstadoCamionRecepcion extends EstadoCamion
@@ -170,11 +226,18 @@ public class Camion {
         public void finAtencionRecepcion()
         {
             setEstado(new EstadoCamionColaPesaje());
+            setServidor("Ninguno");
         }
 
         @Override
         public String toString() {
-            return "Siendo atendido por Recepcion";
+            return "En Recepcion";
+        }
+        
+        @Override
+        public boolean estaEnRecepcion()
+        {
+            return true;
         }
     }
     public class EstadoCamionColaPesaje extends EstadoCamion
@@ -183,11 +246,17 @@ public class Camion {
         public void inicioAtencionPesaje()
         {
             setEstado(new EstadoCamionEnPesaje());
+            setServidor("Balanza");
         }
 
         @Override
         public String toString() {
-            return "Esperando para ser Pesado";
+            return "Cola Pesaje";
+        }
+        
+        public boolean estaEnColaPesaje() 
+        {
+            return true;
         }
     }
     
@@ -197,11 +266,17 @@ public class Camion {
         public void finAtencionPesaje()
         {
             setEstado(new EstadoCamionColaDescarga());
+            setServidor("Ninguno");
         }
 
         @Override
         public String toString() {
-            return "Siendo Pesado";
+            return "En Pesado";
+        }
+        
+        public boolean estaEnBalanza() 
+        {
+            return true;
         }
     }
     
@@ -211,17 +286,24 @@ public class Camion {
         public void inicioAtencionDarsena1()
         {
             setEstado(new EstadoCamionDescargando());
+            setServidor("Darsena");
         }
         
         @Override
         public void inicioAtencionDarsena2()
         {
             setEstado(new EstadoCamionDescargando());
+            setServidor("Darsena");
         }
 
         @Override
         public String toString() {
-            return "Esperando para descarga";
+            return "Cola Descarga";
+        }
+        
+        public boolean estaEnColaDescarga() 
+        {
+            return true;
         }
     }
     
@@ -241,7 +323,12 @@ public class Camion {
 
         @Override
         public String toString() {
-            return "Siendo Descargado";
+            return "En Darsena";
+        }
+        
+        public boolean estaEnDarsena() 
+        {
+            return true;
         }
     }
     

@@ -382,7 +382,7 @@ public class Sistema implements Comparable<Sistema>
             else
             {
                 lista.add(camion.getEstado().toString());
-                lista.add(camion.getServidorAtendido().getNombre());
+                lista.add(camion.getServidorAtendido());
                 lista.add(Utilidades.formatParaLocalTime(camion.getTiempoLlegada()));
                 lista.add(Utilidades.formatParaLocalTime(camion.getTiempoFin()));
             }

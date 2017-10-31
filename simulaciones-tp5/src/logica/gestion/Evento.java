@@ -12,10 +12,13 @@ package logica.gestion;
 public interface Evento 
 {
     String LLEGADA_CAMION = "Llegada Camion";
-    String FIN_ATENCION_RECEPCION = "Fin Atc Recepcion";
+    String FIN_ATENCION_RECEPCION = "Fin Atencion Recepcion";
+    String INICIO_ATENCION_RECEPCION = "Inicio Atencion Recepcion";
     String FIN_PESAJE = "Fin Pesaje";
+    String INICIO_PESAJE = "Inici Pesaje";
     /** Se retira el camion */
     String FIN_DESCARGA = "Fin Descarga";
+    String INICIO_DESCARGA = "Inicio Descarga";
     String FIN_CALIBRADO = "Fin Calibrado";
     String APERTURA = "Apertura";
     String CIERRE = "Cierre";

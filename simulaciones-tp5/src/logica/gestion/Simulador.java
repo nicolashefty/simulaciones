@@ -189,13 +189,18 @@ public class Simulador
         vectorActual.setReloj(newTime);
         vectorActual.setEvento(Evento.FIN_ATENCION_RECEPCION);
 
+        Camion queEstabaAtendiendo = getCamion(Evento.FIN_ATENCION_RECEPCION);
         try {
             vectorActual.setHoraFinAtencion(null);
+            queEstabaAtendiendo.finAtencionRecepcion();
             vectorActual.getRecepcionista().finAtencionRecepcion();
         } catch (NecesitaCalcularRNDFinAtencion | NecesitaCalcularRNDInicioAtencion e) {
             
             try {
 
+                Camion aAtender = getCamion(Evento.INICIO_ATENCION_RECEPCION);
+                aAtender.inicioAtencionRecepcion();
+                
                 vectorActual.getRecepcionista().inicioAtencionRecepcion();
                 double rndP = new Random().nextDouble();
 
@@ -220,6 +225,8 @@ public class Simulador
         }
         
         try {
+            Camion aPesar = getCamion(Evento.INICIO_PESAJE);
+                aPesar.inicioAtencionPesaje();
             vectorActual.getBalanza().inicioPesaje();
         } catch (NecesitaCalcularRNDPesaje ex) {
             double rndP = new Random().nextDouble();
@@ -240,7 +247,7 @@ public class Simulador
         vectorActual.setEvento(Evento.FIN_CALIBRADO);
         
         //Cual dársena!!?
-        if (vectorActual.getHoraFinDescarga1().equals(newTime))
+        if (vectorActual.getHoraFinRecalibrado1() != null && vectorActual.getHoraFinRecalibrado1().equals(newTime))
         {
             try
             {
@@ -249,8 +256,8 @@ public class Simulador
             }
             catch (NecesitaCalcularRNDDarsena ncrndD)
             {
-                //TODO: ver qué camion pasa a estar Descargando!
-                
+                Camion aDescargar = getCamion(Evento.INICIO_DESCARGA);
+                aDescargar.inicioAtencionDarsena1();
                 double rndD = new Random().nextDouble();
                 vectorActual.setRndTiempoDescarga1(rndD);
                 vectorActual.setTiempoDescarga1(Utilidades.uniforme(20, 25, rndD));
@@ -269,7 +276,8 @@ public class Simulador
             }
             catch(NecesitaCalcularRNDDarsena ncrndD)
             {
-                //TODO: Ver que camion pasa a estar descargando!!
+                Camion aDescargar = getCamion(Evento.INICIO_DESCARGA);
+                aDescargar.inicioAtencionDarsena1();
                 double rndD = new Random().nextDouble();
                 vectorActual.setRndTiempoDescarga2(rndD);
                 vectorActual.setTiempoDescarga2(Utilidades.uniforme(20, 25, rndD));
@@ -279,8 +287,6 @@ public class Simulador
                         .plusHours(vectorActual.getTiempoDescarga2().getHour()));
             }
         }
-        
-        //throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void rutinaFinDescarga(LocalTime newTime) 
@@ -289,6 +295,13 @@ public class Simulador
         vectorActual.setReloj(newTime);
         vectorActual.setEvento(Evento.FIN_DESCARGA);
         vectorActual.setAcCantAtendidos(vectorAnterior.getAcCantAtendidos()+1);
+        
+        Camion enDescarga = getCamion(Evento.FIN_DESCARGA);
+        
+        vectorActual.setAcTiempoPermanencia(vectorActual.getAcTiempoPermanencia().plus(Duration.between(enDescarga.getTiempoLlegada(), newTime)));
+        enDescarga.setTiempoFin(newTime);
+        enDescarga.finAtencionDarsena1();
+        
         //Cual dársena!!?
         if (vectorActual.getHoraFinDescarga1() != null 
                 && vectorActual.getHoraFinDescarga1().equals(newTime))
@@ -316,7 +329,8 @@ public class Simulador
             }
             catch(NecesitaCalcularRNDDarsena ncrndd)
             {
-                //TODO: ver qué camion pasa a estar Descargando!
+                Camion aDescargar = getCamion(Evento.INICIO_DESCARGA);
+                aDescargar.inicioAtencionDarsena1();
                 
                 double rndD = new Random().nextDouble();
                 vectorActual.setRndTiempoDescarga1(rndD);
@@ -326,7 +340,6 @@ public class Simulador
                         .plusMinutes(vectorActual.getTiempoDescarga1().getMinute())
                         .plusHours(vectorActual.getTiempoDescarga1().getHour()));
             }
-            //Se va el camion que estaba descargando en darsena 1
         }
         else
         {
@@ -354,7 +367,9 @@ public class Simulador
             }
             catch(NecesitaCalcularRNDDarsena ncrndd)
             {
-                //TODO: Ver que camion pasa a estar descargando!!
+                Camion aDescargar = getCamion(Evento.INICIO_DESCARGA);
+                aDescargar.inicioAtencionDarsena1();
+                
                 double rndD = new Random().nextDouble();
                 vectorActual.setRndTiempoDescarga2(rndD);
                 vectorActual.setTiempoDescarga2(Utilidades.uniforme(20, 25, rndD));
@@ -363,10 +378,7 @@ public class Simulador
                         .plusMinutes(vectorActual.getTiempoDescarga2().getMinute())
                         .plusHours(vectorActual.getTiempoDescarga2().getHour()));
             }
-            //Se va el camion que estaba descargando en Darsena2
         }
-        
-        //throw new UnsupportedOperationException("Nico"); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void rutinaFinPesaje(LocalTime newTime) 
@@ -375,12 +387,19 @@ public class Simulador
         vectorActual.setReloj(newTime);
         vectorActual.setEvento(Evento.FIN_PESAJE);
         vectorActual.setHoraFinPesado(null);
+        
+        Camion enPesado = getCamion(Evento.FIN_PESAJE);
+        enPesado.finAtencionPesaje();
+                
         try
         {
             vectorActual.getBalanza().finPesaje();
         }
         catch(NecesitaCalcularRNDPesaje ncrndp)
         {
+            Camion aPesar = getCamion(Evento.INICIO_PESAJE);
+            aPesar.inicioAtencionPesaje();
+            
             double rndP = new Random().nextDouble();
             vectorActual.setRndTiempoPesado(rndP);
             vectorActual.setTiempoPesado(Utilidades.uniforme(5, 7, rndP));
@@ -390,6 +409,8 @@ public class Simulador
                     .plusHours(vectorActual.getTiempoPesado().getHour()));
         }
         //Siguiente en el proceso es Descarga
+
+        Camion aDescargar = getCamion(Evento.INICIO_DESCARGA);
         if(vectorActual.getDarsena1().estaLibre())
         {
             try
@@ -398,6 +419,7 @@ public class Simulador
             }
             catch (NecesitaCalcularRNDDarsena ncrndd)
             {
+                aDescargar.inicioAtencionDarsena1();
                 double rndD = new Random().nextDouble();
                 vectorActual.setRndTiempoDescarga1(rndD);
                 vectorActual.setTiempoDescarga1(Utilidades.uniforme(20, 25, rndD));
@@ -415,6 +437,7 @@ public class Simulador
             }
             catch (NecesitaCalcularRNDDarsena ncrndd)
             {
+                aDescargar.inicioAtencionDarsena1();
                 double rndD = new Random().nextDouble();
                 vectorActual.setRndTiempoDescarga2(rndD);
                 vectorActual.setTiempoDescarga2(Utilidades.uniforme(20, 25, rndD));
@@ -433,6 +456,7 @@ public class Simulador
             }
             catch (NecesitaCalcularRNDDarsena ncrndd)
             {
+                aDescargar.inicioAtencionDarsena1();
                 double rndD = new Random().nextDouble();
                 vectorActual.setRndTiempoDescarga1(rndD);
                 vectorActual.setTiempoDescarga1(Utilidades.uniforme(20, 25, rndD));
@@ -463,6 +487,7 @@ public class Simulador
             vectorActual.getRecepcionista().inicioAtencionRecepcion();
         } catch (NecesitaCalcularRNDInicioAtencion e) {
 
+            
             double rnd = new Random().nextDouble();
             vectorActual.setRndTiempoAtencion(rnd);
 
@@ -471,7 +496,7 @@ public class Simulador
                     .plusSeconds(vectorActual.getTiempoAtencion().getSecond())
                     .plusMinutes(vectorActual.getTiempoAtencion().getMinute())
                     .plusHours(vectorActual.getTiempoAtencion().getHour()));
-            llega.finAtencionRecepcion();
+            llega.inicioAtencionRecepcion();
         }
         double rnd = new Random().nextDouble();
         vectorActual.setRndLlegadaCamiones(rnd);
@@ -576,5 +601,87 @@ public class Simulador
             vectorActual.setAcCantNOAtendidos(vectorAnterior.getAcCantNOAtendidos() + na.getNoAtendidos());
             
         }
+    }
+
+    private Camion getCamion(String evento) 
+    {
+        switch (evento)
+        {
+            case Evento.INICIO_ATENCION_RECEPCION:
+            {
+                for(Camion c : vectorActual.getCamiones())
+                {
+                    if (c.estaEnColaRecepcion())
+                    {
+                        //El primero q encuentre deberia ser el siguiente de la cola
+                        return c;
+                    }
+                }
+                break;
+            }
+            case Evento.FIN_ATENCION_RECEPCION:
+            {
+                for(Camion c : vectorActual.getCamiones())
+                {
+                    if (c.estaEnRecepcion())
+                    {
+                        //Deberia ser el unico en recepcion
+                        return c;
+                    }
+                }
+                break;
+            }
+            case Evento.INICIO_PESAJE:
+            {
+                for(Camion c : vectorActual.getCamiones())
+                {
+                    if (c.estaEnColaPesaje())
+                    {
+                        //El primero q encuentre deberia ser el siguiente de la cola
+                        return c;
+                    }
+                }
+                break;
+            }
+            case Evento.FIN_PESAJE:
+            {
+                for(Camion c : vectorActual.getCamiones())
+                {
+                    if (c.estaEnBalanza())
+                    {
+                        //Deberia ser el unico en recepcion
+                        return c;
+                    }
+                }
+                break;
+            }
+            case Evento.INICIO_DESCARGA:
+            {
+                for(Camion c : vectorActual.getCamiones())
+                {
+                    if (c.estaEnColaDescarga())
+                    {
+                        //El primero q encuentre deberia ser el siguiente de la cola
+                        return c;
+                    }
+                }
+                break;
+            }
+            case Evento.FIN_DESCARGA:
+            {
+                for(Camion c : vectorActual.getCamiones())
+                {
+                    if (c.estaEnDarsena())
+                    {
+                        //Deberia ser el unico en recepcion
+                        return c;
+                    }
+                }
+                break;
+            }
+        }
+        Camion ficticio = new Camion();
+        ficticio.setEstado(ficticio.new EstadoCamionFin());
+        return ficticio;
     }
 }
