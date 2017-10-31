@@ -136,11 +136,11 @@ public class Simulador
             //Solo guardamos los que vamos a mostrar
             datos.add(vectorActual);
         }
-        for(String v : vectorActual.getVectorFila())
-        {
-            
-            System.out.println(v + "\t");
-        }
+//        for(String v : vectorActual.getVectorFila())
+//        {
+//            
+//            System.out.println(v + "\t");
+//        }
         vectorAnterior = vectorActual;
         vectorActual = null;
     }
